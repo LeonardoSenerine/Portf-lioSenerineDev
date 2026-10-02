@@ -16,34 +16,51 @@ export function SearchDemo({ queries, resultTitle, resultUrl, resultText }: Prop
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { margin: "-10% 0px" });
   const reduce = useReducedMotion();
-  const [index, setIndex] = useState(0);
   const [typed, setTyped] = useState(reduce ? queries[0] : "");
   const [showResult, setShowResult] = useState(!!reduce);
+  const indexRef = useRef(0);
+  const typedRef = useRef("");
 
+  // Uma sequência só, sem timers concorrentes: esconde o resultado, apaga a
+  // pesquisa anterior, digita a próxima e mostra o resultado. Pausa fora da tela.
   useEffect(() => {
     if (!inView || reduce) return;
-    const query = queries[index];
-    let i = 0;
-    let timer: ReturnType<typeof setTimeout>;
-
-    const type = () => {
-      i += 1;
-      setTyped(query.slice(0, i));
-      if (i < query.length) timer = setTimeout(type, 45 + Math.random() * 50);
-      else timer = setTimeout(() => setShowResult(true), 350);
+    let cancelled = false;
+    const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
+    const write = (text: string) => {
+      typedRef.current = text;
+      setTyped(text);
     };
-    timer = setTimeout(() => {
-      setShowResult(false);
-      setTyped("");
-      type();
-    }, 400);
 
-    const next = setTimeout(() => setIndex((n) => (n + 1) % queries.length), query.length * 70 + 3800);
+    (async () => {
+      let current = typedRef.current;
+      while (!cancelled) {
+        const query = queries[indexRef.current];
+        setShowResult(false);
+        await wait(250);
+        for (let n = current.length - 1; n >= 0 && !cancelled; n--) {
+          write(current.slice(0, n));
+          await wait(18);
+        }
+        await wait(300);
+        for (let n = 1; n <= query.length && !cancelled; n++) {
+          write(query.slice(0, n));
+          await wait(45 + Math.random() * 50);
+        }
+        current = query;
+        if (cancelled) return;
+        await wait(350);
+        if (cancelled) return;
+        setShowResult(true);
+        await wait(3200);
+        indexRef.current = (indexRef.current + 1) % queries.length;
+      }
+    })();
+
     return () => {
-      clearTimeout(timer);
-      clearTimeout(next);
+      cancelled = true;
     };
-  }, [index, inView, reduce, queries]);
+  }, [inView, reduce, queries]);
 
   return (
     <div ref={ref} className="search" aria-hidden="true">
@@ -69,7 +86,7 @@ export function SearchDemo({ queries, resultTitle, resultUrl, resultText }: Prop
           <AnimatePresence>
             {showResult && (
               <motion.div
-                key={index}
+                key="hit"
                 className="search__hit"
                 initial={{ opacity: 0, y: 14, scale: 0.98 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}

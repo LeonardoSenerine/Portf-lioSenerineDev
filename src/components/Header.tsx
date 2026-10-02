@@ -33,7 +33,6 @@ export function Header({ lang, nav, whatsappHref }: Props) {
 
         <nav className="header__nav" aria-label="Principal">
           <a href="#trabalhos">{nav.work}</a>
-          <a href="#ao-vivo">{nav.live}</a>
           <a href="#servicos">{nav.services}</a>
           <a href="#processo">{nav.process}</a>
           <a href="#sobre">{nav.about}</a>
@@ -42,9 +41,10 @@ export function Header({ lang, nav, whatsappHref }: Props) {
 
         <div className="header__actions">
           <ThemeToggle labelLight={nav.themeLight} labelDark={nav.themeDark} />
-          <Link href={`/${otherLang}`} className="lang-switch" hrefLang={otherLang} aria-label={nav.switchLabel}>
+          {/* Troca de idioma recarrega a página: o layout raiz muda de idioma inteiro. */}
+          <a href={`/${otherLang}`} className="lang-switch" hrefLang={otherLang} aria-label={nav.switchLabel}>
             {nav.switchTo}
-          </Link>
+          </a>
           <a href={whatsappHref} className="btn btn--dark btn--sm header__cta" target="_blank" rel="noopener">
             {nav.cta}
           </a>

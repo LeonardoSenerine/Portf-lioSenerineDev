@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { notFound } from "next/navigation";
 import { Inter_Tight, Instrument_Serif, JetBrains_Mono } from "next/font/google";
@@ -32,19 +32,45 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
     metadataBase: new URL(site.url),
     title: dict.meta.title,
     description: dict.meta.description,
+    applicationName: site.brand,
+    keywords: dict.meta.keywords,
+    authors: [{ name: site.name, url: site.url }],
+    creator: site.name,
+    publisher: site.name,
+    category: "technology",
     alternates: {
       canonical: `/${lang}`,
       languages: { "pt-BR": "/pt", en: "/en", "x-default": "/pt" },
     },
     openGraph: {
       type: "website",
+      url: `/${lang}`,
       siteName: site.brand,
       title: dict.meta.title,
       description: dict.meta.description,
       locale: lang === "pt" ? "pt_BR" : "en_US",
+      alternateLocale: lang === "pt" ? ["en_US"] : ["pt_BR"],
     },
+    twitter: {
+      card: "summary_large_image",
+      title: dict.meta.title,
+      description: dict.meta.description,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
+    },
+    formatDetection: { telephone: false, email: false, address: false },
   };
 }
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f2efea" },
+    { media: "(prefers-color-scheme: dark)", color: "#121113" },
+  ],
+};
 
 export default async function RootLayout({ children, params }: LayoutProps<"/[lang]">) {
   const { lang } = await params;

@@ -5,8 +5,8 @@ import { projects, shot } from "@/content/projects";
 import { site, whatsappLink } from "@/content/site";
 import { Header } from "@/components/Header";
 import { DeviceMockup } from "@/components/DeviceMockup";
-import { SiteViewer } from "@/components/SiteViewer";
 import { SearchDemo } from "@/components/SearchDemo";
+import { JsonLd } from "@/components/JsonLd";
 import {
   AreasWall,
   CountUp,
@@ -32,6 +32,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
 
   return (
     <>
+      <JsonLd lang={lang} t={t} />
       <Header lang={lang} nav={t.nav} whatsappHref={wa} />
 
       <main id="topo">
@@ -126,7 +127,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
                   <Reveal key={p.id} className="case">
                     <article className="case__inner">
                       <div className="case__media">
-                        <DeviceMockup id={p.id} url={p.url} alt={item.client} fullHeight={p.fullHeight} />
+                        <DeviceMockup id={p.id} url={p.url} alt={item.client} fullHeight={p.fullHeight} privateLabel={t.work.privateLabel} />
                         <span className="case__hint">{t.work.hoverHint}</span>
                       </div>
                       <div className="case__body">
@@ -155,12 +156,13 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
                           ))}
                         </ul>
                         <div className="case__links">
-                          <a href={p.url} target="_blank" rel="noopener" className="btn btn--dark btn--sm">
-                            {t.work.visit} <span aria-hidden="true">↗</span>
-                          </a>
-                          <a href="#ao-vivo" className="link-arrow">
-                            {t.work.preview} <span aria-hidden="true">→</span>
-                          </a>
+                          {p.url ? (
+                            <a href={p.url} target="_blank" rel="noopener" className="btn btn--dark btn--sm">
+                              {t.work.visit} <span aria-hidden="true">↗</span>
+                            </a>
+                          ) : (
+                            <span className="case__private">{t.work.privateNote}</span>
+                          )}
                         </div>
                       </div>
                     </article>
@@ -170,19 +172,6 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             </div>
           </div>
         </section>
-
-        {/* Ao vivo */}
-        <ScrollSection className="section section--surface" id="ao-vivo">
-          <div className="container">
-            <SectionHead kicker={t.live.kicker} title={t.live.title} intro={t.live.intro} />
-            <Reveal>
-              <SiteViewer
-                items={projects.map((p) => ({ id: p.id, url: p.url, client: t.work.items[p.id].client, segment: t.work.items[p.id].segment }))}
-                labels={t.live}
-              />
-            </Reveal>
-          </div>
-        </ScrollSection>
 
         {/* Áreas */}
         <section className="section areas" id="areas">

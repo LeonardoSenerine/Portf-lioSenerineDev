@@ -4,21 +4,15 @@
 
 export type ProjectKind = "real" | "concept";
 
-export type Project = {
-  id: ProjectId;
-  url: string;
-  kind: ProjectKind;
-  fullHeight: number;
-};
-
 export const projects = [
   { id: "gordinho", url: "https://gordinho-lanches-site.vercel.app", kind: "real", fullHeight: 7500 },
   { id: "dconde", url: "https://dcondebarbershop.vercel.app", kind: "real", fullHeight: 6963 },
-  { id: "convite", url: "https://weedding-invite-sandy.vercel.app", kind: "real", fullHeight: 6153 },
+  // Convite de casamento: evento privado do casal, sem link público.
+  { id: "convite", url: null, kind: "real", fullHeight: 6153 },
   { id: "samoa", url: "https://samoa-gastro-bar.vercel.app", kind: "concept", fullHeight: 6884 },
   { id: "pontoalto", url: "https://ponto-alto-site-omega.vercel.app", kind: "concept", fullHeight: 5996 },
   { id: "meraki", url: "https://meraki-studio-nu.vercel.app", kind: "concept", fullHeight: 7500 },
-] as const satisfies readonly { id: string; url: string; kind: ProjectKind; fullHeight: number }[];
+] as const satisfies readonly { id: string; url: string | null; kind: ProjectKind; fullHeight: number }[];
 
 export type ProjectId = (typeof projects)[number]["id"];
 

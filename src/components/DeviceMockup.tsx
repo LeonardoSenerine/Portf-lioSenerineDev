@@ -3,14 +3,16 @@ import { prettyUrl, shot, type ProjectId } from "@/content/projects";
 
 type Props = {
   id: ProjectId;
-  url: string;
+  // Sem url (projeto privado), a barra de endereço mostra só um rótulo.
+  url: string | null;
+  privateLabel?: string;
   alt: string;
   fullHeight: number;
 };
 
 // Janela de navegador com a página inteira, que rola sozinha no hover,
 // e um celular por cima com a versão mobile.
-export function DeviceMockup({ id, url, alt, fullHeight }: Props) {
+export function DeviceMockup({ id, url, alt, fullHeight, privateLabel }: Props) {
   // Duração proporcional à altura da página: ~1s a cada 900px.
   const duration = Math.round((fullHeight / 900) * 10) / 10;
 
@@ -23,7 +25,7 @@ export function DeviceMockup({ id, url, alt, fullHeight }: Props) {
             <i />
             <i />
           </span>
-          <span className="browser__url">{prettyUrl(url)}</span>
+          <span className="browser__url">{url ? prettyUrl(url) : privateLabel}</span>
         </div>
         <div className="browser__screen" style={{ "--scroll-dur": `${duration}s` } as React.CSSProperties}>
           <Image src={shot(id, "full")} alt={alt} width={800} height={fullHeight} sizes="(max-width: 900px) 100vw, 640px" className="browser__page" />

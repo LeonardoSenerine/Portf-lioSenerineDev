@@ -22,10 +22,10 @@ const pt = {
     title: "Leonardo Senerine · Sites e aplicações",
     description:
       "Sites e aplicações sob medida para negócios de qualquer área. Feitos para aparecer no Google, passar confiança e levar o cliente direto até você.",
+    keywords: ["criação de sites", "site profissional", "desenvolvimento de sites", "aplicações web", "landing page", "site para empresas", "SEO local", "site com WhatsApp", "sistema de agendamento online"],
   },
   nav: {
     work: "Trabalhos",
-    live: "Ao vivo",
     services: "Serviços",
     process: "Processo",
     about: "Sobre",
@@ -76,7 +76,8 @@ const pt = {
     problemLabel: "O problema",
     deliveredLabel: "O que entreguei",
     visit: "Ver site ao vivo",
-    preview: "Navegar aqui",
+    privateLabel: "convite privado",
+    privateNote: "Link privado, a pedido dos noivos",
     hoverHint: "passe o mouse para rolar",
     items: {
       gordinho: {
@@ -165,18 +166,8 @@ const pt = {
       },
     } as Record<ProjectId, ProjectText>,
   },
-  live: {
-    kicker: "03 · ao vivo",
-    title: "Navegue pelos sites",
-    intro: "Abra cada projeto aqui mesmo, no computador ou no celular, sem sair da página.",
-    desktop: "Computador",
-    mobile: "Celular",
-    open: "Abrir em nova aba",
-    loading: "Carregando o site",
-    choose: "Escolha um projeto",
-  },
   areas: {
-    kicker: "04 · áreas",
+    kicker: "03 · áreas",
     title: "Trabalho com qualquer área.",
     list: ["Advocacia", "Construção", "Lanchonetes", "Estúdios", "Restaurantes", "Barbearias", "Clínicas", "Academias", "Imobiliárias", "Eventos", "Lojas"],
     last: "e a sua",
@@ -184,7 +175,7 @@ const pt = {
     cta: "Me conta sobre o seu negócio",
   },
   services: {
-    kicker: "05 · serviços",
+    kicker: "04 · serviços",
     title: "O que eu faço por você",
     intro: "Você fala direto com quem desenha, programa e publica. Sem intermediário.",
     recommended: "Recomendado",
@@ -212,7 +203,7 @@ const pt = {
       "Manutenção mensal: troca de cardápio, agenda, fotos e textos, sem você precisar se preocupar.",
   },
   process: {
-    kicker: "06 · processo",
+    kicker: "05 · processo",
     title: "Do primeiro oi ao site no ar",
     steps: [
       { title: "Conversa", text: "Entendo o negócio, quem é o seu cliente e o que hoje chega pelo WhatsApp." },
@@ -222,7 +213,7 @@ const pt = {
     ],
   },
   about: {
-    kicker: "07 · sobre",
+    kicker: "06 · sobre",
     title: "Prazer, Leonardo.",
     paragraphs: [
       "Crio sites e aplicações para negócios de qualquer área e de qualquer cidade. Construo cada projeto partindo do que o cliente já tem: o letreiro da recepção, o cardápio oficial, as fotos do salão lotado.",
@@ -231,7 +222,7 @@ const pt = {
     skills: ["Next.js", "React", "TypeScript", "Supabase", "PostgreSQL", "SEO local", "Design de interface"],
   },
   faq: {
-    kicker: "08 · dúvidas",
+    kicker: "07 · dúvidas",
     title: "Perguntas frequentes",
     items: [
       {
@@ -284,10 +275,10 @@ const en: Dictionary = {
     title: "Leonardo Senerine · Websites & apps",
     description:
       "Custom websites and apps for businesses in any field. Built to show up on Google, earn trust and bring customers straight to you.",
+    keywords: ["website design", "custom website", "web development", "web apps", "landing page", "business website", "local SEO", "WhatsApp website", "online booking system"],
   },
   nav: {
     work: "Work",
-    live: "Live",
     services: "Services",
     process: "Process",
     about: "About",
@@ -338,7 +329,8 @@ const en: Dictionary = {
     problemLabel: "The problem",
     deliveredLabel: "What I delivered",
     visit: "Visit live site",
-    preview: "Browse here",
+    privateLabel: "private invitation",
+    privateNote: "Private link, at the couple's request",
     hoverHint: "hover to scroll",
     items: {
       gordinho: {
@@ -427,18 +419,8 @@ const en: Dictionary = {
       },
     },
   },
-  live: {
-    kicker: "03 · live",
-    title: "Browse the sites",
-    intro: "Open each project right here, on desktop or mobile, without leaving the page.",
-    desktop: "Desktop",
-    mobile: "Mobile",
-    open: "Open in new tab",
-    loading: "Loading the site",
-    choose: "Pick a project",
-  },
   areas: {
-    kicker: "04 · fields",
+    kicker: "03 · fields",
     title: "I work with any field.",
     list: ["Law firms", "Construction", "Diners", "Studios", "Restaurants", "Barbershops", "Clinics", "Gyms", "Real estate", "Events", "Shops"],
     last: "and yours",
@@ -446,7 +428,7 @@ const en: Dictionary = {
     cta: "Tell me about your business",
   },
   services: {
-    kicker: "05 · services",
+    kicker: "04 · services",
     title: "What I can do for you",
     intro: "You talk directly to the person who designs, codes and ships. No middlemen.",
     recommended: "Recommended",
@@ -474,7 +456,7 @@ const en: Dictionary = {
       "Monthly care plan: menu, calendar, photo and copy updates, so you don't have to think about it.",
   },
   process: {
-    kicker: "06 · process",
+    kicker: "05 · process",
     title: "From first hello to live site",
     steps: [
       { title: "Talk", text: "I learn about your business, your customers and what comes in through WhatsApp today." },
@@ -484,7 +466,7 @@ const en: Dictionary = {
     ],
   },
   about: {
-    kicker: "07 · about",
+    kicker: "06 · about",
     title: "Hi, I'm Leonardo.",
     paragraphs: [
       "I build websites and apps for businesses in any field, anywhere. I build every project starting from what the client already has: the sign at the front desk, the official menu, photos of a packed room.",
@@ -493,7 +475,7 @@ const en: Dictionary = {
     skills: ["Next.js", "React", "TypeScript", "Supabase", "PostgreSQL", "Local SEO", "Interface design"],
   },
   faq: {
-    kicker: "08 · faq",
+    kicker: "07 · faq",
     title: "Frequently asked questions",
     items: [
       {
