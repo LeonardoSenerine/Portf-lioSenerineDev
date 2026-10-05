@@ -5,17 +5,20 @@ import { Inter_Tight, Instrument_Serif, JetBrains_Mono } from "next/font/google"
 import { getDictionary, hasLocale, locales } from "@/content/dictionaries";
 import { site } from "@/content/site";
 import { MotionProvider } from "@/components/motion";
+import { RevealObserver } from "@/components/RevealObserver";
 import { themeScript } from "@/content/theme";
 import "../globals.css";
 
 const sans = Inter_Tight({ variable: "--font-sans", subsets: ["latin"] });
+// A serifa só aparece em itálico; a mono não está na primeira tela, então não é
+// pré-carregada e não disputa banda com o título e a foto.
 const serif = Instrument_Serif({
   variable: "--font-serif",
   subsets: ["latin"],
   weight: "400",
-  style: ["normal", "italic"],
+  style: "italic",
 });
-const mono = JetBrains_Mono({ variable: "--font-mono", subsets: ["latin"] });
+const mono = JetBrains_Mono({ variable: "--font-mono", subsets: ["latin"], preload: false });
 
 export const dynamicParams = false;
 
@@ -91,6 +94,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
           <style>{`main [style*="opacity"] { opacity: 1 !important; transform: none !important; }`}</style>
         </noscript>
         <MotionProvider>{children}</MotionProvider>
+        <RevealObserver />
       </body>
     </html>
   );

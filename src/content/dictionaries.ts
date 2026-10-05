@@ -47,10 +47,11 @@ const pt = {
     photoAlt: "Leonardo Senerine, sites e aplicações",
     photoCaption: "Leonardo Senerine",
     photoRole: "Design + código",
+    // Garantias que respondem às dúvidas de quem vai contratar
     stats: [
-      { value: "6", label: "sites no ar" },
-      { value: "2", label: "idiomas, se precisar" },
-      { value: "100%", label: "sob medida, sem template" },
+      { value: "Valor fechado", label: "proposta por escrito antes de começar" },
+      { value: "Prévia ao vivo", label: "você acompanha o site sendo feito por um link" },
+      { value: "Direto comigo", label: "sem intermediário, do design ao código" },
     ],
   },
   niches: ["Bares", "Restaurantes", "Hamburguerias", "Barbearias", "Estúdios de tatuagem", "Casas de show", "Convites de casamento"],
@@ -76,9 +77,8 @@ const pt = {
     problemLabel: "O problema",
     deliveredLabel: "O que entreguei",
     visit: "Ver site ao vivo",
-    privateLabel: "convite privado",
-    privateNote: "Link privado, a pedido dos noivos",
-    hoverHint: "passe o mouse para rolar",
+    privateNote: "Link e dados privados, a pedido dos noivos",
+    carousel: { region: "Projetos", pickHint: "toque num projeto para ver os detalhes", pause: "Pausar rotação", play: "Retomar rotação" },
     items: {
       gordinho: {
         client: "Gordinho Lanches",
@@ -216,10 +216,11 @@ const pt = {
     kicker: "06 · sobre",
     title: "Prazer, Leonardo.",
     paragraphs: [
-      "Crio sites e aplicações para negócios de qualquer área e de qualquer cidade. Construo cada projeto partindo do que o cliente já tem: o letreiro da recepção, o cardápio oficial, as fotos do salão lotado.",
-      "Cuido de tudo, do visual ao código e à publicação. Isso significa decisões rápidas, nada de telefone sem fio e um site que você entende.",
+      "Antes de abrir o editor de código, eu quero entender o seu negócio: quem é o seu cliente, o que ele procura e o que faz ele desistir no meio do caminho. O site nasce dessas respostas, não de um modelo pronto.",
+      "Eu desenho, programo e coloco no ar. Sem agência no meio e sem recado repassado: quem ouve o seu pedido é quem escreve o código. Foi assim que a D'Conde saiu do primeiro rascunho para um sistema de agendamento em uso em duas semanas.",
+      "Depois do lançamento eu continuo por perto. Trocar um preço, uma foto ou um horário é uma mensagem no WhatsApp, não um chamado esquecido numa fila.",
     ],
-    skills: ["Next.js", "React", "TypeScript", "Supabase", "PostgreSQL", "SEO local", "Design de interface"],
+    skills: ["Design sob medida", "Rápido no celular", "Pronto para o Google", "Sistemas e painéis", "Suporte depois do lançamento"],
   },
   faq: {
     kicker: "07 · dúvidas",
@@ -301,9 +302,9 @@ const en: Dictionary = {
     photoCaption: "Leonardo Senerine",
     photoRole: "Design + code",
     stats: [
-      { value: "6", label: "sites live" },
-      { value: "2", label: "languages, if you need" },
-      { value: "100%", label: "custom, no templates" },
+      { value: "Fixed price", label: "written proposal before any work starts" },
+      { value: "Live preview", label: "follow the site being built through a link" },
+      { value: "Straight to me", label: "no middlemen, from design to code" },
     ],
   },
   niches: ["Bars", "Restaurants", "Burger joints", "Barbershops", "Tattoo studios", "Live music venues", "Wedding invitations"],
@@ -329,9 +330,8 @@ const en: Dictionary = {
     problemLabel: "The problem",
     deliveredLabel: "What I delivered",
     visit: "Visit live site",
-    privateLabel: "private invitation",
-    privateNote: "Private link, at the couple's request",
-    hoverHint: "hover to scroll",
+    privateNote: "Link and details kept private, at the couple's request",
+    carousel: { region: "Projects", pickHint: "tap a project to see the details", pause: "Pause rotation", play: "Resume rotation" },
     items: {
       gordinho: {
         client: "Gordinho Lanches",
@@ -469,10 +469,11 @@ const en: Dictionary = {
     kicker: "06 · about",
     title: "Hi, I'm Leonardo.",
     paragraphs: [
-      "I build websites and apps for businesses in any field, anywhere. I build every project starting from what the client already has: the sign at the front desk, the official menu, photos of a packed room.",
-      "I handle everything, from visuals to code to launch. That means fast decisions, no broken telephone, and a site you actually understand.",
+      "Before I open a code editor, I want to understand your business: who your customer is, what they're looking for and what makes them give up halfway. The site comes from those answers, not from a ready-made template.",
+      "I design, build and launch. No agency in the middle and no messages lost in translation: the person who hears your request is the one writing the code. That's how D'Conde went from first sketch to a booking system in daily use in two weeks.",
+      "After launch I stay close. Changing a price, a photo or opening hours is a WhatsApp message, not a ticket forgotten in a queue.",
     ],
-    skills: ["Next.js", "React", "TypeScript", "Supabase", "PostgreSQL", "Local SEO", "Interface design"],
+    skills: ["Custom design", "Fast on mobile", "Ready for Google", "Systems and dashboards", "Support after launch"],
   },
   faq: {
     kicker: "07 · faq",

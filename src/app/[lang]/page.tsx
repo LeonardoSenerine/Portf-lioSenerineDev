@@ -4,23 +4,19 @@ import { getDictionary, hasLocale } from "@/content/dictionaries";
 import { projects, shot } from "@/content/projects";
 import { site, whatsappLink } from "@/content/site";
 import { Header } from "@/components/Header";
-import { DeviceMockup } from "@/components/DeviceMockup";
+import { ProjectShowcase } from "@/components/ProjectShowcase";
 import { SearchDemo } from "@/components/SearchDemo";
 import { JsonLd } from "@/components/JsonLd";
 import {
   AreasWall,
-  CountUp,
   DrawLine,
-  FadeIn,
-  HeroTitle,
   Magnetic,
   Marquee,
   Parallax,
-  Reveal,
   ScrollSection,
-  SplitTitle,
   Spotlight,
 } from "@/components/motion";
+import { FadeIn, HeroTitle, Reveal, SplitTitle } from "@/components/reveal";
 
 const pad = (n: number) => String(n + 1).padStart(2, "0");
 
@@ -58,10 +54,8 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
               <FadeIn delay={0.8}>
                 <dl className="hero__stats">
                   {t.hero.stats.map((s) => (
-                    <div key={s.label}>
-                      <dt>
-                        <CountUp value={s.value} />
-                      </dt>
+                    <div key={s.value}>
+                      <dt>{s.value}</dt>
                       <dd>{s.label}</dd>
                     </div>
                   ))}
@@ -82,15 +76,6 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             </div>
           </div>
         </section>
-
-        {/* Faixa com as capturas dos sites */}
-        <Marquee className="shots-marquee" duration={60}>
-          {projects.map((p) => (
-            <div className="shots-marquee__item" key={p.id}>
-              <Image src={shot(p.id, "desktop")} alt="" width={1440} height={900} sizes="340px" />
-            </div>
-          ))}
-        </Marquee>
 
         {/* Por que ter um site */}
         <section className="section why" id="por-que">
@@ -116,60 +101,29 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         </section>
 
         {/* Trabalhos */}
-        <section className="section" id="trabalhos">
+        <section className="section section--work" id="trabalhos">
           <div className="container">
             <SectionHead kicker={t.work.kicker} title={t.work.title} intro={t.work.intro} />
 
-            <div className="cases">
-              {projects.map((p, i) => {
-                const item = t.work.items[p.id];
-                return (
-                  <Reveal key={p.id} className="case">
-                    <article className="case__inner">
-                      <div className="case__media">
-                        <DeviceMockup id={p.id} url={p.url} alt={item.client} fullHeight={p.fullHeight} privateLabel={t.work.privateLabel} />
-                        <span className="case__hint">{t.work.hoverHint}</span>
-                      </div>
-                      <div className="case__body">
-                        <div className="case__meta">
-                          <span className="case__index">{pad(i)}</span>
-                          <span className={`chip chip--${p.kind}`}>{t.work.kindLabel[p.kind]}</span>
-                        </div>
-                        <p className="case__client">
-                          {item.client} <span>· {item.segment}</span>
-                        </p>
-                        <h3 className="case__title">{item.title}</h3>
-                        <dl className="case__story">
-                          <dt>{t.work.problemLabel}</dt>
-                          <dd>{item.problem}</dd>
-                          <dt>{t.work.deliveredLabel}</dt>
-                          <dd>{item.delivered}</dd>
-                        </dl>
-                        <ul className="case__metrics">
-                          {item.metrics.map((m) => (
-                            <li key={m.label}>
-                              <strong>
-                                <CountUp value={m.value} />
-                              </strong>
-                              <span>{m.label}</span>
-                            </li>
-                          ))}
-                        </ul>
-                        <div className="case__links">
-                          {p.url ? (
-                            <a href={p.url} target="_blank" rel="noopener" className="btn btn--dark btn--sm">
-                              {t.work.visit} <span aria-hidden="true">↗</span>
-                            </a>
-                          ) : (
-                            <span className="case__private">{t.work.privateNote}</span>
-                          )}
-                        </div>
-                      </div>
-                    </article>
-                  </Reveal>
-                );
-              })}
-            </div>
+            <Reveal>
+              <ProjectShowcase
+                items={projects.map((p) => ({
+                  id: p.id,
+                  url: p.url,
+                  kind: p.kind,
+                  kindLabel: t.work.kindLabel[p.kind],
+                  ...t.work.items[p.id],
+                  image: shot(p.id, "mobile"),
+                }))}
+                labels={{
+                  ...t.work.carousel,
+                  problemLabel: t.work.problemLabel,
+                  deliveredLabel: t.work.deliveredLabel,
+                  visit: t.work.visit,
+                  privateNote: t.work.privateNote,
+                }}
+              />
+            </Reveal>
           </div>
         </section>
 

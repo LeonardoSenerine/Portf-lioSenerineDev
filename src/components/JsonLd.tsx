@@ -1,5 +1,5 @@
 import type { Dictionary, Locale } from "@/content/dictionaries";
-import { projects } from "@/content/projects";
+import { projects, shot } from "@/content/projects";
 import { site } from "@/content/site";
 
 // Dados estruturados (schema.org) para o Google entender quem é, o que oferece,
@@ -72,7 +72,7 @@ export function JsonLd({ lang, t }: { lang: Locale; t: Dictionary }) {
             headline: t.work.items[p.id].title,
             description: t.work.items[p.id].delivered,
             ...(p.url ? { url: p.url } : {}),
-            image: `${site.url}/work/${p.id}/desktop.jpg`,
+            image: `${site.url}${shot(p.id, "desktop")}`,
             creator: { "@id": personId },
           },
         })),

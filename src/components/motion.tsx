@@ -1,13 +1,12 @@
 "use client";
 
-import { Fragment, useEffect, useRef, useState, type ReactNode, type PointerEvent } from "react";
+import { Fragment, useEffect, useRef, useState, useSyncExternalStore, type ReactNode, type PointerEvent } from "react";
 import {
   MotionConfig,
   animate,
   motion,
   useInView,
   useMotionValue,
-  useReducedMotion,
   useScroll,
   useSpring,
   useTransform,
@@ -24,96 +23,16 @@ export function MotionProvider({ children }: { children: ReactNode }) {
   );
 }
 
-type RevealProps = {
-  children: ReactNode;
-  className?: string;
-  delay?: number;
-  y?: number;
-};
-
-export function Reveal({ children, className, delay = 0, y = 28 }: RevealProps) {
-  return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "0px 0px -10% 0px" }}
-      transition={{ duration: 0.8, ease, delay }}
-    >
-      {children}
-    </motion.div>
-  );
+// Efeitos ligados à rolagem só no computador: no celular custam processamento
+// e o ganho visual é pequeno.
+const desktopQuery = "(min-width: 900px) and (prefers-reduced-motion: no-preference)";
+function subscribeDesktop(onChange: () => void) {
+  const mq = window.matchMedia(desktopQuery);
+  mq.addEventListener("change", onChange);
+  return () => mq.removeEventListener("change", onChange);
 }
-
-// Entrada do hero em CSS puro: começa na primeira pintura, sem esperar o JavaScript,
-// para não atrasar o conteúdo principal (LCP).
-export function FadeIn({ children, className, delay = 0 }: RevealProps) {
-  return (
-    <div className={`fade-up ${className ?? ""}`} style={{ "--d": `${delay}s` } as React.CSSProperties}>
-      {children}
-    </div>
-  );
-}
-
-// Palavras sobem de dentro de uma máscara, uma depois da outra.
-function Words({ text, start = 0, step = 0.06, inView }: { text: string; start?: number; step?: number; inView: boolean }) {
-  return (
-    <>
-      {text.split(" ").map((w, i) => (
-        <Fragment key={i}>
-          <span className="word-mask">
-            <motion.span
-              initial={{ y: "105%" }}
-              animate={inView ? { y: "0%" } : undefined}
-              transition={{ duration: 0.9, ease, delay: start + i * step }}
-            >
-              {w}
-            </motion.span>
-          </span>{" "}
-        </Fragment>
-      ))}
-    </>
-  );
-}
-
-// Título do hero: palavras sobem de uma máscara (CSS); o ponto final dá um "pop".
-export function HeroTitle({ before, em, after }: { before: string; em: string; after: string }) {
-  const words = before.split(" ");
-  const delay = (i: number) => ({ "--d": `${0.1 + i * 0.07}s` }) as React.CSSProperties;
-  return (
-    <h1 className="hero__title">
-      {words.map((w, i) => (
-        <Fragment key={i}>
-          <span className="word-mask">
-            <span className="rise" style={delay(i)}>
-              {w}
-            </span>
-          </span>{" "}
-        </Fragment>
-      ))}
-      <span className="word-mask">
-        <em className="rise" style={delay(words.length)}>
-          {em}
-        </em>
-        <span className="accent pop" style={delay(words.length + 3)}>
-          {after}
-        </span>
-      </span>
-    </h1>
-  );
-}
-
-// Título de seção que se revela palavra por palavra ao entrar na tela.
-export function SplitTitle({ text, as: Tag = "h2", className = "section__title" }: { text: string; as?: "h2" | "h3"; className?: string }) {
-  const ref = useRef<HTMLHeadingElement>(null);
-  const inView = useInView(ref, { once: true, margin: "0px 0px -10% 0px" });
-  return (
-    <Tag ref={ref} className={className} aria-label={text}>
-      <span aria-hidden="true">
-        <Words text={text} inView={inView} step={0.05} />
-      </span>
-    </Tag>
-  );
+function useIsDesktop() {
+  return useSyncExternalStore(subscribeDesktop, () => window.matchMedia(desktopQuery).matches, () => false);
 }
 
 // Foto que sobe um pouco mais devagar que a rolagem.
@@ -121,32 +40,14 @@ export function Parallax({ children, className, distance = 60 }: { children: Rea
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], [-distance / 2, distance / 2]);
+  const desktop = useIsDesktop();
 
   return (
     <div ref={ref} className={className}>
-      <motion.div style={{ y }} className="parallax__inner">
+      <motion.div style={desktop ? { y } : undefined} className="parallax__inner">
         {children}
       </motion.div>
     </div>
-  );
-}
-
-// Elemento que flutua devagar, para cartões soltos no hero.
-export function Float({ children, className, delay = 0, amplitude = 10, duration = 6 }: { children: ReactNode; className?: string; delay?: number; amplitude?: number; duration?: number }) {
-  const reduce = useReducedMotion();
-  return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, scale: 0.9, y: 20 }}
-      animate={reduce ? { opacity: 1, scale: 1, y: 0 } : { opacity: 1, scale: 1, y: [0, -amplitude, 0] }}
-      transition={{
-        opacity: { duration: 0.8, delay },
-        scale: { duration: 0.8, ease, delay },
-        y: reduce ? { duration: 0.8, delay } : { duration, repeat: Infinity, ease: "easeInOut", delay },
-      }}
-    >
-      {children}
-    </motion.div>
   );
 }
 
@@ -239,17 +140,17 @@ export function Magnetic({ children, strength = 0.25 }: { children: ReactNode; s
   );
 }
 
+// Faixa que corre em loop: animação em CSS, roda fora da thread principal.
 export function Marquee({ children, duration = 28, reverse = false, className = "" }: { children: ReactNode; duration?: number; reverse?: boolean; className?: string }) {
   return (
     <div className={`marquee ${className}`} aria-hidden="true">
-      <motion.div
-        className="marquee__track"
-        animate={{ x: reverse ? ["-50%", "0%"] : ["0%", "-50%"] }}
-        transition={{ duration, ease: "linear", repeat: Infinity }}
+      <div
+        className={`marquee__track${reverse ? " marquee__track--reverse" : ""}`}
+        style={{ "--marquee-dur": `${duration}s` } as React.CSSProperties}
       >
         {children}
         {children}
-      </motion.div>
+      </div>
     </div>
   );
 }
@@ -261,8 +162,9 @@ export function ScrollSection({ children, className, id }: { children: ReactNode
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "start 30%"] });
   const scale = useTransform(scrollYProgress, [0, 1], [0.94, 1]);
   const radius = useTransform(scrollYProgress, [0, 1], [48, 0]);
+  const desktop = useIsDesktop();
   return (
-    <motion.section ref={ref} id={id} className={className} style={{ scale, borderRadius: radius }}>
+    <motion.section ref={ref} id={id} className={className} style={desktop ? { scale, borderRadius: radius } : undefined}>
       {children}
     </motion.section>
   );
@@ -278,8 +180,8 @@ export function AreasWall({ list, last }: { list: string[]; last: string }) {
         <Fragment key={word}>
           <motion.span
             className="areas__item"
-            initial={{ opacity: 0, y: 30, filter: "blur(6px)" }}
-            animate={inView ? { opacity: 1, y: 0, filter: "blur(0px)" } : undefined}
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : undefined}
             transition={{ duration: 0.7, ease, delay: i * 0.06 }}
           >
             <span className="areas__word">{word}</span>
