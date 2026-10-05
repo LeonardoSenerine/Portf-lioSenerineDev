@@ -206,10 +206,22 @@ const pt = {
     kicker: "Processo",
     title: "Do primeiro oi ao site no ar",
     steps: [
-      { title: "Conversa", text: "Entendo o negócio, quem é o seu cliente e o que hoje chega pelo WhatsApp." },
-      { title: "Proposta", text: "Escopo, prazo e valor fechados por escrito antes de começar." },
-      { title: "Design e código", text: "Você acompanha tudo por um link de prévia e pede ajustes no caminho." },
-      { title: "No ar", text: "Domínio, Google e prévia de link configurados. Depois disso eu continuo por perto para os ajustes." },
+      {
+        title: "Conversa",
+        text: "Uma conversa por vídeo ou pelo WhatsApp. Quero entender o seu negócio, quem é o seu cliente e o que hoje chega pelo WhatsApp. Também olho o que você já tem: o Instagram, as fotos, o cardápio, o letreiro. É daí que o site começa.",
+      },
+      {
+        title: "Proposta",
+        text: "Mando por escrito o que vai ser feito, em quanto tempo e por quanto. O valor é fechado: o que está na proposta é o que você paga. Só começo depois que você aprovar.",
+      },
+      {
+        title: "Design e código",
+        text: "Eu desenho e programo o site do zero, pensando primeiro no celular. Você acompanha tudo por um link de prévia, vê o site ganhando forma e pede ajustes no caminho, sem esperar o fim para opinar.",
+      },
+      {
+        title: "No ar",
+        text: "Registro o domínio, publico o site e deixo tudo pronto para o Google e para a prévia de link no WhatsApp. Depois do lançamento eu continuo por perto: trocar um preço, uma foto ou um horário é só me mandar uma mensagem.",
+      },
     ],
   },
   about: {
@@ -459,10 +471,22 @@ const en: Dictionary = {
     kicker: "Process",
     title: "From first hello to live site",
     steps: [
-      { title: "Talk", text: "I learn about your business, your customers and what comes in through WhatsApp today." },
-      { title: "Proposal", text: "Scope, timeline and price agreed in writing before any work starts." },
-      { title: "Design and code", text: "You follow along through a preview link and ask for changes as we go." },
-      { title: "Launch", text: "Domain, Google and link preview set up. After that I stay close for adjustments." },
+      {
+        title: "Talk",
+        text: "A video call or a WhatsApp chat. I want to understand your business, who your customer is and what comes in through WhatsApp today. I also look at what you already have: your Instagram, photos, menu, shop sign. That's where the site starts.",
+      },
+      {
+        title: "Proposal",
+        text: "I send in writing what will be built, how long it takes and what it costs. The price is fixed: what's in the proposal is what you pay. I only start once you approve it.",
+      },
+      {
+        title: "Design and code",
+        text: "I design and code the site from scratch, mobile first. You follow everything through a preview link, watch the site take shape and ask for changes along the way, without waiting for the end to weigh in.",
+      },
+      {
+        title: "Launch",
+        text: "I register the domain, publish the site and get it ready for Google and for WhatsApp link previews. After launch I stay close: changing a price, a photo or opening hours is just a message to me.",
+      },
     ],
   },
   about: {

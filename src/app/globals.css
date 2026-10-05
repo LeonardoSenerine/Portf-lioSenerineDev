@@ -1174,8 +1174,8 @@ em {
   grid-template-columns: 40px 1fr;
   grid-template-areas: "num title" "num text";
   column-gap: 18px;
-  row-gap: 6px;
-  padding: 24px 0;
+  row-gap: 10px;
+  padding: 40px 0;
 }
 .pstep__num {
   grid-area: num;
@@ -1198,7 +1198,7 @@ em {
   transition: background 0.5s var(--ease), color 0.5s var(--ease), border-color 0.5s var(--ease), box-shadow 0.5s var(--ease), transform 0.5s var(--ease);
 }
 .pstep__title { grid-area: title; font-size: 28px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.1; }
-.pstep__text { grid-area: text; max-width: 420px; color: var(--muted); }
+.pstep__text { grid-area: text; max-width: 460px; color: var(--muted); }
 .pstep__title,
 .pstep__text { transition: opacity 0.5s var(--ease); }
 
@@ -1222,6 +1222,7 @@ em {
     column-gap: 36px;
     align-items: center;
   }
+  .pstep { padding: 64px 0; }
   .pstep__num { align-self: center; margin: 0; }
   .pstep__title { text-align: right; font-size: clamp(32px, 3.6vw, 54px); }
   .process__line { left: 50%; margin-left: -1px; }
@@ -1230,7 +1231,7 @@ em {
 /* Computador com movimento: o bloco fica preso na tela e a rolagem percorre
    os passos (o passo da vez vem do ProcessAxis, pela classe is-active). */
 @media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
-  .process { height: 340vh; padding: 0; }
+  .process { --pstep-h: max(220px, 32vh); height: 380vh; padding: 0; }
   .process__pin {
     position: sticky;
     top: 0;
@@ -1242,9 +1243,23 @@ em {
   }
   .process__count { display: block; }
   .process__head { margin-bottom: 24px; }
-  .process__axis { flex: 1; grid-template-rows: repeat(4, 1fr); align-items: center; }
-  .process__line { top: 12.5%; bottom: 12.5%; }
-  .pstep { padding: 0; }
+  /* Janela do eixo: os passos deslizam por ela e somem nas bordas */
+  .process__viewport {
+    position: relative;
+    flex: 1;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(transparent, #000 16%, #000 84%, transparent);
+    mask-image: linear-gradient(transparent, #000 16%, #000 84%, transparent);
+  }
+  .process__axis {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(50% - var(--pstep-h) / 2);
+    display: block;
+  }
+  .process__line { top: calc(var(--pstep-h) / 2); bottom: calc(var(--pstep-h) / 2); }
+  .pstep { height: var(--pstep-h); padding: 0; }
   .pstep__num {
     background: var(--flood);
     color: var(--muted);
