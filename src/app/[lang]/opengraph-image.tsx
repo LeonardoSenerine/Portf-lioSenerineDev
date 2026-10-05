@@ -1,13 +1,15 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
+import sharp from "sharp";
 import { getDictionary, hasLocale, locales } from "@/content/dictionaries";
 
 // Capa do link (WhatsApp, LinkedIn, Google), gerada no build para cada idioma.
 // Mesma identidade do site: o bloco azul aceso com o título, a foto num painel
-// claro e o ponto de luz do logo.
+// claro e o ponto de luz do logo. Sai em JPEG leve (~100 KB): o WhatsApp
+// ignora capas pesadas, e o PNG direto do ImageResponse passava de 300 KB.
 export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
+export const contentType = "image/jpeg";
 export const alt = "Leonardo Senerine · senerine.dev";
 
 export function generateStaticParams() {
@@ -28,7 +30,7 @@ export default async function Image({ params }: { params: Promise<{ lang: string
     readFile(join(fonts, "InterTight-Regular.ttf")),
   ]);
 
-  return new ImageResponse(
+  const png = await new ImageResponse(
     (
       <div style={{ width: "100%", height: "100%", display: "flex", fontFamily: "Inter Tight" }}>
         <div
@@ -79,5 +81,8 @@ export default async function Image({ params }: { params: Promise<{ lang: string
         { name: "Inter Tight", data: regular, weight: 400, style: "normal" },
       ],
     },
-  );
+  ).arrayBuffer();
+
+  const jpeg = await sharp(Buffer.from(png)).jpeg({ quality: 82, mozjpeg: true }).toBuffer();
+  return new Response(new Uint8Array(jpeg), { headers: { "Content-Type": contentType } });
 }
