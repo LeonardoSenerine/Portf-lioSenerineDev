@@ -369,12 +369,26 @@ em {
   justify-content: space-between;
   gap: 24px;
 }
+/* Logo: "senerine", o ponto aceso (o mesmo dos rótulos e do título) e "dev" em azul */
 .logo {
-  font-size: 20px;
-  font-weight: 600;
-  letter-spacing: -0.03em;
+  display: inline-flex;
+  align-items: baseline;
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
 }
-.logo span { color: var(--accent-text); }
+.logo__dot {
+  display: inline-block;
+  width: 0.26em;
+  height: 0.26em;
+  margin: 0 0.06em 0 0.08em;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent-glow), 0 0 3px var(--accent-glow);
+  transition: box-shadow 0.4s var(--ease);
+}
+.logo:hover .logo__dot { box-shadow: 0 0 16px var(--accent), 0 0 4px var(--accent); }
+.logo__tld { color: var(--accent-text); }
 
 .header__nav { display: none; gap: 28px; font-size: 15px; color: var(--ink-soft); }
 .header__nav a { position: relative; }
@@ -1175,7 +1189,7 @@ em {
   grid-template-areas: "num title" "num text";
   column-gap: 18px;
   row-gap: 10px;
-  padding: 40px 0;
+  padding: 56px 0;
 }
 .pstep__num {
   grid-area: num;
@@ -1222,7 +1236,7 @@ em {
     column-gap: 36px;
     align-items: center;
   }
-  .pstep { padding: 64px 0; }
+  .pstep { padding: 96px 0; }
   .pstep__num { align-self: center; margin: 0; }
   .pstep__title { text-align: right; font-size: clamp(32px, 3.6vw, 54px); }
   .process__line { left: 50%; margin-left: -1px; }
@@ -1231,7 +1245,7 @@ em {
 /* Computador com movimento: o bloco fica preso na tela e a rolagem percorre
    os passos (o passo da vez vem do ProcessAxis, pela classe is-active). */
 @media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
-  .process { --pstep-h: max(220px, 32vh); height: 380vh; padding: 0; }
+  .process { --pstep-h: max(280px, 42vh); height: 420vh; padding: 0; }
   .process__pin {
     position: sticky;
     top: 0;
@@ -1408,6 +1422,70 @@ em {
 
 @media (min-width: 720px) {
   .footer { padding-bottom: 28px; }
+}
+
+/* ---------- Página 404 ---------- */
+
+.nf { min-height: 100vh; min-height: 100svh; display: flex; }
+/* Luz do alto, atrás do número */
+.nf__glow {
+  position: absolute;
+  top: -30%;
+  left: 50%;
+  width: 120vw;
+  max-width: 1200px;
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  background: radial-gradient(closest-side, var(--flood-beam), transparent);
+  opacity: 0.6;
+  pointer-events: none;
+}
+.nf__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 48px;
+  padding-top: 28px;
+  padding-bottom: 32px;
+}
+.flood .logo__dot { background: #ffffff; box-shadow: 0 0 12px rgba(255, 255, 255, 0.7); }
+.nf__code {
+  display: flex;
+  align-items: flex-end;
+  font-size: clamp(120px, 30vw, 300px);
+  font-weight: 700;
+  line-height: 0.85;
+  letter-spacing: -0.07em;
+  text-shadow: 0 0 80px rgba(255, 255, 255, 0.25);
+}
+/* O ponto aceso do logo, em tamanho grande */
+.nf__dot {
+  width: 0.13em;
+  height: 0.13em;
+  margin: 0 0 0.02em 0.06em;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.8), 0 0 12px rgba(255, 255, 255, 0.9);
+  animation: beam 2.4s ease-in-out infinite alternate;
+}
+.nf__title {
+  margin-top: 32px;
+  max-width: 760px;
+  font-size: clamp(32px, 5.4vw, 64px);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+}
+.nf__text { margin-top: 18px; max-width: 520px; font-size: clamp(17px, 2vw, 19px); color: var(--muted); }
+.nf__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+.nf__alt { font-size: 14px; color: var(--muted); }
+.nf__alt a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 559px) {
+  .nf__actions > .btn { flex: 1 1 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nf__dot { animation: none; }
 }
 
 /* ---------- CTA fixo no celular ---------- */

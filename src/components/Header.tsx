@@ -28,7 +28,9 @@ export function Header({ lang, nav, whatsappHref }: Props) {
     <header className={`header${scrolled ? " header--scrolled" : ""}`}>
       <div className="container header__inner">
         <Link href={`/${lang}`} className="logo" aria-label="senerine.dev">
-          senerine<span>.dev</span>
+          senerine
+          <span className="logo__dot" aria-hidden="true" />
+          <span className="logo__tld">dev</span>
         </Link>
 
         <nav className="header__nav" aria-label="Principal">

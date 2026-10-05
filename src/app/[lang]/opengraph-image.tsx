@@ -27,15 +27,19 @@ export default async function Image({ params }: { params: Promise<{ lang: string
     (
       <div style={{ width: "100%", height: "100%", display: "flex", background: "#f2efea", color: "#1e1d1e", fontFamily: "Inter Tight" }}>
         <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between", padding: "64px 0 64px 72px" }}>
-          <div style={{ display: "flex", fontSize: 30, fontWeight: 700, letterSpacing: -1 }}>
-            senerine<span style={{ color: "#0a63b2" }}>.dev</span>
+          <div style={{ display: "flex", alignItems: "flex-end", fontSize: 34, fontWeight: 700, letterSpacing: -1.4 }}>
+            senerine
+            <div style={{ display: "flex", width: 9, height: 9, margin: "0 2px 7px 3px", borderRadius: 9, background: "#0a63b2", boxShadow: "0 0 12px rgba(10, 99, 178, 0.6)" }} />
+            <span style={{ color: "#0a63b2" }}>dev</span>
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div style={{ display: "flex", fontSize: 76, fontWeight: 700, lineHeight: 1, letterSpacing: -3, maxWidth: 640 }}>
               {`${t.hero.titleBefore} ${t.hero.titleEm}.`}
             </div>
-            <div style={{ display: "flex", width: 120, height: 8, marginTop: 32, borderRadius: 8, background: "#0a63b2" }} />
-            <div style={{ display: "flex", marginTop: 20, fontSize: 28, fontWeight: 400, color: "#6a6670" }}>{t.footer.role}</div>
+            <div style={{ display: "flex", alignItems: "center", marginTop: 32, fontSize: 28, fontWeight: 400, color: "#6a6670" }}>
+              <div style={{ display: "flex", width: 12, height: 12, marginRight: 14, borderRadius: 12, background: "#0a63b2", boxShadow: "0 0 14px rgba(10, 99, 178, 0.6)" }} />
+              {t.footer.role}
+            </div>
           </div>
         </div>
         <div style={{ width: 430, display: "flex", alignItems: "flex-end", justifyContent: "center", background: "#ffffff" }}>

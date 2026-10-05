@@ -1,7 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // O layout raiz fica dentro de [lang]; a 404 do site inteiro vem de
+  // src/app/global-not-found.tsx.
+  experimental: {
+    globalNotFound: true,
+  },
 };
 
 export default nextConfig;
