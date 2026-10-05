@@ -30,7 +30,7 @@ function subscribeDesktop(onChange: () => void) {
   mq.addEventListener("change", onChange);
   return () => mq.removeEventListener("change", onChange);
 }
-function useIsDesktop() {
+export function useIsDesktop() {
   return useSyncExternalStore(subscribeDesktop, () => window.matchMedia(desktopQuery).matches, () => false);
 }
 
@@ -54,17 +54,6 @@ export function ScrollProgress() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 140, damping: 30, restDelta: 0.001 });
   return <motion.div className="scroll-progress" style={{ scaleX }} />;
-}
-
-// Linha que se desenha conforme a seção passa pela tela.
-export function DrawLine({ className }: { className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 85%", "start 35%"] });
-  return (
-    <div ref={ref} className={className}>
-      <motion.div className="draw-line__fill" style={{ scaleX: scrollYProgress }} />
-    </div>
-  );
 }
 
 // Conta até o número quando aparece na tela; textos sem número ficam como estão.
@@ -126,7 +115,7 @@ export function ScrollSection({ children, className, id }: { children: ReactNode
   );
 }
 
-// Parede de palavras: cada área entra em sequência; a última fica em itálico azul.
+// Parede de palavras: cada área entra em sequência; a última fica em azul.
 export function AreasWall({ list, last }: { list: string[]; last: string }) {
   const ref = useRef<HTMLParagraphElement>(null);
   const inView = useInView(ref, { once: true, margin: "0px 0px -15% 0px" });

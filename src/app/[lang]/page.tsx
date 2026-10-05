@@ -4,12 +4,12 @@ import { getDictionary, hasLocale } from "@/content/dictionaries";
 import { projects, shot } from "@/content/projects";
 import { site, whatsappLink } from "@/content/site";
 import { Header } from "@/components/Header";
+import { ProcessAxis } from "@/components/ProcessAxis";
 import { ProjectShowcase } from "@/components/ProjectShowcase";
 import { SearchDemo } from "@/components/SearchDemo";
 import { JsonLd } from "@/components/JsonLd";
 import {
   AreasWall,
-  DrawLine,
   Marquee,
   Parallax,
   ScrollSection,
@@ -176,21 +176,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         </section>
 
         {/* Processo */}
-        <ScrollSection className="section section--surface" id="processo">
-          <div className="container">
-            <SectionHead kicker={t.process.kicker} title={t.process.title} />
-            <DrawLine className="draw-line" />
-            <div className="steps">
-              {t.process.steps.map((step, i) => (
-                <Reveal key={step.title} delay={0.15 + i * 0.12} className="step" lit>
-                  <span className="step__num">{pad(i)}</span>
-                  <h3>{step.title}</h3>
-                  <p>{step.text}</p>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </ScrollSection>
+        <ProcessAxis kicker={t.process.kicker} title={t.process.title} steps={t.process.steps} />
 
         {/* Sobre */}
         <section className="section" id="sobre">
