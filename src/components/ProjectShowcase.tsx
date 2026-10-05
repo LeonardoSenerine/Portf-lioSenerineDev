@@ -1,14 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
+  animate,
   motion,
-  useAnimationFrame,
   useInView,
   useMotionValue,
+  useMotionValueEvent,
   useReducedMotion,
   useTransform,
+  type AnimationPlaybackControls,
   type MotionValue,
   type PanInfo,
 } from "motion/react";
@@ -25,7 +27,7 @@ export type ShowcaseItem = {
   problem: string;
   delivered: string;
   metrics: { value: string; label: string }[];
-  image: string;
+  images: { desktop: string; mobile: string };
 };
 
 type Labels = {
@@ -35,107 +37,149 @@ type Labels = {
   visit: string;
   privateNote: string;
   pickHint: string;
-  pause: string;
-  play: string;
+  prev: string;
+  next: string;
 };
 
 const ease = [0.22, 1, 0.36, 1] as const;
-// Quantos cartões formam a volta completa do cilindro (os projetos se repetem).
-const SLOTS = 30;
-const STEP = 360 / SLOTS;
-// Velocidade do giro: uma volta a cada 90 s.
-const DEG_PER_MS = 360 / 90000;
-const DRAG_DEG_PER_PX = 0.08;
+const spring = { type: "spring", stiffness: 150, damping: 22, mass: 0.9 } as const;
+// O carrossel anda sozinho a cada 4 s, sem parar (só fica parado fora da tela e
+// com "reduzir movimento"). Um toque nas setas ou nos pontos recomeça a contagem.
+const AUTOPLAY_MS = 4000;
 
-// Faixa curva infinita: a câmera fica no centro de um cilindro de cartões que
-// gira sem parar. As bordas crescem e viram para quem vê, como num estúdio.
+// Distância de um cartão até o centro, no caminho mais curto do laço (de -n/2 a n/2).
+const wrap = (v: number, n: number) => ((((v + n / 2) % n) + n) % n) - n / 2;
+const mod = (v: number, n: number) => ((v % n) + n) % n;
+
+// Carrossel em leque: o cartão do centro fica grande e reto (nítido); os
+// vizinhos encolhem, giram um pouco e ficam atrás. A posição é um número
+// contínuo, então arrastar, as setas e o giro automático deslizam sem saltos.
+// Quando a faixa entra na tela (descendo ou subindo), os cartões se abrem do centro.
 export function ProjectShowcase({ items, labels }: { items: ShowcaseItem[]; labels: Labels }) {
-  const rot = useMotionValue(0);
+  const n = items.length;
+  const pos = useMotionValue(0);
+  const spread = useMotionValue(0);
   const [selected, setSelected] = useState(0);
-  const [playing, setPlaying] = useState(true);
+  const [kick, setKick] = useState(0);
 
-  const curveRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(curveRef, { amount: 0.2 });
+  const stageRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(stageRef, { amount: 0.6 });
+  const visible = useInView(stageRef, { amount: 0.2 });
+  // As capturas são pedidas quando a faixa chega perto da tela, todas de uma vez.
+  const near = useInView(stageRef, { once: true, margin: "600px 0px" });
   const reduce = useReducedMotion();
-  const hovering = useRef(false);
+
   const dragging = useRef(false);
+  // Ignora o clique que vem logo depois de um arraste.
+  const justDragged = useRef(false);
+  const anim = useRef<AnimationPlaybackControls | null>(null);
 
-  useAnimationFrame((_, delta) => {
-    if (!playing || reduce || !inView || hovering.current || dragging.current) return;
-    rot.set(rot.get() - delta * DEG_PER_MS);
-  });
+  useMotionValueEvent(pos, "change", (v) => setSelected(mod(Math.round(v), n)));
 
-  const ringTransform = useTransform(rot, (r) => `translateZ(var(--curve-r)) rotateY(${r}deg)`);
+  // Abre o leque ao entrar na tela e fecha ao sair, nos dois sentidos da rolagem.
+  useEffect(() => {
+    if (reduce) {
+      spread.set(1);
+      return;
+    }
+    const controls = animate(spread, visible ? 1 : 0, visible ? { duration: 1.2, ease } : { duration: 0.3 });
+    return () => controls.stop();
+  }, [visible, reduce, spread]);
 
-  const onPan = (_: unknown, info: PanInfo) => {
+  const goTo = useCallback(
+    (target: number) => {
+      anim.current?.stop();
+      if (reduce) pos.set(target);
+      else anim.current = animate(pos, target, spring);
+    },
+    [pos, reduce],
+  );
+
+  useEffect(() => {
+    if (reduce || !inView) return;
+    const id = setInterval(() => {
+      if (!dragging.current) goTo(Math.round(pos.get()) + 1);
+    }, AUTOPLAY_MS);
+    return () => clearInterval(id);
+  }, [reduce, inView, goTo, pos, kick]);
+
+  const touch = () => setKick((k) => k + 1);
+  const step = (dir: number) => {
+    touch();
+    goTo(Math.round(pos.get()) + dir);
+  };
+  const select = (i: number) => {
+    if (justDragged.current) return;
+    touch();
+    const cur = pos.get();
+    goTo(Math.round(cur + wrap(i - cur, n)));
+  };
+
+  // Um cartão de distância equivale a ~70% da largura do cartão arrastado.
+  const unit = () => (stageRef.current?.querySelector<HTMLElement>(".cf__card")?.offsetWidth ?? 300) * 0.7;
+  const onPanStart = () => {
     dragging.current = true;
-    rot.set(rot.get() + info.delta.x * DRAG_DEG_PER_PX);
+    anim.current?.stop();
   };
-  const onPanEnd = () => {
+  const onPan = (_: unknown, info: PanInfo) => {
+    pos.set(pos.get() - info.delta.x / unit());
+  };
+  const onPanEnd = (_: unknown, info: PanInfo) => {
     dragging.current = false;
+    justDragged.current = true;
+    setTimeout(() => (justDragged.current = false), 250);
+    touch();
+    goTo(Math.round(pos.get() - (info.velocity.x / unit()) * 0.2));
   };
-
-  const slots = Array.from({ length: SLOTS }, (_, s) => s);
 
   return (
-    <div className="showcase" role="region" aria-label={labels.region}>
-      <motion.div
-        ref={curveRef}
-        className="curve"
-        onPan={onPan}
-        onPanEnd={onPanEnd}
-        onPointerEnter={(e) => {
-          if (e.pointerType === "mouse") hovering.current = true;
-        }}
-        onPointerLeave={() => {
-          hovering.current = false;
-        }}
-      >
-        <motion.div className="curve__ring" style={{ transform: ringTransform }}>
-          {slots.map((s) => {
-            const index = s % items.length;
-            return (
-              <CurveCard
-                key={s}
-                slot={s}
-                item={items[index]}
-                rot={rot}
-                selected={index === selected}
-                onSelect={() => setSelected(index)}
-              />
-            );
-          })}
-        </motion.div>
+    <div
+      className="showcase"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label={labels.region}
+      onKeyDown={(e) => {
+        if (e.key === "ArrowLeft") step(-1);
+        if (e.key === "ArrowRight") step(1);
+      }}
+    >
+      <motion.div ref={stageRef} className="cf" onPanStart={onPanStart} onPan={onPan} onPanEnd={onPanEnd}>
+        <div className="cf__beam" aria-hidden="true" />
+        {items.map((it, i) => (
+          <CoverCard
+            key={it.id}
+            index={i}
+            n={n}
+            item={it}
+            pos={pos}
+            spread={spread}
+            load={near}
+            active={i === selected}
+            onSelect={() => select(i)}
+          />
+        ))}
       </motion.div>
 
-      {/* Seleção acessível: os nomes dos projetos; o cartão clicado também seleciona. */}
-      <div className="showcase__picker">
-        <div className="showcase__tabs" role="tablist" aria-label={labels.region}>
+      <div className="cf__controls">
+        <button type="button" className="cf__arrow cf__arrow--prev" onClick={() => step(-1)} aria-label={labels.prev}>
+          <span aria-hidden="true">←</span>
+        </button>
+        <div className="cf__dots" role="tablist" aria-label={labels.region}>
           {items.map((it, i) => (
             <button
               key={it.id}
               type="button"
               role="tab"
               aria-selected={i === selected}
-              className={`showcase__tab${i === selected ? " is-active" : ""}`}
-              onClick={() => setSelected(i)}
-            >
-              {i === selected && <motion.span layoutId="showcase-tab" className="showcase__tab-bg" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
-              <span>{it.client}</span>
-            </button>
+              aria-label={it.client}
+              className={`cf__dot${i === selected ? " is-active" : ""}`}
+              onClick={() => select(i)}
+            />
           ))}
         </div>
-        {!reduce && (
-          <button
-            type="button"
-            className="showcase__play"
-            onClick={() => setPlaying((p) => !p)}
-            aria-label={playing ? labels.pause : labels.play}
-            aria-pressed={!playing}
-          >
-            {playing ? "❚❚" : "▶"}
-          </button>
-        )}
+        <button type="button" className="cf__arrow cf__arrow--next" onClick={() => step(1)} aria-label={labels.next}>
+          <span aria-hidden="true">→</span>
+        </button>
       </div>
       <p className="showcase__hint">{labels.pickHint}</p>
 
@@ -198,33 +242,61 @@ export function ProjectShowcase({ items, labels }: { items: ShowcaseItem[]; labe
 }
 
 type CardProps = {
-  slot: number;
+  index: number;
+  n: number;
   item: ShowcaseItem;
-  rot: MotionValue<number>;
-  selected: boolean;
+  pos: MotionValue<number>;
+  spread: MotionValue<number>;
+  load: boolean;
+  active: boolean;
   onSelect: () => void;
 };
 
-// Cartão num ângulo fixo do cilindro; some quando passa para trás da câmera.
-function CurveCard({ slot, item, rot, selected, onSelect }: CardProps) {
-  const angle = slot * STEP;
-  const opacity = useTransform(rot, (r) => {
-    const rel = ((((angle + r) % 360) + 540) % 360) - 180;
-    const a = Math.abs(rel);
-    return a < 62 ? 1 : a > 78 ? 0 : (78 - a) / 16;
+// Cada cartão calcula o próprio lugar a partir da distância até o centro:
+// desliza para o lado, encolhe, gira de leve e vai para trás.
+function CoverCard({ index, n, item, pos, spread, load, active, onSelect }: CardProps) {
+  const d = useTransform(pos, (p) => wrap(index - p, n));
+  const transform = useTransform([d, spread], ([dv, s]: number[]) => {
+    const a = Math.abs(dv) * s;
+    const sign = Math.sign(dv);
+    const x = sign * (a <= 1 ? a * 68 : 68 + (a - 1) * 50);
+    const scale = 1 - Math.min(a, 2.5) * 0.13;
+    const rot = -sign * Math.min(a, 1.5) * 12;
+    return `translateX(${x}%) scale(${scale}) rotateY(${rot}deg)`;
   });
+  const zIndex = useTransform(d, (dv) => 10 - Math.round(Math.abs(dv) * 2));
+  const opacity = useTransform(d, (dv) => {
+    const a = Math.abs(dv);
+    return a < 2.1 ? 1 : a > 2.7 ? 0 : (2.7 - a) / 0.6;
+  });
+  // Os de trás ficam um pouco mais escuros, para dar profundidade.
+  const shade = useTransform([d, spread], ([dv, s]: number[]) => Math.min(Math.abs(dv) * s, 2) * 0.16);
 
   return (
     <motion.button
       type="button"
-      className={`curve__card${selected ? " is-selected" : ""}`}
-      style={{ transform: `rotateY(${angle}deg) translateZ(calc(var(--curve-r) * -1))`, opacity }}
+      className={`cf__card${active ? " is-active" : ""}`}
+      style={{ transform, zIndex, opacity }}
       onClick={onSelect}
       tabIndex={-1}
       aria-hidden="true"
     >
-      <Image src={item.image} alt="" fill sizes="(max-width: 700px) 30vw, 220px" className="curve__img" />
-      <span className="curve__name">{item.client}</span>
+      {load && (
+        <Image
+          src={item.images.mobile}
+          alt=""
+          fill
+          sizes="(min-width: 900px) 360px, 68vw"
+          loading="eager"
+          className="cf__img"
+          draggable={false}
+        />
+      )}
+      <motion.span className="cf__shade" style={{ opacity: shade }} />
+      <span className="cf__label">
+        <strong>{item.client}</strong>
+        <small>{item.kindLabel}</small>
+      </span>
     </motion.button>
   );
 }

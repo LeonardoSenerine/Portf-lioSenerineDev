@@ -9,14 +9,16 @@ type RevealProps = {
   className?: string;
   delay?: number;
   y?: number;
+  // "Acende" (número em azul e um traço de luz) quando chega perto do meio da tela.
+  lit?: boolean;
 };
 
 const vars = (delay: number, y?: number) =>
   ({ "--d": `${delay}s`, ...(y !== undefined ? { "--y": `${y}px` } : {}) }) as CSSProperties;
 
-export function Reveal({ children, className, delay = 0, y }: RevealProps) {
+export function Reveal({ children, className, delay = 0, y, lit }: RevealProps) {
   return (
-    <div className={className} data-reveal="" style={vars(delay, y)}>
+    <div className={className} data-reveal="" data-lit={lit ? "" : undefined} style={vars(delay, y)}>
       {children}
     </div>
   );

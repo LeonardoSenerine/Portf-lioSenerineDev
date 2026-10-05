@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useEffect, useRef, useState, useSyncExternalStore, type ReactNode, type PointerEvent } from "react";
+import { Fragment, useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import {
   MotionConfig,
   animate,
@@ -95,23 +95,6 @@ export function CountUp({ value }: { value: string }) {
   }, [inView]);
 
   return <span ref={ref}>{display}</span>;
-}
-
-// Cartão com um brilho que segue o cursor.
-export function Spotlight({ children, className }: { children: ReactNode; className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const onMove = (e: PointerEvent<HTMLDivElement>) => {
-    const el = ref.current;
-    if (!el) return;
-    const r = el.getBoundingClientRect();
-    el.style.setProperty("--mx", `${e.clientX - r.left}px`);
-    el.style.setProperty("--my", `${e.clientY - r.top}px`);
-  };
-  return (
-    <div ref={ref} className={`spotlight ${className ?? ""}`} onPointerMove={onMove}>
-      {children}
-    </div>
-  );
 }
 
 // Botão que é puxado de leve na direção do cursor.

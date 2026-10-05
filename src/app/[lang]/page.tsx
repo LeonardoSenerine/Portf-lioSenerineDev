@@ -14,7 +14,6 @@ import {
   Marquee,
   Parallax,
   ScrollSection,
-  Spotlight,
 } from "@/components/motion";
 import { FadeIn, HeroTitle, Reveal, SplitTitle } from "@/components/reveal";
 
@@ -90,7 +89,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           <div className="container">
             <div className="why__points">
               {t.why.points.map((pt, i) => (
-                <Reveal key={pt.title} delay={i * 0.1} className="why__point">
+                <Reveal key={pt.title} delay={i * 0.1} className="why__point" lit>
                   <span className="why__num">{pad(i)}</span>
                   <h3>{pt.title}</h3>
                   <p>{pt.text}</p>
@@ -101,7 +100,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         </section>
 
         {/* Trabalhos */}
-        <section className="section section--work" id="trabalhos">
+        <ScrollSection className="section section--work flood" id="trabalhos">
           <div className="container">
             <SectionHead kicker={t.work.kicker} title={t.work.title} intro={t.work.intro} />
 
@@ -113,7 +112,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
                   kind: p.kind,
                   kindLabel: t.work.kindLabel[p.kind],
                   ...t.work.items[p.id],
-                  image: shot(p.id, "mobile"),
+                  images: { desktop: shot(p.id, "desktop"), mobile: shot(p.id, "mobile") },
                 }))}
                 labels={{
                   ...t.work.carousel,
@@ -125,7 +124,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
               />
             </Reveal>
           </div>
-        </section>
+        </ScrollSection>
 
         {/* Áreas */}
         <section className="section areas" id="areas">
@@ -159,8 +158,8 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             <SectionHead kicker={t.services.kicker} title={t.services.title} intro={t.services.intro} />
             <div className="services">
               {t.services.items.map((s, i) => (
-                <Reveal key={s.name} delay={i * 0.1}>
-                  <Spotlight className={`service${s.recommended ? " service--featured" : ""}`}>
+                <Reveal key={s.name} delay={i * 0.1} lit>
+                  <div className={`service${s.recommended ? " service--featured" : ""}`}>
                     <div className="service__top">
                       <span className="service__index">{pad(i)}</span>
                       {s.recommended && <span className="chip chip--accent">{t.services.recommended}</span>}
@@ -172,7 +171,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
                         <li key={f}>{f}</li>
                       ))}
                     </ul>
-                  </Spotlight>
+                  </div>
                 </Reveal>
               ))}
             </div>
@@ -189,7 +188,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             <DrawLine className="draw-line" />
             <div className="steps">
               {t.process.steps.map((step, i) => (
-                <Reveal key={step.title} delay={0.15 + i * 0.12} className="step">
+                <Reveal key={step.title} delay={0.15 + i * 0.12} className="step" lit>
                   <span className="step__num">{pad(i)}</span>
                   <h3>{step.title}</h3>
                   <p>{step.text}</p>
@@ -232,7 +231,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             <SectionHead kicker={t.faq.kicker} title={t.faq.title} />
             <div className="faq__list">
               {t.faq.items.map((item, i) => (
-                <Reveal key={item.q} delay={i * 0.05}>
+                <Reveal key={item.q} delay={i * 0.05} className="faq__row" lit>
                   <details className="faq__item">
                     <summary>
                       {item.q}
@@ -247,11 +246,11 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         </ScrollSection>
 
         {/* Contato */}
-        <ScrollSection className="contact" id="contato">
+        <ScrollSection className="contact flood" id="contato">
           <div className="contact__glow" aria-hidden="true" />
           <div className="container">
             <Reveal>
-              <p className="kicker kicker--light">{t.contact.kicker}</p>
+              <p className="kicker">{t.contact.kicker}</p>
             </Reveal>
             <Reveal delay={0.1} y={40}>
               <h2 className="contact__title">
@@ -263,7 +262,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
               <p className="contact__text">{t.contact.text}</p>
               <div className="contact__actions">
                 <Magnetic>
-                  <a href={wa} className="btn btn--accent btn--lg" target="_blank" rel="noopener">
+                  <a href={wa} className="btn btn--light btn--lg" target="_blank" rel="noopener">
                     {t.contact.primary} <span aria-hidden="true">↗</span>
                   </a>
                 </Magnetic>

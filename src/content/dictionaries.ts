@@ -78,7 +78,7 @@ const pt = {
     deliveredLabel: "O que entreguei",
     visit: "Ver site ao vivo",
     privateNote: "Link e dados privados, a pedido dos noivos",
-    carousel: { region: "Projetos", pickHint: "toque num projeto para ver os detalhes", pause: "Pausar rotação", play: "Retomar rotação" },
+    carousel: { region: "Projetos", pickHint: "arraste para o lado ou use as setas", prev: "Projeto anterior", next: "Próximo projeto" },
     items: {
       gordinho: {
         client: "Gordinho Lanches",
@@ -331,7 +331,7 @@ const en: Dictionary = {
     deliveredLabel: "What I delivered",
     visit: "Visit live site",
     privateNote: "Link and details kept private, at the couple's request",
-    carousel: { region: "Projects", pickHint: "tap a project to see the details", pause: "Pause rotation", play: "Resume rotation" },
+    carousel: { region: "Projects", pickHint: "swipe or use the arrows", prev: "Previous project", next: "Next project" },
     items: {
       gordinho: {
         client: "Gordinho Lanches",

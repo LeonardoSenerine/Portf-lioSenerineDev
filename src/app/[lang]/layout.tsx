@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { notFound } from "next/navigation";
-import { Inter_Tight, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { Inter_Tight, JetBrains_Mono } from "next/font/google";
 import { getDictionary, hasLocale, locales } from "@/content/dictionaries";
 import { site } from "@/content/site";
 import { MotionProvider } from "@/components/motion";
@@ -10,14 +10,8 @@ import { themeScript } from "@/content/theme";
 import "../globals.css";
 
 const sans = Inter_Tight({ variable: "--font-sans", subsets: ["latin"] });
-// A serifa só aparece em itálico; a mono não está na primeira tela, então não é
-// pré-carregada e não disputa banda com o título e a foto.
-const serif = Instrument_Serif({
-  variable: "--font-serif",
-  subsets: ["latin"],
-  weight: "400",
-  style: "italic",
-});
+// A mono não está na primeira tela, então não é pré-carregada e não disputa
+// banda com o título e a foto.
 const mono = JetBrains_Mono({ variable: "--font-mono", subsets: ["latin"], preload: false });
 
 export const dynamicParams = false;
@@ -83,7 +77,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
   return (
     <html
       lang={dict.htmlLang}
-      className={`${sans.variable} ${serif.variable} ${mono.variable}`}
+      className={`${sans.variable} ${mono.variable}`}
       suppressHydrationWarning
     >
       <body>
