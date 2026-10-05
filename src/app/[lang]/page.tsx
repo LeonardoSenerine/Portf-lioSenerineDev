@@ -155,19 +155,17 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             <SectionHead kicker={t.services.kicker} title={t.services.title} intro={t.services.intro} />
             <div className="services">
               {t.services.items.map((s, i) => (
-                <Reveal key={s.name} delay={i * 0.1}>
-                  <div className={`service${s.recommended ? " service--featured" : ""}`}>
-                    <div className="service__top">
-                      {s.recommended && <span className="service__badge">{t.services.recommended}</span>}
-                    </div>
+                <Reveal key={s.name} delay={i * 0.1} className={`service${s.recommended ? " service--featured" : ""}`}>
+                  <div className="service__head">
+                    {s.recommended && <p className="service__badge">{t.services.recommended}</p>}
                     <h3 className="service__name">{s.name}</h3>
                     <p className="service__desc">{s.description}</p>
-                    <ul className="service__list">
-                      {s.features.map((f) => (
-                        <li key={f}>{f}</li>
-                      ))}
-                    </ul>
                   </div>
+                  <ul className="service__list">
+                    {s.features.map((f) => (
+                      <li key={f}>{f}</li>
+                    ))}
+                  </ul>
                 </Reveal>
               ))}
             </div>

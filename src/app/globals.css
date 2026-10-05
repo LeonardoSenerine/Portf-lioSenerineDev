@@ -1053,39 +1053,37 @@ em {
 
 /* ---------- Serviços ---------- */
 
-.services { display: grid; gap: 16px; }
+/* Lista editorial, não grade de cartões: cada serviço é uma linha com fio.
+   Só o plano recomendado vira um painel escuro aceso, a quebra de ritmo. */
+.services { display: grid; border-top: 1px solid var(--line); }
 .service {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  padding: 32px 28px;
-  border-radius: var(--radius);
-  background: var(--surface);
-  border: 1px solid var(--line);
-  transition: transform 0.5s var(--ease);
+  display: grid;
+  gap: 20px;
+  padding: 36px 0;
+  border-bottom: 1px solid var(--line);
 }
-.service:hover { transform: translateY(-6px); }
 .service--featured {
+  margin: 12px 0;
+  padding: 32px 24px;
+  border-radius: var(--radius);
+  border-bottom: 0;
   background: var(--inverse-bg);
   color: var(--inverse-ink);
-  border-color: var(--inverse-bg);
-  /* Luz de contorno: o plano recomendado é o único card iluminado */
+  /* Luz de contorno: o único bloco iluminado da lista */
   box-shadow: 0 0 0 1px var(--accent), 0 30px 90px -30px var(--accent-glow);
 }
-.service__top { display: flex; align-items: center; min-height: 28px; }
-.service__name { margin-top: 40px; font-size: 30px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.1; }
-.service__desc { margin-top: 12px; color: var(--muted); }
+.service__name { font-size: clamp(30px, 4.4vw, 44px); font-weight: 600; letter-spacing: -0.035em; line-height: 1.05; }
+.service__desc { margin-top: 10px; max-width: 440px; color: var(--muted); }
 .service--featured .service__desc { color: var(--inverse-muted); }
-.service__list { margin-top: 28px; display: grid; gap: 12px; font-size: 15px; }
-.service__list li { display: flex; gap: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
-.service--featured .service__list li { border-top-color: var(--inverse-line); }
+.service__list { display: grid; gap: 10px; font-size: 16px; }
+.service__list li { display: flex; gap: 12px; }
 /* Marcador: quadradinho azul aceso, o mesmo das caixinhas de índice */
 .service__list li::before {
   content: "";
   flex-shrink: 0;
   width: 6px;
   height: 6px;
-  margin-top: 0.62em;
+  margin-top: 0.66em;
   border-radius: 1px;
   background: var(--accent-text);
   box-shadow: 0 0 8px var(--accent-glow);
@@ -1096,9 +1094,9 @@ em {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  margin-bottom: 14px;
   font-size: 13px;
   font-weight: 600;
-  color: var(--inverse-ink);
 }
 .service__badge::before {
   content: "";
@@ -1108,6 +1106,23 @@ em {
   background: var(--accent);
   box-shadow: 0 0 10px var(--accent-glow);
 }
+
+@media (min-width: 900px) {
+  .service {
+    grid-template-columns: 1.15fr 1fr;
+    column-gap: 72px;
+    align-items: start;
+    padding: 48px 0;
+  }
+  .service--featured { padding: 48px 44px; margin: 16px 0; }
+  .service__list { padding-top: 10px; }
+}
+/* Com folga na lateral, o painel sai um pouco da coluna para os textos
+   continuarem alinhados com as outras linhas. */
+@media (min-width: 1360px) {
+  .service--featured { margin: 16px -44px; }
+}
+
 .services__note {
   margin-top: 24px;
   padding: 20px 24px;
@@ -1117,9 +1132,6 @@ em {
   font-size: 15px;
 }
 
-@media (min-width: 900px) {
-  .services { grid-template-columns: repeat(3, 1fr); }
-}
 
 /* ---------- Processo ---------- */
 
