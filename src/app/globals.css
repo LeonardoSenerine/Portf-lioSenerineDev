@@ -196,26 +196,25 @@ em {
 
 /* ---------- Tipografia base ---------- */
 
-/* Rótulo de seção: um filete de luz que acende quando a seção entra na tela. */
+/* Rótulo de seção: um ponto de luz azul que acende quando a seção entra na tela. */
 .kicker {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   font-size: 14px;
   font-weight: 500;
   color: var(--muted);
 }
 .kicker::before {
   content: "";
-  width: 24px;
-  height: 2px;
-  border-radius: 2px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
   background: var(--accent-text);
-  box-shadow: 0 0 12px var(--accent-glow);
-  transform-origin: 0 50%;
-  transition: transform 0.9s var(--ease) 0.2s;
+  box-shadow: 0 0 10px var(--accent-glow);
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s;
 }
-.js-reveal [data-reveal=""]:not(.is-in) .kicker::before { transform: scaleX(0); }
+.js-reveal [data-reveal=""]:not(.is-in) .kicker::before { transform: scale(0); }
 
 .section { padding: 120px 0; }
 .section--surface {
@@ -804,8 +803,7 @@ em {
   font-size: 14px;
   color: var(--muted);
 }
-/* Um traço no lugar do cadeado em emoji */
-.case__private::before { content: ""; width: 18px; height: 1px; background: currentColor; }
+.case__private::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
 
 @media (min-width: 900px) {
   .showcase__detail { grid-template-columns: 1fr 1fr; column-gap: 64px; }
@@ -944,8 +942,7 @@ em {
    um traço de luz percorre o topo. Descendo acende, subindo apaga. Sem JS ou com
    "reduzir movimento", tudo já aparece aceso. */
 .why__num,
-.step__num,
-.service__index {
+.step__num {
   display: inline-grid;
   place-items: center;
   justify-self: start;
@@ -963,7 +960,7 @@ em {
   box-shadow: 0 0 22px -2px var(--accent-glow);
   transition: background 0.5s var(--ease), color 0.5s var(--ease), border-color 0.5s var(--ease), box-shadow 0.5s var(--ease);
 }
-.js-reveal [data-lit]:not(.is-lit) :is(.why__num, .step__num, .service__index) {
+.js-reveal [data-lit]:not(.is-lit) :is(.why__num, .step__num) {
   background: transparent;
   color: var(--muted);
   border-color: var(--line-strong);
@@ -1075,7 +1072,7 @@ em {
   /* Luz de contorno: o plano recomendado é o único card iluminado */
   box-shadow: 0 0 0 1px var(--accent), 0 30px 90px -30px var(--accent-glow);
 }
-.service__top { display: flex; justify-content: space-between; align-items: center; min-height: 28px; }
+.service__top { display: flex; align-items: center; min-height: 28px; }
 .service__name { margin-top: 40px; font-size: 30px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.1; }
 .service__desc { margin-top: 12px; color: var(--muted); }
 .service--featured .service__desc { color: var(--inverse-muted); }
