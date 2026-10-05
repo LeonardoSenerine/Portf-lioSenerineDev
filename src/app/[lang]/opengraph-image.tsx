@@ -3,7 +3,9 @@ import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { getDictionary, hasLocale, locales } from "@/content/dictionaries";
 
-// Imagem de prévia do link (WhatsApp, LinkedIn, Google), gerada no build para cada idioma.
+// Capa do link (WhatsApp, LinkedIn, Google), gerada no build para cada idioma.
+// Mesma identidade do site: o bloco azul aceso com o título, a foto num painel
+// claro e o ponto de luz do logo.
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const alt = "Leonardo Senerine · senerine.dev";
@@ -11,6 +13,9 @@ export const alt = "Leonardo Senerine · senerine.dev";
 export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
 }
+
+const blue = "#0a63b2";
+const glow = "0 0 18px rgba(255, 255, 255, 0.75)";
 
 export default async function Image({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
@@ -25,23 +30,42 @@ export default async function Image({ params }: { params: Promise<{ lang: string
 
   return new ImageResponse(
     (
-      <div style={{ width: "100%", height: "100%", display: "flex", background: "#f2efea", color: "#1e1d1e", fontFamily: "Inter Tight" }}>
-        <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between", padding: "64px 0 64px 72px" }}>
-          <div style={{ display: "flex", alignItems: "flex-end", fontSize: 34, fontWeight: 700, letterSpacing: -1.4 }}>
+      <div style={{ width: "100%", height: "100%", display: "flex", fontFamily: "Inter Tight" }}>
+        <div
+          style={{
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            padding: "60px 48px 60px 72px",
+            color: "#f7f5f1",
+            backgroundColor: blue,
+            backgroundImage: "radial-gradient(circle at 30% -10%, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0) 60%)",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "flex-end", fontSize: 34, fontWeight: 700, lineHeight: 1, letterSpacing: -1.4 }}>
             senerine
-            <div style={{ display: "flex", width: 9, height: 9, margin: "0 2px 7px 3px", borderRadius: 9, background: "#0a63b2", boxShadow: "0 0 12px rgba(10, 99, 178, 0.6)" }} />
-            <span style={{ color: "#0a63b2" }}>dev</span>
+            <div style={{ display: "flex", width: 9, height: 9, margin: "0 2px 6px 3px", borderRadius: 9, background: "#ffffff", boxShadow: glow }} />
+            <span style={{ color: "#bcd8f5" }}>dev</span>
           </div>
+
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <div style={{ display: "flex", fontSize: 76, fontWeight: 700, lineHeight: 1, letterSpacing: -3, maxWidth: 640 }}>
-              {`${t.hero.titleBefore} ${t.hero.titleEm}.`}
+            <div style={{ display: "flex", flexWrap: "wrap", fontSize: 72, fontWeight: 700, lineHeight: 1.02, letterSpacing: -2.9, maxWidth: 650 }}>
+              {/* Uma palavra por item, para a quebra de linha ficar natural no Satori */}
+              {t.hero.titleBefore.split(" ").map((word, i) => (
+                <span key={i} style={{ marginRight: 17 }}>
+                  {word}
+                </span>
+              ))}
+              <span style={{ color: "#f6c9b6" }}>{`${t.hero.titleEm}.`}</span>
             </div>
-            <div style={{ display: "flex", alignItems: "center", marginTop: 32, fontSize: 28, fontWeight: 400, color: "#6a6670" }}>
-              <div style={{ display: "flex", width: 12, height: 12, marginRight: 14, borderRadius: 12, background: "#0a63b2", boxShadow: "0 0 14px rgba(10, 99, 178, 0.6)" }} />
+            <div style={{ display: "flex", alignItems: "center", marginTop: 34, fontSize: 28, fontWeight: 400, color: "#d6e5f5" }}>
+              <div style={{ display: "flex", width: 12, height: 12, marginRight: 14, borderRadius: 12, background: "#ffffff", boxShadow: glow }} />
               {t.footer.role}
             </div>
           </div>
         </div>
+
         <div style={{ width: 430, display: "flex", alignItems: "flex-end", justifyContent: "center", background: "#ffffff" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={photoSrc} width={430} height={764} style={{ objectFit: "cover", marginBottom: -140 }} alt="" />
