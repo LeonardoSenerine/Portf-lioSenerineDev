@@ -10,7 +10,6 @@ import { JsonLd } from "@/components/JsonLd";
 import {
   AreasWall,
   DrawLine,
-  Magnetic,
   Marquee,
   Parallax,
   ScrollSection,
@@ -40,11 +39,9 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
               <FadeIn delay={0.6}>
                 <p className="hero__lead">{t.hero.lead}</p>
                 <div className="hero__actions">
-                  <Magnetic>
-                    <a href={wa} className="btn btn--accent" target="_blank" rel="noopener">
-                      {t.hero.primary} <span aria-hidden="true">↗</span>
-                    </a>
-                  </Magnetic>
+                  <a href={wa} className="btn btn--accent" target="_blank" rel="noopener">
+                    {t.hero.primary} <span aria-hidden="true">↗</span>
+                  </a>
                   <a href="#trabalhos" className="btn btn--ghost">
                     {t.hero.secondary}
                   </a>
@@ -147,7 +144,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           {t.niches.map((n) => (
             <span key={n} className="text-marquee__item">
               {n}
-              <span className="text-marquee__dot">✦</span>
+              <span className="text-marquee__dot" aria-hidden="true">/</span>
             </span>
           ))}
         </Marquee>
@@ -162,7 +159,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
                   <div className={`service${s.recommended ? " service--featured" : ""}`}>
                     <div className="service__top">
                       <span className="service__index">{pad(i)}</span>
-                      {s.recommended && <span className="chip chip--accent">{t.services.recommended}</span>}
+                      {s.recommended && <span className="service__badge">{t.services.recommended}</span>}
                     </div>
                     <h3 className="service__name">{s.name}</h3>
                     <p className="service__desc">{s.description}</p>
@@ -261,11 +258,9 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             <Reveal delay={0.25}>
               <p className="contact__text">{t.contact.text}</p>
               <div className="contact__actions">
-                <Magnetic>
-                  <a href={wa} className="btn btn--light btn--lg" target="_blank" rel="noopener">
-                    {t.contact.primary} <span aria-hidden="true">↗</span>
-                  </a>
-                </Magnetic>
+                <a href={wa} className="btn btn--light btn--lg" target="_blank" rel="noopener">
+                  {t.contact.primary} <span aria-hidden="true">↗</span>
+                </a>
                 <a href={`mailto:${site.email}`} className="btn btn--outline-light btn--lg">
                   {t.contact.email}
                 </a>

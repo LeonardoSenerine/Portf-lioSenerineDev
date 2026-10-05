@@ -6,7 +6,6 @@ import {
   animate,
   motion,
   useInView,
-  useMotionValue,
   useScroll,
   useSpring,
   useTransform,
@@ -95,32 +94,6 @@ export function CountUp({ value }: { value: string }) {
   }, [inView]);
 
   return <span ref={ref}>{display}</span>;
-}
-
-// Botão que é puxado de leve na direção do cursor.
-export function Magnetic({ children, strength = 0.25 }: { children: ReactNode; strength?: number }) {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const sx = useSpring(x, { stiffness: 250, damping: 18 });
-  const sy = useSpring(y, { stiffness: 250, damping: 18 });
-  return (
-    <motion.span
-      className="magnetic"
-      style={{ x: sx, y: sy }}
-      onPointerMove={(e) => {
-        if (e.pointerType !== "mouse") return;
-        const r = e.currentTarget.getBoundingClientRect();
-        x.set((e.clientX - r.left - r.width / 2) * strength);
-        y.set((e.clientY - r.top - r.height / 2) * strength);
-      }}
-      onPointerLeave={() => {
-        x.set(0);
-        y.set(0);
-      }}
-    >
-      {children}
-    </motion.span>
-  );
 }
 
 // Faixa que corre em loop: animação em CSS, roda fora da thread principal.
