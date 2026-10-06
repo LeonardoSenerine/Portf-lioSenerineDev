@@ -122,6 +122,20 @@ const pt = {
           { value: "0", label: "presentes repetidos" },
         ],
       },
+      suramu: {
+        client: "SURAMU",
+        segment: "Sushi delivery de quebrada",
+        title: "Um sushi de quebrada que para a rolagem",
+        problem:
+          "Sushi feito na quebrada por sushimen que aprenderam com mestres japoneses: sem salmão, sem cream cheese, só peixe do dia. A marca tinha a tag em grafite e os pôsteres, mas faltava um site à altura, pensado para quem pede pelo celular vindo do Instagram.",
+        delivered:
+          "Site com a tag em grafite pintada na tela como spray, manifesto em três telas, quadro de peixes do dia que o dono atualiza num único arquivo, rota do mercado ao balcão em cinco paradas e pedido pelo WhatsApp.",
+        metrics: [
+          { value: "0", label: "salmão e cream cheese no cardápio" },
+          { value: "5", label: "paradas do mercado ao balcão" },
+          { value: "1 arquivo", label: "para atualizar os peixes do dia" },
+        ],
+      },
       samoa: {
         client: "Samoa Gastrobar",
         segment: "Gastrobar com música ao vivo",
@@ -385,6 +399,20 @@ const en: Dictionary = {
           { value: "1 link", label: "with everything about the day" },
           { value: "RSVP", label: "sent ready-made via WhatsApp" },
           { value: "0", label: "duplicate gifts" },
+        ],
+      },
+      suramu: {
+        client: "SURAMU",
+        segment: "Street sushi delivery",
+        title: "A street sushi brand that stops the scroll",
+        problem:
+          "Sushi made in the city's outskirts by sushimen who learned from Japanese masters: no salmon, no cream cheese, only fish of the day. The brand had its graffiti tag and posters but no website to match, built for people ordering on their phones from Instagram.",
+        delivered:
+          "A site with the graffiti tag sprayed onto the screen, a three-screen manifesto, a fish-of-the-day board the owner updates in a single file, a five-stop route from market to counter and WhatsApp ordering.",
+        metrics: [
+          { value: "0", label: "salmon or cream cheese on the menu" },
+          { value: "5", label: "stops from market to counter" },
+          { value: "1 file", label: "to update the fish of the day" },
         ],
       },
       samoa: {

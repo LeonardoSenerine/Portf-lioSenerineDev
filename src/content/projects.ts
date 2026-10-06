@@ -8,6 +8,7 @@ export const projects = [
   { id: "dconde", url: "https://dcondebarbershop.vercel.app", kind: "real" },
   // Convite de casamento: evento privado do casal, sem link público.
   { id: "convite", url: null, kind: "real" },
+  { id: "suramu", url: "https://suramusushi.vercel.app", kind: "concept" },
   { id: "samoa", url: "https://samoa-gastro-bar.vercel.app", kind: "concept" },
   { id: "pontoalto", url: "https://ponto-alto-site-omega.vercel.app", kind: "concept" },
   { id: "meraki", url: "https://meraki-studio-nu.vercel.app", kind: "concept" },
