@@ -52,8 +52,8 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
     <figure key="og" className="artifact artifact--og">
       <Image src="/work/suramu/og.jpg" alt={t.process.artifacts.og} width={1200} height={630} sizes="(max-width: 900px) 90vw, 520px" />
       <figcaption>
-        <strong>suramusushi.vercel.app</strong>
-        <span>SURAMU スラム · Real Sushi · Delivery de Quebrada</span>
+        <strong>SURAMU スラム</strong>
+        <span>Real Sushi · Delivery de Quebrada</span>
       </figcaption>
     </figure>,
   ];
