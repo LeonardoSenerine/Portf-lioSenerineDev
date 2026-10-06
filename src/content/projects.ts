@@ -32,9 +32,13 @@ export type ProjectId = Project["id"];
 export const featuredProjects = projects.filter((p) => p.featured);
 export const moreProjects = projects.filter((p) => !p.featured);
 
-// O convite usa capturas desfocadas, com outro nome para nenhum cache servir as antigas.
-export const shot = (id: ProjectId, kind: "desktop" | "mobile") =>
-  id === "convite" ? `/work/${id}/${kind}-privado.jpg` : `/work/${id}/${kind}.jpg`;
+// Projetos que não podem ser vistos: capturas desfocadas, com outro nome para nenhum
+// cache servir as antigas. O convite é privado; a SURAMU está em negociação.
+const privateShots: readonly ProjectId[] = ["convite", "suramu"];
+const img = (id: ProjectId, name: string) =>
+  privateShots.includes(id) ? `/work/${id}/${name}-privado.jpg` : `/work/${id}/${name}.jpg`;
+
+export const shot = (id: ProjectId, kind: "desktop" | "mobile") => img(id, kind);
 
 // Duas telas internas de cada case em destaque (1440×900).
-export const details = (id: ProjectId) => [`/work/${id}/detail-1.jpg`, `/work/${id}/detail-2.jpg`];
+export const details = (id: ProjectId) => [img(id, "detail-1"), img(id, "detail-2")];
