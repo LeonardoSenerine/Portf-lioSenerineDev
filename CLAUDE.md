@@ -16,6 +16,8 @@ Portfólio comercial do Leonardo Senerine: o objetivo é **vender** (gerar conta
 
 - Prioridade é o **celular**. Componentes animados com tamanho fixo (sem pular nem piscar). Bastante respiro entre as seções.
 - Paleta tirada da foto: azul `#0a63b2`, preto `#1e1d1e`, off-white quente, tom de pele `#d99278`. Temas claro e escuro precisam continuar funcionando.
+- Sistema visual "o ponto": o ponto azul aceso é a assinatura. Fecha títulos e nomes (`.dot`), vira o ponto final do hero com a foto dentro (cresce na rolagem até cobrir a tela), numera os cases, vira o cursor sobre os projetos (`CursorDot`) e abre o bloco de contato. Novos elementos devem reaproveitar esse ponto antes de inventar outro recurso.
+- Cases em `src/content/projects.ts` (`featured`, `stack`) e `public/work/<id>/detail-*.jpg`; tecnologias tiradas do package.json de cada projeto e decisões dos estudos de caso, nunca inventadas.
 - Evitar cara de "site feito por IA" (grades de cards com ícone em quadrado e selo, faixas de números genéricos); preferir composições editoriais e tipográficas.
 - O título do hero não tem animação de entrada (é o LCP). Entradas na rolagem são CSS + um único IntersectionObserver (`src/components/reveal.tsx` e `RevealObserver.tsx`); Motion só para o que é interativo.
 

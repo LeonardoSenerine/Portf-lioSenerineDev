@@ -53,10 +53,10 @@ export function JsonLd({ lang, t }: { lang: Locale; t: Dictionary }) {
         availableLanguage: ["Portuguese", "English"],
         hasOfferCatalog: {
           "@type": "OfferCatalog",
-          name: t.services.title,
-          itemListElement: t.services.items.map((s) => ({
+          name: t.offer.title,
+          itemListElement: t.offer.formats.map((f) => ({
             "@type": "Offer",
-            itemOffered: { "@type": "Service", name: s.name, description: s.description },
+            itemOffered: { "@type": "Service", name: f.name, description: f.text },
           })),
         },
       },
@@ -69,8 +69,8 @@ export function JsonLd({ lang, t }: { lang: Locale; t: Dictionary }) {
           item: {
             "@type": "CreativeWork",
             name: t.work.items[p.id].client,
-            headline: t.work.items[p.id].title,
-            description: t.work.items[p.id].delivered,
+            headline: t.work.items[p.id].quote,
+            description: t.work.items[p.id].solution ?? t.work.items[p.id].quote,
             ...(p.url ? { url: p.url } : {}),
             image: `${site.url}${shot(p.id, "desktop")}`,
             creator: { "@id": personId },
@@ -79,7 +79,7 @@ export function JsonLd({ lang, t }: { lang: Locale; t: Dictionary }) {
       },
       {
         "@type": "FAQPage",
-        mainEntity: t.faq.items.map((f) => ({
+        mainEntity: t.offer.faq.map((f) => ({
           "@type": "Question",
           name: f.q,
           acceptedAnswer: { "@type": "Answer", text: f.a },

@@ -7,283 +7,258 @@ export const defaultLocale: Locale = "pt";
 export const hasLocale = (value: string): value is Locale =>
   (locales as readonly string[]).includes(value);
 
-type ProjectText = {
+// Cases em destaque têm a história completa; os outros só aparecem no índice.
+type CaseText = {
   client: string;
   segment: string;
-  title: string;
-  problem: string;
-  delivered: string;
-  metrics: { value: string; label: string }[];
+  quote: string;
+  objective?: string;
+  concept?: string;
+  solution?: string;
+  decisions?: string[];
 };
+
+type ProcessStep = { title: string; question: string; text: string; example: string };
 
 const pt = {
   htmlLang: "pt-BR",
   meta: {
     title: "Leonardo Senerine · Sites e aplicações",
     description:
-      "Sites e aplicações sob medida para negócios de qualquer área. Feitos para aparecer no Google, passar confiança e levar o cliente direto até você.",
-    keywords: ["criação de sites", "site profissional", "desenvolvimento de sites", "aplicações web", "landing page", "site para empresas", "SEO local", "site com WhatsApp", "sistema de agendamento online"],
+      "Sites e aplicações com identidade própria. Design, código e estratégia na mesma mão, para marcas que não querem passar batido.",
+    keywords: ["criação de sites", "site profissional", "desenvolvimento web", "aplicações web", "design de interface", "Next.js", "React", "site para marcas", "SEO técnico"],
   },
   nav: {
-    work: "Trabalhos",
-    services: "Serviços",
+    work: "Cases",
     process: "Processo",
-    about: "Sobre",
-    faq: "Dúvidas",
+    about: "Quem faz",
+    contact: "Contato",
     cta: "Vamos conversar",
+    menu: "Menu",
+    close: "Fechar",
     switchTo: "EN",
     switchLabel: "Read in English",
     themeLight: "Usar tema claro",
     themeDark: "Usar tema escuro",
   },
-  whatsappMessage: "Olá, Leonardo! Vi o senerine.dev e quero conversar sobre um site.",
+  whatsappMessage: "Olá, Leonardo! Vi o senerine.dev e quero conversar sobre um projeto.",
   hero: {
-    titleBefore: "Sites que fazem o cliente",
-    titleEm: "chamar",
-    titleAfter: ".",
-    lead: "Eu desenho e programo sites e aplicações para negócios de qualquer área. Quem procura no Google acha você, entende o que você faz e chama no WhatsApp.",
+    meta: ["Sites e aplicações", "Design + código"],
+    latestLabel: "Último no ar",
+    titleBefore: "Sites que não passam",
+    titleEm: "batido",
+    lead: "Eu desenho e programo sites e aplicações para marcas que têm algo a dizer. Design, código e estratégia na mesma mão, do primeiro rabisco ao deploy.",
     primary: "Chamar no WhatsApp",
-    secondary: "Ver trabalhos",
-    photoAlt: "Leonardo Senerine, sites e aplicações",
-    photoCaption: "Leonardo Senerine",
-    photoRole: "Design + código",
-    // Garantias que respondem às dúvidas de quem vai contratar
-    stats: [
-      { value: "Valor fechado", label: "proposta por escrito antes de começar" },
-      { value: "Prévia ao vivo", label: "você acompanha tudo por um link" },
-      { value: "Direto comigo", label: "do design ao código, sou eu que faço" },
-    ],
+    secondary: "Ver os cases",
+    photoAlt: "Leonardo Senerine dentro do ponto azul que fecha o título",
+    scroll: "Role",
   },
-  niches: ["Bares", "Restaurantes", "Hamburguerias", "Barbearias", "Estúdios de tatuagem", "Casas de show", "Convites de casamento"],
-  why: {
-    kicker: "Por que ter um site",
-    title: "Rede social é vitrine. Site é endereço.",
-    intro: "O Instagram mostra o que você posta. O site aparece quando alguém procura pelo que você faz, mesmo que nunca tenha ouvido falar de você.",
-    queries: ["advogado trabalhista perto de mim", "lanchonete aberta agora", "construtora de confiança", "barbearia com horário marcado"],
-    resultTitle: "Seu negócio",
-    resultUrl: "seunegocio.com.br",
-    resultText: "Quem você é, onde fica, horários e um botão para chamar no WhatsApp.",
-    points: [
-      { title: "A busca começa no Google", text: "Quem precisa de um serviço costuma começar pelo Google. Sem site, o seu negócio quase não aparece ali." },
-      { title: "Atende de madrugada", text: "Mostra quem você é, onde fica e como chamar. Às três da manhã, com a loja fechada, ele continua respondendo." },
-      { title: "O algoritmo não manda nele", text: "Nas redes o alcance muda toda semana. O site fica no seu domínio, com o seu conteúdo, do jeito que você decidiu." },
+  beliefs: {
+    label: "No que eu acredito",
+    items: [
+      "Bonito é o mínimo. Lembrado é o objetivo.",
+      "Toda escolha tem um porquê. Até o espaço vazio.",
+      "Código é onde o design deixa de ser promessa.",
     ],
   },
   work: {
-    kicker: "Trabalhos",
-    title: "Cada lugar com a sua cara",
-    intro: "Começo pelo que o lugar já tem: o letreiro, o cardápio, as fotos do salão. Por isso nenhum fica parecido com o outro.",
-    kindLabel: { real: "Projeto real, no ar", concept: "Proposta conceitual" } as Record<ProjectKind, string>,
-    problemLabel: "O problema",
-    deliveredLabel: "O que eu fiz",
-    visit: "Ver site ao vivo",
-    privateNote: "Link e dados privados, a pedido dos noivos",
-    carousel: { region: "Projetos", pickHint: "arraste para o lado ou use as setas", prev: "Projeto anterior", next: "Próximo projeto" },
+    kicker: "Cases",
+    title: "Cada projeto pediu uma resposta diferente",
+    intro: "Abaixo, cada escolha vem com o seu porquê.",
+    kindLabel: { real: "Projeto real", concept: "Proposta conceitual" } as Record<ProjectKind, string>,
+    labels: {
+      objective: "Objetivo",
+      concept: "Conceito",
+      solution: "O que eu fiz",
+      decisions: "Decisões",
+      stack: "Feito com",
+      visit: "Ver no ar",
+      cursor: "Ver no ar",
+      private: "Link privado, a pedido dos noivos",
+    },
+    moreTitle: "Mais trabalhos",
     items: {
-      gordinho: {
-        client: "Gordinho Lanches",
-        segment: "Hamburgueria desde 1992",
-        title: "34 anos de história contados ano a ano",
-        problem:
-          "Uma hamburgueria tradicional com a história inteira contada só num mural na parede da loja, e quem procurava a casa achava pouca informação útil.",
-        delivered:
-          "Site de marca com a trajetória real, do carrinho de 1992 ao salão de hoje, cachorro-quente em destaque, horários que mudam conforme o dia, pedido pelo WhatsApp e SEO para busca local.",
-        metrics: [
-          { value: "34 anos", label: "de história no site" },
-          { value: "6", label: "marcos na linha do tempo" },
-          { value: "2", label: "canais de pedido: WhatsApp e iFood" },
-        ],
-      },
-      dconde: {
-        client: "D'Conde Barbearia",
-        segment: "Barbearia com hora marcada",
-        title: "Agendamento online e painel de gestão",
-        problem:
-          "Só atendia com hora marcada: 17 serviços, barbeiros com horários diferentes a cada dia e tudo combinado pelo WhatsApp.",
-        delivered:
-          "Site, agendamento em 4 etapas, login sem senha e um painel com agenda, financeiro, estoque e loja. E-mails automáticos avisam a equipe e lembram o cliente 3 horas antes.",
-        metrics: [
-          { value: "2 semanas", label: "do primeiro commit ao ar" },
-          { value: "17", label: "serviços agendáveis online" },
-          { value: "9", label: "módulos no painel" },
-        ],
-      },
-      convite: {
-        client: "Convite de casamento",
-        segment: "Evento",
-        title: "Um convite que confirma presença sozinho",
-        problem:
-          "Convite impresso não responde dúvidas, não mostra o caminho e não ajuda a contar quantas pessoas vêm nem a evitar presente repetido.",
-        delivered:
-          "Convite digital com contagem regressiva, história do casal, programação, mapa, confirmação de presença que chega pronta no WhatsApp e lista de presentes com reserva.",
-        metrics: [
-          { value: "1 link", label: "com tudo sobre o grande dia" },
-          { value: "RSVP", label: "enviado pronto pelo WhatsApp" },
-          { value: "0", label: "presentes repetidos" },
-        ],
-      },
       suramu: {
         client: "SURAMU",
-        segment: "Sushi delivery de quebrada",
-        title: "Um sushi de quebrada que para a rolagem",
-        problem:
-          "Sushi feito na quebrada por sushimen que aprenderam com mestres japoneses: sem salmão, sem cream cheese, só peixe do dia. A marca tinha a tag em grafite e os pôsteres, mas faltava um site à altura, pensado para quem pede pelo celular vindo do Instagram.",
-        delivered:
-          "Site com a tag em grafite pintada na tela como spray, manifesto em três telas, quadro de peixes do dia que o dono atualiza num único arquivo, rota do mercado ao balcão em cinco paradas e pedido pelo WhatsApp.",
-        metrics: [
-          { value: "0", label: "salmão e cream cheese no cardápio" },
-          { value: "5", label: "paradas do mercado ao balcão" },
-          { value: "1 arquivo", label: "para atualizar os peixes do dia" },
-        ],
-      },
-      samoa: {
-        client: "Samoa Gastrobar",
-        segment: "Gastrobar com música ao vivo",
-        title: "De um Linktree com PDF a um site que aparece no Google",
-        problem:
-          "10,2 mil seguidores, música ao vivo e almoço de terça a domingo. Na internet, só o Instagram e um cardápio em PDF.",
-        delivered:
-          "Cardápio em página com 42 itens, agenda de shows que se atualiza sozinha, SEO local, prévia de link caprichada para o WhatsApp e mapa só com consentimento.",
-        metrics: [
-          { value: "42", label: "itens no cardápio online" },
-          { value: "94 KB", label: "prévia do link no WhatsApp" },
-          { value: "4", label: "páginas prontas para o Google" },
-        ],
-      },
-      pontoalto: {
-        client: "Ponto Alto · Clube da Música",
-        segment: "Casa de shows",
-        title: "Uma casa de shows que só tinha flyers",
-        problem:
-          "Para saber o próximo show era preciso achar o flyer certo no feed. Ingresso, lista e bandas chegavam todos pelo mesmo WhatsApp.",
-        delivered:
-          "Próximo show no topo com ingresso, palco em vídeo, formulário para bandas e cada show publicado como evento no Google.",
-        metrics: [
-          { value: "1º", label: "próximo show sempre no topo" },
-          { value: "540p", label: "vídeos leves, um por vez" },
-          { value: "0", label: "chamadas ao Maps sem aceite" },
+        segment: "Real sushi · delivery de quebrada",
+        quote: "Uma marca de rua com voz alta e um cardápio que muda todo dia.",
+        objective:
+          "Levar para a tela a mesma atitude dos pôsteres: sem salmão, sem cream cheese, só peixe do dia, com pedido fácil pelo celular.",
+        concept:
+          "Grafite encontra a tradição japonesa. Títulos que entram com força pela borda, palavras carimbadas em faixas e o padrão de sushis como textura.",
+        solution:
+          "Tag em grafite pintada na tela como spray, manifesto em três telas, quadro de peixes do dia atualizado num único arquivo, rota do mercado ao balcão e pedido pelo WhatsApp e pelo iFood.",
+        decisions: [
+          "HTML, CSS e JavaScript puros: um delivery não precisa carregar um framework para mostrar o peixe do dia.",
+          "As letras da marca viram vetor usado como máscara, nítidas em qualquer tela e em qualquer cor.",
         ],
       },
       meraki: {
         client: "Meraki Galleria Shop",
         segment: "Tatuagem e barbearia",
-        title: "Uma identidade redesenhada a partir do letreiro",
-        problem:
-          "Trabalho forte no Instagram e nenhum site: quem buscava tatuagem na cidade não encontrava o espaço.",
-        delivered:
-          "Logo em SVG animado traço a traço, galeria editorial, botão de agendar que muda conforme a seção e HTML pré-renderizado para o Google.",
-        metrics: [
-          { value: "1.238", label: "palavras legíveis pelo Google" },
-          { value: "70", label: "imagens com texto alternativo" },
-          { value: "2", label: "negócios, um site" },
+        quote: "O nome já existia no letreiro da recepção. Faltava virar site.",
+        objective:
+          "Fazer a tatuagem e a barbearia do mesmo endereço aparecerem no Google, cada uma com o seu caminho para agendar.",
+        concept:
+          "A marca vem do real: o letreiro dourado da recepção, com o A sem a barra do meio, redesenhado em SVG e animado traço a traço.",
+        solution:
+          "Galeria editorial com tela cheia, agendamento que muda de destino conforme a seção e HTML pré-renderizado para o Google ler o site inteiro.",
+        decisions: [
+          "O botão de agendar acompanha a leitura: leva ao WhatsApp do tatuador ou à agenda da barbearia, conforme a parte do site.",
+          "Prints de 290px viraram fotos nítidas com super-resolução por IA, misturada à original para a pele não ficar de plástico.",
         ],
       },
-    } as Record<ProjectId, ProjectText>,
-  },
-  areas: {
-    kicker: "Áreas",
-    title: "Trabalho com qualquer área.",
-    list: ["Advocacia", "Construção", "Lanchonetes", "Estúdios", "Restaurantes", "Barbearias", "Clínicas", "Academias", "Imobiliárias", "Eventos", "Lojas"],
-    last: "e a sua",
-    note: "Do escritório de advocacia à lanchonete da esquina, começo sempre pela mesma pergunta: quem é o seu cliente e o que ele precisa ver para te chamar?",
-    cta: "Me conta do seu negócio",
-  },
-  services: {
-    kicker: "Serviços",
-    title: "Três jeitos de começar",
-    intro: "Você conversa com quem desenha, programa e publica. O recado não passa por ninguém no meio.",
-    recommended: "Recomendado",
-    items: [
-      {
-        name: "Landing page",
-        description: "Uma página que apresenta o negócio e leva o visitante ao WhatsApp.",
-        features: ["Design sob medida", "Pensada primeiro para o celular", "WhatsApp, mapa e Instagram", "Publicação com domínio próprio"],
-        recommended: false,
+      dconde: {
+        client: "D'Conde Barbearia",
+        segment: "Barbearia com hora marcada",
+        quote: "Do primeiro commit ao sistema em uso em duas semanas.",
+        objective:
+          "Tirar a agenda do WhatsApp: 17 serviços, barbeiros com horários diferentes a cada dia e tudo combinado à mão.",
+        concept:
+          "O cliente marca em quatro passos, a equipe administra num painel e as regras ficam onde ninguém consegue burlar: no banco de dados.",
+        solution:
+          "Site, agendamento em 4 etapas, login sem senha por código no e-mail e painel com 9 módulos, de agenda a estoque. E-mails automáticos lembram o cliente 3 horas antes.",
+        decisions: [
+          "Preço, horário e permissão são validados no Postgres. A tela só mostra o que o banco permite.",
+          "Dois clientes no mesmo horário? O banco recusa qualquer sobreposição, inclusive de serviços que ocupam várias horas.",
+        ],
       },
-      {
-        name: "Site + SEO local",
-        description: "Para quem quer ser encontrado no Google por quem está perto.",
-        features: ["Várias páginas: cardápio, agenda, eventos", "Dados estruturados para o Google", "Prévia de link para WhatsApp", "Privacidade e cookies (LGPD)"],
-        recommended: true,
+      gordinho: {
+        client: "Gordinho Lanches",
+        segment: "Hamburgueria desde 1992",
+        quote: "34 anos de história que só existiam num mural na parede.",
+        objective: "Contar a trajetória real da casa e levar quem procura no Google direto para o pedido.",
+        concept: "Um site de marca, sem cardápio: o foco é o legado, a família e o pedido pelo WhatsApp.",
+        solution:
+          "Linha do tempo ano a ano, do carrinho de 1992 ao salão de hoje, horários que mudam conforme o dia, pedido pelo WhatsApp e pelo iFood e SEO para busca local.",
+        decisions: [
+          "O emblema foi redesenhado em SVG sem o \"self service\", que a casa não oferece mais.",
+          "O mascote foi recortado do logo original e virou personagem do site.",
+        ],
       },
-      {
-        name: "Sistema sob medida",
-        description: "Quando o site precisa trabalhar: agendar, avisar e organizar.",
-        features: ["Agendamento online", "Área do cliente sem senha", "Painel de gestão", "Notificações automáticas"],
-        recommended: false,
+      samoa: {
+        client: "Samoa Gastrobar",
+        segment: "Gastrobar com música ao vivo",
+        quote: "De um Linktree com PDF a um site que aparece no Google.",
       },
-    ],
-    maintenance:
-      "Manutenção mensal: mudou o cardápio, a agenda ou uma foto? Você me manda no WhatsApp e eu atualizo.",
+      pontoalto: {
+        client: "Ponto Alto · Clube da Música",
+        segment: "Casa de shows",
+        quote: "Uma casa de shows que só tinha flyers.",
+      },
+      convite: {
+        client: "Convite de casamento",
+        segment: "Evento",
+        quote: "Um convite que confirma presença sozinho.",
+      },
+    } as Record<ProjectId, CaseText>,
   },
   process: {
     kicker: "Processo",
-    title: "Do primeiro oi ao site no ar",
+    title: "Código é a última etapa",
+    intro: "Antes de abrir o editor, todo projeto passa por cinco perguntas. Ao lado, o caminho da SURAMU.",
     steps: [
       {
-        title: "Conversa",
-        text: "Uma conversa por vídeo ou pelo WhatsApp. Quero entender o seu negócio, quem é o seu cliente e o que hoje chega pelo WhatsApp. Também olho o que você já tem: o Instagram, as fotos, o cardápio, o letreiro. É daí que o site começa.",
+        title: "Marca",
+        question: "Quem é essa marca e o que ela se recusa a ser?",
+        text: "A personalidade vem antes da paleta.",
+        example: "A SURAMU se recusa a ter salmão e cream cheese. Isso virou o site inteiro.",
       },
       {
-        title: "Proposta",
-        text: "Mando por escrito o que vai ser feito, em quanto tempo e por quanto. O valor é fechado: o que está na proposta é o que você paga. Só começo depois que você aprovar.",
+        title: "Usuário",
+        question: "Quem chega, de onde e com qual pressa?",
+        text: "O mesmo site serve gente diferente, em momentos diferentes.",
+        example: "Na SURAMU, quem pede chega pelo Instagram, no celular. O botão de pedir aparece primeiro.",
       },
       {
-        title: "Design e código",
-        text: "Eu desenho e programo o site do zero, pensando primeiro no celular. Você acompanha tudo por um link de prévia, vê o site ganhando forma e pede ajustes no caminho, sem esperar o fim para opinar.",
+        title: "Experiência",
+        question: "O que a pessoa sente a cada rolagem?",
+        text: "O roteiro existe antes da tela.",
+        example: "Na SURAMU, um manifesto por tela antes do cardápio. Primeiro a atitude, depois o peixe.",
       },
       {
-        title: "No ar",
-        text: "Registro o domínio, publico o site e deixo tudo pronto para o Google e para a prévia de link no WhatsApp. Depois do lançamento eu continuo por perto: trocar um preço, uma foto ou um horário é só me mandar uma mensagem.",
+        title: "Interface",
+        question: "Como tipo, cor, grid e movimento viram um sistema?",
+        text: "Cada elemento se repete com intenção.",
+        example: "Vermelho sushi, preto, papel e uma faixa que carimba as palavras mais importantes.",
       },
-    ],
+      {
+        title: "Tecnologia",
+        question: "Qual é a ferramenta certa para o tamanho do problema?",
+        text: "Só agora o código entra.",
+        example: "Na SURAMU, HTML puro e um arquivo que o dono edita para trocar o peixe do dia.",
+      },
+    ] as ProcessStep[],
+    artifacts: {
+      poster: "Pôster da SURAMU: nosso sushi não tem cream cheese",
+      mobile: "A primeira tela da SURAMU no celular, com o botão de pedir",
+      manifesto: "O manifesto da SURAMU ocupando a tela inteira",
+      code: "data/peixes-do-dia.js",
+    },
   },
   about: {
-    kicker: "Sobre",
-    title: "Prazer, Leonardo.",
+    kicker: "Quem faz",
+    name: "Leonardo Senerine",
+    role: "Full stack developer",
+    title: "Eu fico entre o design e o código. É ali que muito projeto se perde.",
     paragraphs: [
-      "Antes de abrir o editor, eu quero entender o seu negócio: quem é o seu cliente, o que ele procura e em que ponto ele desiste. O site nasce dessas respostas.",
-      "Eu desenho, programo e coloco no ar. Quem ouve o seu pedido é quem escreve o código, então nada se perde no caminho. Foi assim que a D'Conde saiu do primeiro rascunho para um sistema de agendamento em uso em duas semanas.",
-      "Depois do lançamento eu continuo por perto. Trocar um preço, uma foto ou um horário é só me mandar uma mensagem no WhatsApp.",
+      "Penso como quem desenha e construo como quem programa. Arquitetura, performance e interface entram na mesma conversa que a marca.",
+      "Quem ouve o seu pedido é quem escreve o código, então nada se perde no caminho. Foi assim que a D'Conde saiu do primeiro rascunho para um sistema em uso em duas semanas.",
+      "Depois do lançamento eu continuo por perto. Trocar um preço, uma foto ou um horário é só me mandar uma mensagem.",
     ],
-    skills: ["Design sob medida", "Rápido no celular", "Pronto para o Google", "Sistemas e painéis", "Suporte depois do lançamento"],
+    photoAlt: "Leonardo Senerine em preto e branco",
+    skills: ["Design de interface", "Desenvolvimento full stack", "Next.js", "React", "TypeScript", "SEO técnico", "Performance web"],
   },
-  faq: {
-    kicker: "Dúvidas",
-    title: "Antes de você perguntar",
+  tools: {
+    kicker: "Ferramentas",
+    title: "A ferramenta depende do problema",
     items: [
+      { tools: "React e Next.js", text: "quando a interface precisa crescer sem perder velocidade.", proof: "Gordinho, D'Conde" },
+      { tools: "TypeScript", text: "em tudo que precisa durar depois do lançamento.", proof: "Meraki, D'Conde, Gordinho" },
+      { tools: "APIs e banco de dados", text: "quando o site precisa trabalhar: agenda, login, painel e avisos.", proof: "D'Conde" },
+      { tools: "Node.js e Python", text: "nos bastidores: scripts, automações e tratamento de imagem.", proof: "Meraki" },
+      { tools: "Tailwind ou CSS puro", text: "o que deixar a página mais leve e mais fácil de manter.", proof: "D'Conde, SURAMU" },
+    ],
+    note: "Este site: Next.js, TypeScript e CSS escrito à mão.",
+  },
+  offer: {
+    kicker: "Como trabalhar comigo",
+    title: "Valor fechado, prévia ao vivo, conversa direta",
+    formats: [
+      { name: "Landing page", text: "Uma página que apresenta a marca e leva direto ao contato." },
+      { name: "Site + SEO", text: "Várias páginas, dados estruturados e prévia de link caprichada." },
+      { name: "Sistema sob medida", text: "Quando o site precisa trabalhar: agendar, avisar e organizar." },
+    ],
+    promises: [
+      { value: "Valor fechado", label: "proposta por escrito antes de começar" },
+      { value: "Prévia ao vivo", label: "você acompanha tudo por um link" },
+      { value: "Direto comigo", label: "do design ao código, sou eu que faço" },
+    ],
+    faqTitle: "Antes de você perguntar",
+    faq: [
       {
-        q: "Quanto custa um site?",
+        q: "Quanto custa?",
         a: "Depende do que o site precisa fazer. Depois de uma conversa rápida, mando uma proposta com valor fechado. O que está nela é o que você paga.",
       },
       {
         q: "Quanto tempo leva?",
-        a: "Uma landing page fica pronta em poucas semanas. Sistemas com agendamento levam um pouco mais. O prazo vai escrito na proposta.",
-      },
-      {
-        q: "Preciso ter domínio e hospedagem?",
-        a: "Não. Eu ajudo a registrar o domínio e cuido da publicação. Para a maioria dos sites, a hospedagem tem custo baixo ou zero.",
+        a: "Uma landing page fica pronta em poucas semanas. Sistemas levam um pouco mais. O prazo vai escrito na proposta.",
       },
       {
         q: "Vou conseguir atualizar o conteúdo?",
-        a: "Sim. Posso fazer as trocas na manutenção mensal ou, se fizer sentido, montar um painel para você editar sozinho.",
-      },
-      {
-        q: "Meu negócio vai aparecer no Google?",
-        a: "O site sai preparado para busca local: endereço, horário, dados estruturados e páginas que o Google consegue ler. A posição também depende da concorrência e do seu perfil no Google.",
+        a: "Sim. Posso fazer as trocas numa manutenção mensal ou, se fizer sentido, montar um painel para você editar sozinho.",
       },
       {
         q: "Você atende na minha cidade?",
-        a: "Atendo clientes de qualquer lugar. Todo o processo funciona a distância, com conversas por vídeo ou WhatsApp.",
+        a: "Atendo clientes de qualquer lugar. Todo o processo funciona a distância, por vídeo ou WhatsApp.",
       },
     ],
   },
   contact: {
-    kicker: "Vamos conversar",
-    titleBefore: "Seu negócio merece mais que um",
-    titleEm: "link na bio",
-    titleAfter: ".",
-    text: "Me conta o que você precisa. Quem responde sou eu mesmo.",
+    kicker: "Contato",
+    titleBefore: "Vamos fazer o seu não passar",
+    titleEm: "batido",
+    text: "Me conta da marca e do que ela precisa. Quem responde sou eu.",
     primary: "Chamar no WhatsApp",
     email: "Mandar e-mail",
   },
@@ -291,6 +266,7 @@ const pt = {
     role: "Sites e aplicações",
     rights: "Todos os direitos reservados.",
     backToTop: "Voltar ao topo",
+    made: "Feito à mão em Next.js, sem template.",
   },
 };
 
@@ -301,255 +277,226 @@ const en: Dictionary = {
   meta: {
     title: "Leonardo Senerine · Websites & apps",
     description:
-      "Custom websites and apps for businesses in any field. Built to show up on Google, earn trust and bring customers straight to you.",
-    keywords: ["website design", "custom website", "web development", "web apps", "landing page", "business website", "local SEO", "WhatsApp website", "online booking system"],
+      "Websites and apps with a point of view. Design, code and strategy in one pair of hands, for brands that refuse to be scrolled past.",
+    keywords: ["website design", "custom website", "web development", "web apps", "interface design", "Next.js", "React", "brand website", "technical SEO"],
   },
   nav: {
     work: "Work",
-    services: "Services",
     process: "Process",
     about: "About",
-    faq: "FAQ",
+    contact: "Contact",
     cta: "Let's talk",
+    menu: "Menu",
+    close: "Close",
     switchTo: "PT",
     switchLabel: "Ler em português",
     themeLight: "Switch to light theme",
     themeDark: "Switch to dark theme",
   },
-  whatsappMessage: "Hi Leonardo! I found senerine.dev and would like to talk about a website.",
+  whatsappMessage: "Hi Leonardo! I found senerine.dev and would like to talk about a project.",
   hero: {
-    titleBefore: "Websites that make customers",
-    titleEm: "reach out",
-    titleAfter: ".",
-    lead: "I design and code websites and apps for businesses in any field. People searching on Google find you, get what you do and message you on WhatsApp.",
+    meta: ["Websites & apps", "Design + code"],
+    latestLabel: "Latest launch",
+    titleBefore: "Websites nobody scrolls",
+    titleEm: "past",
+    lead: "I design and code websites and apps for brands with something to say. Design, code and strategy in one pair of hands, from first sketch to deploy.",
     primary: "Message on WhatsApp",
     secondary: "See the work",
-    photoAlt: "Leonardo Senerine, websites & apps",
-    photoCaption: "Leonardo Senerine",
-    photoRole: "Design + code",
-    stats: [
-      { value: "Fixed price", label: "written proposal before any work starts" },
-      { value: "Live preview", label: "follow everything through a link" },
-      { value: "Straight to me", label: "from design to code, I do it myself" },
-    ],
+    photoAlt: "Leonardo Senerine inside the blue dot that ends the headline",
+    scroll: "Scroll",
   },
-  niches: ["Bars", "Restaurants", "Burger joints", "Barbershops", "Tattoo studios", "Live music venues", "Wedding invitations"],
-  why: {
-    kicker: "Why a website",
-    title: "Social media is a shop window. A website is your address.",
-    intro: "Instagram shows what you post. A website shows up when someone searches for what you do, even if they've never heard of you.",
-    queries: ["employment lawyer near me", "diner open now", "trusted construction company", "barbershop with appointments"],
-    resultTitle: "Your business",
-    resultUrl: "yourbusiness.com",
-    resultText: "Who you are, where you are, opening hours and a button to message you on WhatsApp.",
-    points: [
-      { title: "Searching starts on Google", text: "People who need a service usually start on Google. Without a website, your business barely shows up there." },
-      { title: "Open at 3 a.m.", text: "It shows who you are, where you are and how to reach you. At three in the morning, with the shop closed, it keeps answering." },
-      { title: "The algorithm doesn't run it", text: "Reach on social media changes every week. Your site lives on your domain, with your content, the way you decided." },
+  beliefs: {
+    label: "What I believe",
+    items: [
+      "Pretty is the baseline. Memorable is the goal.",
+      "Every choice has a reason. Even the empty space.",
+      "Code is where design stops being a promise.",
     ],
   },
   work: {
     kicker: "Work",
-    title: "Every place looks like itself",
-    intro: "I start from what the place already has: the sign, the menu, the photos of a packed room. That's why no two look alike.",
-    kindLabel: { real: "Real project, live", concept: "Concept proposal" },
-    problemLabel: "The problem",
-    deliveredLabel: "What I did",
-    visit: "Visit live site",
-    privateNote: "Link and details kept private, at the couple's request",
-    carousel: { region: "Projects", pickHint: "swipe or use the arrows", prev: "Previous project", next: "Next project" },
+    title: "Every project asked for a different answer",
+    intro: "Below, every choice comes with its reason.",
+    kindLabel: { real: "Real project", concept: "Concept proposal" },
+    labels: {
+      objective: "Goal",
+      concept: "Concept",
+      solution: "What I built",
+      decisions: "Decisions",
+      stack: "Built with",
+      visit: "Visit live site",
+      cursor: "Visit live",
+      private: "Private link, at the couple's request",
+    },
+    moreTitle: "More work",
     items: {
-      gordinho: {
-        client: "Gordinho Lanches",
-        segment: "Burger joint since 1992",
-        title: "34 years of history, told year by year",
-        problem:
-          "A traditional burger joint whose whole story lived only on a mural on the shop wall, and people looking it up found little useful information.",
-        delivered:
-          "A brand site with the real timeline, from the 1992 food cart to today's dining room, hot dogs in the spotlight, opening hours that change by day, WhatsApp ordering and local SEO.",
-        metrics: [
-          { value: "34 years", label: "of history on the site" },
-          { value: "6", label: "milestones on the timeline" },
-          { value: "2", label: "ordering channels: WhatsApp and iFood" },
-        ],
-      },
-      dconde: {
-        client: "D'Conde Barbearia",
-        segment: "Appointment-only barbershop",
-        title: "Online booking and a management dashboard",
-        problem:
-          "Appointment only: 17 services, barbers with different hours every day, and everything arranged over WhatsApp.",
-        delivered:
-          "Website, 4-step booking, passwordless login and a dashboard with schedule, finances, stock and shop. Automatic emails alert the team and remind clients 3 hours ahead.",
-        metrics: [
-          { value: "2 weeks", label: "from first commit to live" },
-          { value: "17", label: "services bookable online" },
-          { value: "9", label: "dashboard modules" },
-        ],
-      },
-      convite: {
-        client: "Wedding invitation",
-        segment: "Event",
-        title: "An invitation that collects RSVPs on its own",
-        problem:
-          "A printed invitation can't answer questions, show the way, count who's coming or prevent duplicate gifts.",
-        delivered:
-          "A digital invitation with a countdown, the couple's story, schedule, map, an RSVP that arrives ready-made on WhatsApp and a gift list with reservations.",
-        metrics: [
-          { value: "1 link", label: "with everything about the day" },
-          { value: "RSVP", label: "sent ready-made via WhatsApp" },
-          { value: "0", label: "duplicate gifts" },
-        ],
-      },
       suramu: {
         client: "SURAMU",
-        segment: "Street sushi delivery",
-        title: "A street sushi brand that stops the scroll",
-        problem:
-          "Sushi made in the city's outskirts by sushimen who learned from Japanese masters: no salmon, no cream cheese, only fish of the day. The brand had its graffiti tag and posters but no website to match, built for people ordering on their phones from Instagram.",
-        delivered:
-          "A site with the graffiti tag sprayed onto the screen, a three-screen manifesto, a fish-of-the-day board the owner updates in a single file, a five-stop route from market to counter and WhatsApp ordering.",
-        metrics: [
-          { value: "0", label: "salmon or cream cheese on the menu" },
-          { value: "5", label: "stops from market to counter" },
-          { value: "1 file", label: "to update the fish of the day" },
-        ],
-      },
-      samoa: {
-        client: "Samoa Gastrobar",
-        segment: "Gastrobar with live music",
-        title: "From a Linktree with a PDF to a site Google can find",
-        problem:
-          "10.2k followers, live music and lunch Tuesday to Sunday. Online, just Instagram and a PDF menu.",
-        delivered:
-          "A 42-item menu page, a gig calendar that updates itself, local SEO, a polished WhatsApp link preview and a map that only loads with consent.",
-        metrics: [
-          { value: "42", label: "menu items online" },
-          { value: "94 KB", label: "WhatsApp link preview" },
-          { value: "4", label: "pages ready for Google" },
-        ],
-      },
-      pontoalto: {
-        client: "Ponto Alto · Clube da Música",
-        segment: "Live music venue",
-        title: "A music venue that only had flyers",
-        problem:
-          "Finding the next show meant digging through the feed for the right flyer. Tickets, guest list and bands all came through one WhatsApp.",
-        delivered:
-          "Next show up top with tickets, a video stage, a form for bands, and every show published as an event on Google.",
-        metrics: [
-          { value: "1st", label: "next show always on top" },
-          { value: "540p", label: "light videos, one at a time" },
-          { value: "0", label: "Maps calls before consent" },
+        segment: "Real sushi · street delivery",
+        quote: "A street brand with a loud voice and a menu that changes every day.",
+        objective:
+          "Bring the posters' attitude to the screen: no salmon, no cream cheese, only fish of the day, with easy ordering on a phone.",
+        concept:
+          "Graffiti meets Japanese tradition. Headlines that slam in from the edge, words stamped on bars and a sushi pattern as texture.",
+        solution:
+          "A graffiti tag sprayed onto the screen, a three-screen manifesto, a fish-of-the-day board updated in a single file, a route from market to counter and ordering via WhatsApp and iFood.",
+        decisions: [
+          "Plain HTML, CSS and JavaScript: a delivery doesn't need to ship a framework to show today's fish.",
+          "The brand lettering becomes vector masks, sharp on any screen and in any color.",
         ],
       },
       meraki: {
         client: "Meraki Galleria Shop",
         segment: "Tattoo and barbershop",
-        title: "An identity redrawn from the shop sign",
-        problem:
-          "Strong work on Instagram and no website: people searching for a tattoo artist in town couldn't find the place.",
-        delivered:
-          "An SVG logo animated stroke by stroke, an editorial gallery, a booking button that changes with each section, and pre-rendered HTML for Google.",
-        metrics: [
-          { value: "1,238", label: "words Google can read" },
-          { value: "70", label: "images with alt text" },
-          { value: "2", label: "businesses, one site" },
+        quote: "The name already existed on the reception sign. It just had to become a website.",
+        objective: "Get the tattoo studio and the barbershop at the same address found on Google, each with its own way to book.",
+        concept:
+          "The brand comes from the real thing: the golden reception sign, with its crossbar-less A, redrawn in SVG and animated stroke by stroke.",
+        solution:
+          "An editorial gallery with full screen view, booking that changes destination by section and pre-rendered HTML so Google reads the whole site.",
+        decisions: [
+          "The booking button follows the reading: it goes to the tattoo artist's WhatsApp or the barbershop calendar, depending on the section.",
+          "290px screenshots became sharp photos with AI super-resolution, blended with the original so skin never looks plastic.",
         ],
+      },
+      dconde: {
+        client: "D'Conde Barbearia",
+        segment: "Appointment-only barbershop",
+        quote: "From first commit to a system in daily use in two weeks.",
+        objective: "Take the schedule out of WhatsApp: 17 services, barbers with different hours every day and everything arranged by hand.",
+        concept:
+          "Clients book in four steps, the team manages from a dashboard and the rules live where nobody can bypass them: in the database.",
+        solution:
+          "Website, 4-step booking, passwordless login with an email code and a 9-module dashboard, from schedule to stock. Automatic emails remind clients 3 hours ahead.",
+        decisions: [
+          "Price, time slot and permissions are validated in Postgres. The screen only shows what the database allows.",
+          "Two clients, same slot? The database rejects any overlap, including services that take several hours.",
+        ],
+      },
+      gordinho: {
+        client: "Gordinho Lanches",
+        segment: "Burger joint since 1992",
+        quote: "34 years of history that only lived on a mural on the wall.",
+        objective: "Tell the real story of the place and take people searching on Google straight to ordering.",
+        concept: "A brand site with no menu: the focus is the legacy, the family and ordering on WhatsApp.",
+        solution:
+          "A year-by-year timeline, from the 1992 food cart to today's dining room, opening hours that change by day, ordering via WhatsApp and iFood and local SEO.",
+        decisions: [
+          "The emblem was redrawn in SVG without the \"self service\" line, which the place no longer offers.",
+          "The mascot was cut out of the original logo and became a character on the site.",
+        ],
+      },
+      samoa: {
+        client: "Samoa Gastrobar",
+        segment: "Gastrobar with live music",
+        quote: "From a Linktree with a PDF to a site Google can find.",
+      },
+      pontoalto: {
+        client: "Ponto Alto · Clube da Música",
+        segment: "Live music venue",
+        quote: "A music venue that only had flyers.",
+      },
+      convite: {
+        client: "Wedding invitation",
+        segment: "Event",
+        quote: "An invitation that collects RSVPs on its own.",
       },
     },
   },
-  areas: {
-    kicker: "Fields",
-    title: "I work with any field.",
-    list: ["Law firms", "Construction", "Diners", "Studios", "Restaurants", "Barbershops", "Clinics", "Gyms", "Real estate", "Events", "Shops"],
-    last: "and yours",
-    note: "From a law firm to the diner around the corner, I always start with the same question: who is your customer, and what do they need to see before they reach out?",
-    cta: "Tell me about your business",
-  },
-  services: {
-    kicker: "Services",
-    title: "Three ways to start",
-    intro: "You talk to the person who designs, codes and ships. Your message doesn't pass through anyone else.",
-    recommended: "Recommended",
-    items: [
-      {
-        name: "Landing page",
-        description: "One page that presents your business and leads visitors to WhatsApp.",
-        features: ["Custom design", "Mobile first", "WhatsApp, map and Instagram", "Launched on your own domain"],
-        recommended: false,
-      },
-      {
-        name: "Website + local SEO",
-        description: "For businesses that want to be found on Google by people nearby.",
-        features: ["Multiple pages: menu, calendar, events", "Structured data for Google", "WhatsApp link preview", "Privacy and cookie policies"],
-        recommended: true,
-      },
-      {
-        name: "Custom system",
-        description: "When the site needs to do work: book, notify and organize.",
-        features: ["Online booking", "Passwordless client area", "Management dashboard", "Automatic notifications"],
-        recommended: false,
-      },
-    ],
-    maintenance:
-      "Monthly care plan: new menu, new dates, a new photo? Send it to me on WhatsApp and I'll update it.",
-  },
   process: {
     kicker: "Process",
-    title: "From first hello to live site",
+    title: "Code is the last step",
+    intro: "Before I open the editor, every project goes through five questions. Alongside, how SURAMU went through them.",
     steps: [
       {
-        title: "Talk",
-        text: "A video call or a WhatsApp chat. I want to understand your business, who your customer is and what comes in through WhatsApp today. I also look at what you already have: your Instagram, photos, menu, shop sign. That's where the site starts.",
+        title: "Brand",
+        question: "Who is this brand, and what does it refuse to be?",
+        text: "Personality comes before the palette.",
+        example: "SURAMU refuses salmon and cream cheese. That became the whole site.",
       },
       {
-        title: "Proposal",
-        text: "I send in writing what will be built, how long it takes and what it costs. The price is fixed: what's in the proposal is what you pay. I only start once you approve it.",
+        title: "People",
+        question: "Who arrives, from where, in what kind of hurry?",
+        text: "The same site serves different people at different moments.",
+        example: "SURAMU customers arrive from Instagram, on their phones. The order button comes first.",
       },
       {
-        title: "Design and code",
-        text: "I design and code the site from scratch, mobile first. You follow everything through a preview link, watch the site take shape and ask for changes along the way, without waiting for the end to weigh in.",
+        title: "Experience",
+        question: "What does a person feel with every scroll?",
+        text: "The script exists before the screen.",
+        example: "At SURAMU, one manifesto line per screen before the menu. Attitude first, then the fish.",
       },
       {
-        title: "Launch",
-        text: "I register the domain, publish the site and get it ready for Google and for WhatsApp link previews. After launch I stay close: changing a price, a photo or opening hours is just a message to me.",
+        title: "Interface",
+        question: "How do type, color, grid and motion become a system?",
+        text: "Every element repeats with intent.",
+        example: "Sushi red, black, paper and a bar that stamps the most important words.",
+      },
+      {
+        title: "Technology",
+        question: "What's the right tool for the size of the problem?",
+        text: "Only now does code come in.",
+        example: "At SURAMU, plain HTML and a single file the owner edits to change the fish of the day.",
       },
     ],
+    artifacts: {
+      poster: "SURAMU poster: our sushi has no cream cheese",
+      mobile: "SURAMU's first screen on a phone, with the order button",
+      manifesto: "SURAMU's manifesto filling the whole screen",
+      code: "data/peixes-do-dia.js",
+    },
   },
   about: {
     kicker: "About",
-    title: "Hi, I'm Leonardo.",
+    name: "Leonardo Senerine",
+    role: "Full stack developer",
+    title: "I work between design and code. That's where a lot of projects get lost.",
     paragraphs: [
-      "Before I open the editor, I want to understand your business: who your customer is, what they're looking for and where they give up. The site comes from those answers.",
-      "I design, code and launch. The person who hears your request is the one writing the code, so nothing gets lost along the way. That's how D'Conde went from first sketch to a booking system in daily use in two weeks.",
-      "After launch I stay close. Changing a price, a photo or opening hours is just a WhatsApp message to me.",
+      "I think like someone who designs and build like someone who codes. Architecture, performance and interface sit in the same conversation as the brand.",
+      "The person who hears your request is the one writing the code, so nothing gets lost along the way. That's how D'Conde went from first sketch to a system in daily use in two weeks.",
+      "After launch I stay close. Changing a price, a photo or opening hours is just a message to me.",
     ],
-    skills: ["Custom design", "Fast on mobile", "Ready for Google", "Systems and dashboards", "Support after launch"],
+    photoAlt: "Leonardo Senerine in black and white",
+    skills: ["Interface design", "Full stack development", "Next.js", "React", "TypeScript", "Technical SEO", "Web performance"],
   },
-  faq: {
-    kicker: "FAQ",
-    title: "Before you ask",
+  tools: {
+    kicker: "Tools",
+    title: "The tool depends on the problem",
     items: [
+      { tools: "React and Next.js", text: "when the interface needs to grow without slowing down.", proof: "Gordinho, D'Conde" },
+      { tools: "TypeScript", text: "in everything that has to last after launch.", proof: "Meraki, D'Conde, Gordinho" },
+      { tools: "APIs and databases", text: "when the site has to do work: booking, login, dashboards and alerts.", proof: "D'Conde" },
+      { tools: "Node.js and Python", text: "behind the scenes: scripts, automation and image processing.", proof: "Meraki" },
+      { tools: "Tailwind or plain CSS", text: "whatever keeps the page lighter and easier to maintain.", proof: "D'Conde, SURAMU" },
+    ],
+    note: "This site: Next.js, TypeScript and hand-written CSS.",
+  },
+  offer: {
+    kicker: "Working together",
+    title: "Fixed price, live preview, straight talk",
+    formats: [
+      { name: "Landing page", text: "One page that presents the brand and leads straight to contact." },
+      { name: "Website + SEO", text: "Multiple pages, structured data and a polished link preview." },
+      { name: "Custom system", text: "When the site has to do work: book, notify and organize." },
+    ],
+    promises: [
+      { value: "Fixed price", label: "written proposal before any work starts" },
+      { value: "Live preview", label: "follow everything through a link" },
+      { value: "Straight to me", label: "from design to code, I do it myself" },
+    ],
+    faqTitle: "Before you ask",
+    faq: [
       {
-        q: "How much does a website cost?",
+        q: "How much does it cost?",
         a: "It depends on what the site needs to do. After a quick chat I send a fixed-price proposal. What's in it is what you pay.",
       },
       {
         q: "How long does it take?",
-        a: "A landing page takes a few weeks. Systems with booking take a bit longer. The timeline is written into the proposal.",
-      },
-      {
-        q: "Do I need a domain and hosting?",
-        a: "No. I help you register the domain and handle the launch. For most sites, hosting costs little or nothing.",
+        a: "A landing page takes a few weeks. Systems take a bit longer. The timeline is written into the proposal.",
       },
       {
         q: "Will I be able to update the content?",
         a: "Yes. I can make updates on a monthly plan or, when it makes sense, build a dashboard so you can edit it yourself.",
-      },
-      {
-        q: "Will my business show up on Google?",
-        a: "The site ships ready for local search: address, hours, structured data and pages Google can read. Ranking also depends on competition and your Google Business profile.",
       },
       {
         q: "Do you work with clients in my city?",
@@ -558,11 +505,10 @@ const en: Dictionary = {
     ],
   },
   contact: {
-    kicker: "Let's talk",
-    titleBefore: "Your business deserves more than a",
-    titleEm: "link in bio",
-    titleAfter: ".",
-    text: "Tell me what you need. I'm the one who replies.",
+    kicker: "Contact",
+    titleBefore: "Let's make yours the one nobody scrolls",
+    titleEm: "past",
+    text: "Tell me about the brand and what it needs. I'm the one who replies.",
     primary: "Message on WhatsApp",
     email: "Send an email",
   },
@@ -570,6 +516,7 @@ const en: Dictionary = {
     role: "Websites & apps",
     rights: "All rights reserved.",
     backToTop: "Back to top",
+    made: "Handmade in Next.js, no template.",
   },
 };
 

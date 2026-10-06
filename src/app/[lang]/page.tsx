@@ -1,244 +1,318 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getDictionary, hasLocale } from "@/content/dictionaries";
-import { projects, shot } from "@/content/projects";
+import { details, featuredProjects, moreProjects, shot } from "@/content/projects";
 import { site, whatsappLink } from "@/content/site";
 import { Header } from "@/components/Header";
+import { Hero } from "@/components/Hero";
+import { CaseMedia } from "@/components/CaseMedia";
+import { MoreWork } from "@/components/MoreWork";
 import { ProcessAxis } from "@/components/ProcessAxis";
-import { ProjectShowcase } from "@/components/ProjectShowcase";
-import { SearchDemo } from "@/components/SearchDemo";
+import { CursorDot } from "@/components/CursorDot";
 import { JsonLd } from "@/components/JsonLd";
-import {
-  AreasWall,
-  Marquee,
-  Parallax,
-  ScrollSection,
-} from "@/components/motion";
-import { FadeIn, HeroTitle, Reveal, SplitTitle } from "@/components/reveal";
+import { Reveal, SplitTitle } from "@/components/reveal";
 
 const pad = (n: number) => String(n + 1).padStart(2, "0");
+
+// Trecho real do arquivo que o dono da SURAMU edita para trocar o peixe do dia.
+const FISH_CODE = `window.PEIXES_DO_DIA = [
+  { nome: "Olho-de-boi", status: "chegou" },
+  { nome: "Atum",        status: "chegou" },
+  { nome: "Bonito",      status: "ultimas" },
+  { nome: "Polvo",       status: "acabou" },
+];`;
 
 export default async function Home({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
   const t = getDictionary(lang);
   const wa = whatsappLink(t.whatsappMessage);
+  const total = featuredProjects.length;
+
+  // Artefatos reais da SURAMU, um para cada etapa do processo.
+  const artifacts = [
+    <figure key="poster" className="artifact artifact--poster">
+      <Image src="/work/suramu/poster.webp" alt={t.process.artifacts.poster} width={1280} height={1600} sizes="(max-width: 900px) 70vw, 340px" />
+    </figure>,
+    <figure key="mobile" className="artifact artifact--phone">
+      <Image src="/work/suramu/mobile.jpg" alt={t.process.artifacts.mobile} width={780} height={1688} sizes="(max-width: 900px) 52vw, 240px" />
+    </figure>,
+    <figure key="manifesto" className="artifact artifact--screen">
+      <Image src="/work/suramu/detail-1.jpg" alt={t.process.artifacts.manifesto} width={1440} height={900} sizes="(max-width: 900px) 90vw, 520px" />
+    </figure>,
+    <div key="tokens" className="artifact artifact--tokens">
+      <ul className="tokens__swatches">
+        {[
+          ["#C8141A", "sushi red"],
+          ["#2A2A2A", "charcoal"],
+          ["#F4F1EC", "paper"],
+          ["#F2B8B8", "pink"],
+        ].map(([hex, name]) => (
+          <li key={hex} style={{ background: hex }}>
+            <span className="mono">{hex}</span>
+            <span className="mono">{name}</span>
+          </li>
+        ))}
+      </ul>
+      <p className="tokens__type">
+        Nosso sushi <mark>não tem</mark> cream cheese
+      </p>
+    </div>,
+    <figure key="code" className="artifact artifact--code">
+      <figcaption className="mono">{t.process.artifacts.code}</figcaption>
+      <pre>
+        <code>{FISH_CODE}</code>
+      </pre>
+    </figure>,
+  ];
 
   return (
     <>
       <JsonLd lang={lang} t={t} />
       <Header lang={lang} nav={t.nav} whatsappHref={wa} />
+      <CursorDot />
 
       <main id="topo">
-        {/* Hero */}
-        <section className="hero">
-          <div className="hero__glow" aria-hidden="true" />
-          <div className="container hero__grid">
-            <div className="hero__copy">
-              <HeroTitle before={t.hero.titleBefore} em={t.hero.titleEm} after={t.hero.titleAfter} />
-              <FadeIn delay={0.6}>
-                <p className="hero__lead">{t.hero.lead}</p>
-                <div className="hero__actions">
-                  <a href={wa} className="btn btn--accent" target="_blank" rel="noopener">
-                    {t.hero.primary} <span aria-hidden="true">↗</span>
-                  </a>
-                  <a href="#trabalhos" className="btn btn--ghost">
-                    {t.hero.secondary}
-                  </a>
-                </div>
-              </FadeIn>
-              <FadeIn delay={0.8}>
-                <dl className="hero__stats">
-                  {t.hero.stats.map((s) => (
-                    <div key={s.value}>
-                      <dt>{s.value}</dt>
-                      <dd>{s.label}</dd>
-                    </div>
-                  ))}
-                </dl>
-              </FadeIn>
-            </div>
+        <Hero t={t.hero} whatsappHref={wa} latest={{ name: t.work.items.suramu.client, href: "#case-suramu" }} />
 
-            <div className="hero__visual">
-              <FadeIn className="hero__photo" delay={0.3}>
-                <Parallax className="hero__photo-frame" distance={50}>
-                  <Image src="/leonardo-retrato.jpg" alt={t.hero.photoAlt} width={900} height={1600} priority sizes="(max-width: 900px) 90vw, 420px" />
-                </Parallax>
-                <div className="hero__badge">
-                  <strong>{t.hero.photoCaption}</strong>
-                  <span>{t.hero.photoRole}</span>
-                </div>
-              </FadeIn>
-            </div>
-          </div>
-        </section>
-
-        {/* Por que ter um site */}
-        <section className="section why" id="por-que">
-          <div className="container why__grid">
-            <div className="why__copy">
-              <SectionHead kicker={t.why.kicker} title={t.why.title} intro={t.why.intro} />
-            </div>
-            <Reveal className="why__demo" delay={0.15}>
-              <SearchDemo queries={t.why.queries} resultTitle={t.why.resultTitle} resultUrl={t.why.resultUrl} resultText={t.why.resultText} />
-            </Reveal>
-          </div>
+        {/* Crenças: o ponto do hero vira este bloco azul */}
+        <section className="beliefs flood" aria-label={t.beliefs.label}>
           <div className="container">
-            <div className="why__points">
-              {t.why.points.map((pt, i) => (
-                <Reveal key={pt.title} delay={i * 0.1} className="why__point" lit>
-                  <span className="why__num">{pad(i)}</span>
-                  <h3>{pt.title}</h3>
-                  <p>{pt.text}</p>
-                </Reveal>
+            <p className="kicker">{t.beliefs.label}</p>
+            <ol className="beliefs__list">
+              {t.beliefs.items.map((b, i) => (
+                <li key={b} className="beliefs__item">
+                  <span className="beliefs__num mono" aria-hidden="true">
+                    {i + 1}/{t.beliefs.items.length}
+                  </span>
+                  <SplitTitle text={b} as="p" className="beliefs__text" />
+                </li>
               ))}
-            </div>
+            </ol>
           </div>
         </section>
 
-        {/* Trabalhos */}
-        <ScrollSection className="section section--work flood" id="trabalhos">
+        {/* Cases */}
+        <section className="cases" id="cases" aria-labelledby="cases-title">
           <div className="container">
-            <SectionHead kicker={t.work.kicker} title={t.work.title} intro={t.work.intro} />
+            <header className="cases__head">
+              <Reveal>
+                <p className="kicker">{t.work.kicker}</p>
+              </Reveal>
+              <SplitTitle text={t.work.title} className="section__title cases__title" id="cases-title" />
+              <Reveal delay={0.15}>
+                <p className="section__intro">{t.work.intro}</p>
+              </Reveal>
+            </header>
 
-            <Reveal>
-              <ProjectShowcase
-                items={projects.map((p) => ({
-                  id: p.id,
-                  url: p.url,
-                  kind: p.kind,
-                  kindLabel: t.work.kindLabel[p.kind],
-                  ...t.work.items[p.id],
-                  images: { desktop: shot(p.id, "desktop"), mobile: shot(p.id, "mobile") },
-                }))}
-                labels={{
-                  ...t.work.carousel,
-                  problemLabel: t.work.problemLabel,
-                  deliveredLabel: t.work.deliveredLabel,
-                  visit: t.work.visit,
-                  privateNote: t.work.privateNote,
-                }}
-              />
-            </Reveal>
-          </div>
-        </ScrollSection>
+            {featuredProjects.map((p, i) => {
+              const c = t.work.items[p.id];
+              const [d1, d2] = details(p.id);
+              return (
+                <article key={p.id} className="case" id={`case-${p.id}`} aria-labelledby={`case-${p.id}-name`}>
+                  <Reveal className="case__rule">
+                    <span className="mono">
+                      {pad(i)} / {pad(total - 1)}
+                    </span>
+                    <span className="mono">{t.work.kindLabel[p.kind]} · 2026</span>
+                  </Reveal>
+                  <header className="case__head">
+                    <h3 className="case__name" id={`case-${p.id}-name`}>
+                      {c.client}
+                      <span className="dot" aria-hidden="true" />
+                    </h3>
+                    <p className="case__segment">{c.segment}</p>
+                  </header>
+                  <Reveal>
+                    <p className="case__quote">{c.quote}</p>
+                  </Reveal>
 
-        {/* Áreas */}
-        <section className="section areas" id="areas">
-          <div className="container">
-            <Reveal>
-              <p className="kicker">{t.areas.kicker}</p>
-            </Reveal>
-            <SplitTitle text={t.areas.title} className="section__title areas__title" />
-            <AreasWall list={t.areas.list} last={t.areas.last} />
-            <Reveal className="areas__foot" delay={0.2}>
-              <p>{t.areas.note}</p>
-              <a href={wa} target="_blank" rel="noopener" className="link-arrow">
-                {t.areas.cta} <span aria-hidden="true">→</span>
-              </a>
-            </Reveal>
-          </div>
-        </section>
+                  <Reveal className="case__media" y={60}>
+                    <CaseMedia
+                      desktop={shot(p.id, "desktop")}
+                      mobile={shot(p.id, "mobile")}
+                      alt={`${c.client}: ${c.quote}`}
+                      href={p.url}
+                      label={`${t.work.labels.visit}: ${c.client}`}
+                      cursor={t.work.labels.cursor}
+                      flip={i % 2 === 1}
+                    />
+                  </Reveal>
 
-        <Marquee className="text-marquee" duration={32}>
-          {t.niches.map((n) => (
-            <span key={n} className="text-marquee__item">
-              {n}
-              <span className="text-marquee__dot" aria-hidden="true">/</span>
-            </span>
-          ))}
-        </Marquee>
-
-        {/* Serviços */}
-        <section className="section" id="servicos">
-          <div className="container">
-            <SectionHead kicker={t.services.kicker} title={t.services.title} intro={t.services.intro} />
-            <div className="services">
-              {t.services.items.map((s, i) => (
-                <Reveal key={s.name} delay={i * 0.1} className={`service${s.recommended ? " service--featured" : ""}`}>
-                  <div className="service__head">
-                    {s.recommended && <p className="service__badge">{t.services.recommended}</p>}
-                    <h3 className="service__name">{s.name}</h3>
-                    <p className="service__desc">{s.description}</p>
+                  <div className="case__grid">
+                    <dl className="case__story">
+                      {(
+                        [
+                          [t.work.labels.objective, c.objective],
+                          [t.work.labels.concept, c.concept],
+                          [t.work.labels.solution, c.solution],
+                        ] as const
+                      ).map(([label, text], k) => (
+                        <Reveal key={label} delay={k * 0.08}>
+                          <dt className="mono">{label}</dt>
+                          <dd>{text}</dd>
+                        </Reveal>
+                      ))}
+                    </dl>
+                    <Reveal className="case__side" delay={0.12}>
+                      <p className="mono case__label">{t.work.labels.decisions}</p>
+                      <ol className="case__decisions">
+                        {c.decisions?.map((d) => (
+                          <li key={d}>{d}</li>
+                        ))}
+                      </ol>
+                      <p className="mono case__label">{t.work.labels.stack}</p>
+                      <p className="case__stack">{p.stack.join(" · ")}</p>
+                      {p.url && (
+                        <a href={p.url} target="_blank" rel="noopener" className="btn btn--dark case__link">
+                          {t.work.labels.visit} <span aria-hidden="true">↗</span>
+                        </a>
+                      )}
+                    </Reveal>
                   </div>
-                  <ul className="service__list">
-                    {s.features.map((f) => (
-                      <li key={f}>{f}</li>
+
+                  <div className="case__details">
+                    {[d1, d2].map((src, k) => (
+                      <Reveal key={src} className="case__detail" delay={k * 0.1}>
+                        <Image src={src} alt={`${c.client} · ${k + 1}/2`} width={1440} height={900} sizes="(max-width: 900px) 86vw, 50vw" />
+                      </Reveal>
                     ))}
-                  </ul>
-                </Reveal>
-              ))}
-            </div>
-            <Reveal className="services__note">
-              <p>{t.services.maintenance}</p>
-            </Reveal>
+                  </div>
+                </article>
+              );
+            })}
+
+            <MoreWork
+              title={t.work.moreTitle}
+              cursor={t.work.labels.cursor}
+              items={moreProjects.map((p) => ({
+                id: p.id,
+                ...t.work.items[p.id],
+                kind: t.work.kindLabel[p.kind],
+                url: p.url,
+                image: shot(p.id, "desktop"),
+                privateNote: t.work.labels.private,
+              }))}
+            />
           </div>
         </section>
 
-        {/* Processo */}
-        <ProcessAxis kicker={t.process.kicker} title={t.process.title} steps={t.process.steps} />
+        <ProcessAxis
+          kicker={t.process.kicker}
+          title={t.process.title}
+          intro={t.process.intro}
+          steps={t.process.steps}
+          artifacts={artifacts}
+        />
 
-        {/* Sobre */}
-        <section className="section" id="sobre">
-          <div className="container about">
+        {/* Quem faz */}
+        <section className="about" id="sobre" aria-labelledby="about-title">
+          <div className="container about__grid">
             <Reveal className="about__photo">
-              <Image src="/leonardo-retrato.jpg" alt={t.hero.photoAlt} width={900} height={1600} sizes="(max-width: 900px) 90vw, 400px" />
+              <Image src="/leonardo-retrato.jpg" alt={t.about.photoAlt} width={900} height={1600} sizes="(max-width: 900px) 80vw, 420px" />
             </Reveal>
             <div className="about__copy">
               <Reveal>
                 <p className="kicker">{t.about.kicker}</p>
+                <p className="about__name">
+                  {t.about.name}
+                  <span className="dot" aria-hidden="true" />
+                </p>
+                <p className="about__role mono">{t.about.role}</p>
               </Reveal>
-              <SplitTitle text={t.about.title} />
+              <SplitTitle text={t.about.title} className="about__title" id="about-title" />
               {t.about.paragraphs.map((p, i) => (
-                <Reveal key={i} delay={0.1 + i * 0.1}>
+                <Reveal key={i} delay={0.1 + i * 0.08}>
                   <p className="about__text">{p}</p>
                 </Reveal>
               ))}
-              <Reveal delay={0.3}>
-                <ul className="skills">
-                  {t.about.skills.map((s) => (
-                    <li key={s}>{s}</li>
-                  ))}
-                </ul>
-              </Reveal>
             </div>
           </div>
         </section>
 
-        {/* Dúvidas */}
-        <ScrollSection className="section section--surface" id="duvidas">
-          <div className="container faq">
-            <SectionHead kicker={t.faq.kicker} title={t.faq.title} />
-            <div className="faq__list">
-              {t.faq.items.map((item, i) => (
-                <Reveal key={item.q} delay={i * 0.05} className="faq__row" lit>
-                  <details className="faq__item">
+        {/* Ferramentas */}
+        <section className="tools" aria-labelledby="tools-title">
+          <div className="container">
+            <Reveal>
+              <p className="kicker">{t.tools.kicker}</p>
+            </Reveal>
+            <SplitTitle text={t.tools.title} className="section__title" id="tools-title" />
+            <ul className="tools__list">
+              {t.tools.items.map((it, i) => (
+                <li key={it.tools}>
+                  <Reveal className="tools__row" delay={i * 0.05} lit>
+                    <span className="tools__name">{it.tools}</span>
+                    <span className="tools__text">{it.text}</span>
+                    <span className="tools__proof mono">{it.proof}</span>
+                  </Reveal>
+                </li>
+              ))}
+            </ul>
+            <Reveal>
+              <p className="tools__note mono">{t.tools.note}</p>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* Como trabalhar comigo: planos e dúvidas, condensados */}
+        <section className="offer" aria-labelledby="offer-title">
+          <div className="container offer__grid">
+            <div className="offer__intro">
+              <Reveal>
+                <p className="kicker">{t.offer.kicker}</p>
+              </Reveal>
+              <SplitTitle text={t.offer.title} className="offer__title" id="offer-title" />
+              <Reveal delay={0.1}>
+                <dl className="offer__promises">
+                  {t.offer.promises.map((p) => (
+                    <div key={p.value}>
+                      <dt>{p.value}</dt>
+                      <dd>{p.label}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </Reveal>
+            </div>
+            <div className="offer__side">
+              <ul className="offer__formats">
+                {t.offer.formats.map((f, i) => (
+                  <li key={f.name}>
+                    <Reveal className="offer__format" delay={i * 0.06}>
+                      <span className="offer__format-name">{f.name}</span>
+                      <span className="offer__format-text">{f.text}</span>
+                    </Reveal>
+                  </li>
+                ))}
+              </ul>
+              <h3 className="offer__faq-title mono">{t.offer.faqTitle}</h3>
+              <div className="faq__list">
+                {t.offer.faq.map((item) => (
+                  <details key={item.q} className="faq__item">
                     <summary>
                       {item.q}
                       <span className="faq__icon" aria-hidden="true" />
                     </summary>
                     <p>{item.a}</p>
                   </details>
-                </Reveal>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
-        </ScrollSection>
+        </section>
 
-        {/* Contato */}
-        <ScrollSection className="contact flood" id="contato">
-          <div className="contact__glow" aria-hidden="true" />
+        {/* Contato: o ponto se abre de novo e vira o bloco azul final */}
+        <section className="contact flood" id="contato" aria-labelledby="contact-title">
           <div className="container">
             <Reveal>
               <p className="kicker">{t.contact.kicker}</p>
             </Reveal>
             <Reveal delay={0.1} y={40}>
-              <h2 className="contact__title">
+              <h2 className="contact__title" id="contact-title">
                 {t.contact.titleBefore} <em>{t.contact.titleEm}</em>
-                <span className="accent">{t.contact.titleAfter}</span>
+                <span className="dot dot--light" aria-hidden="true" />
               </h2>
             </Reveal>
-            <Reveal delay={0.25}>
+            <Reveal delay={0.2}>
               <p className="contact__text">{t.contact.text}</p>
               <div className="contact__actions">
                 <a href={wa} className="btn btn--light btn--lg" target="_blank" rel="noopener">
@@ -250,7 +324,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
               </div>
             </Reveal>
           </div>
-        </ScrollSection>
+        </section>
       </main>
 
       <footer className="footer">
@@ -258,6 +332,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           <p>
             © {new Date().getFullYear()} {site.name} · {t.footer.role}. {t.footer.rights}
           </p>
+          <p className="footer__made mono">{t.footer.made}</p>
           <nav className="footer__links" aria-label="Redes">
             <a href={site.instagram} target="_blank" rel="noopener">Instagram</a>
             <a href={site.linkedin} target="_blank" rel="noopener">LinkedIn</a>
@@ -271,21 +346,5 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         {t.hero.primary}
       </a>
     </>
-  );
-}
-
-function SectionHead({ kicker, title, intro }: { kicker: string; title: string; intro?: string }) {
-  return (
-    <div className="section__head">
-      <Reveal>
-        <p className="kicker">{kicker}</p>
-      </Reveal>
-      <SplitTitle text={title} />
-      {intro && (
-        <Reveal delay={0.2}>
-          <p className="section__intro">{intro}</p>
-        </Reveal>
-      )}
-    </div>
   );
 }

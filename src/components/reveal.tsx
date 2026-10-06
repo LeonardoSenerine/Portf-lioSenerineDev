@@ -24,32 +24,20 @@ export function Reveal({ children, className, delay = 0, y, lit }: RevealProps) 
   );
 }
 
-// Entrada do hero em CSS puro: começa na primeira pintura, sem esperar o JavaScript.
-export function FadeIn({ children, className, delay = 0 }: RevealProps) {
-  return (
-    <div className={`fade-up ${className ?? ""}`} style={vars(delay)}>
-      {children}
-    </div>
-  );
-}
-
-// Título do hero: aparece pronto, sem animação de entrada, porque é o maior
-// elemento da primeira tela (LCP). Só o ponto final dá um "pop".
-export function HeroTitle({ before, em, after }: { before: string; em: string; after: string }) {
-  return (
-    <h1 className="hero__title">
-      {before} <em>{em}</em>
-      <span className="accent pop" style={vars(0.5)}>
-        {after}
-      </span>
-    </h1>
-  );
-}
-
 // Título de seção: as palavras sobem de uma máscara, uma depois da outra.
-export function SplitTitle({ text, as: Tag = "h2", className = "section__title" }: { text: string; as?: "h2" | "h3"; className?: string }) {
+export function SplitTitle({
+  text,
+  as: Tag = "h2",
+  className = "section__title",
+  id,
+}: {
+  text: string;
+  as?: "h2" | "h3" | "p";
+  className?: string;
+  id?: string;
+}) {
   return (
-    <Tag className={className} aria-label={text} data-reveal="split">
+    <Tag className={className} id={id} aria-label={text} data-reveal="split">
       <span aria-hidden="true">
         {text.split(" ").map((word, i) => (
           <Fragment key={i}>
