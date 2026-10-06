@@ -4,7 +4,7 @@ import { useRef, useState, type ReactNode } from "react";
 import { motion, useMotionValueEvent, useScroll, useTransform } from "motion/react";
 import { useIsDesktop } from "./motion";
 
-type Step = { title: string; question: string; text: string; example: string };
+type Step = { title: string; tags: string[]; question: string; text: string; example: string };
 
 const pad = (n: number) => String(n + 1).padStart(2, "0");
 
@@ -19,7 +19,9 @@ export function ProcessAxis({
   intro,
   steps,
   artifacts,
+  folio,
 }: {
+  folio: string;
   kicker: string;
   title: string;
   intro: string;
@@ -48,7 +50,10 @@ export function ProcessAxis({
       <div className="process__pin container">
         <div className="process__head">
           <div>
-            <p className="kicker">{kicker}</p>
+            <div className="shead__rule">
+              <p className="kicker">{kicker}</p>
+              <p className="shead__folio mono" aria-hidden="true">{folio}</p>
+            </div>
             <h2 className="section__title" id="process-title">
               {title}
               <span className="dot" aria-hidden="true" />
@@ -62,10 +67,12 @@ export function ProcessAxis({
 
         <div className="process__body">
           <div className="process__viewport">
-            <motion.ol className="process__axis" style={desktop ? { transform: shift } : undefined}>
+            {/* a linha do eixo fica fora da lista (só <li> dentro de <ol>), mas anda junto com ela */}
+            <motion.div className="process__axis" style={desktop ? { transform: shift } : undefined}>
               <span className="process__line" aria-hidden="true">
                 <motion.span className="process__fill" style={{ scaleY: desktop ? reel : flowing.scrollYProgress }} />
               </span>
+              <ol className="process__steps">
               {steps.map((step, i) => (
                 <li
                   key={step.title}
@@ -75,6 +82,11 @@ export function ProcessAxis({
                   <span className="pstep__num">{pad(i)}</span>
                   <div className="pstep__body">
                     <h3 className="pstep__title">{step.title}</h3>
+                    <ul className="pstep__tags mono">
+                      {step.tags.map((tag) => (
+                        <li key={tag}>{tag}</li>
+                      ))}
+                    </ul>
                     <p className="pstep__question">{step.question}</p>
                     <p className="pstep__text">
                       {step.text} <span className="pstep__example">{step.example}</span>
@@ -84,7 +96,8 @@ export function ProcessAxis({
                   <div className="pstep__artifact">{artifacts[i]}</div>
                 </li>
               ))}
-            </motion.ol>
+              </ol>
+            </motion.div>
           </div>
 
           {/* no computador, um palco fixo troca o artefato conforme o passo da vez */}

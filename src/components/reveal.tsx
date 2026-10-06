@@ -30,22 +30,28 @@ export function SplitTitle({
   as: Tag = "h2",
   className = "section__title",
   id,
+  dot = false,
 }: {
   text: string;
   as?: "h2" | "h3" | "p";
   className?: string;
   id?: string;
+  // Termina no ponto aceso da marca, que estala depois das palavras.
+  dot?: boolean;
 }) {
+  const words = text.split(" ");
   return (
     <Tag className={className} id={id} aria-label={text} data-reveal="split">
       <span aria-hidden="true">
-        {text.split(" ").map((word, i) => (
+        {words.map((word, i) => (
           <Fragment key={i}>
             <span className="word-mask">
               <span style={vars(i * 0.05)}>{word}</span>
-            </span>{" "}
+            </span>
+            {i < words.length - 1 ? " " : null}
           </Fragment>
         ))}
+        {dot && <span className="dot" style={vars(words.length * 0.05 + 0.3)} />}
       </span>
     </Tag>
   );

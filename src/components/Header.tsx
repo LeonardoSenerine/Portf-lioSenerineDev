@@ -48,6 +48,7 @@ export function Header({ lang, nav, whatsappHref }: Props) {
   const otherLang: Locale = lang === "pt" ? "en" : "pt";
   const links = [
     { href: "#cases", label: nav.work },
+    { href: "#servicos", label: nav.services },
     { href: "#processo", label: nav.process },
     { href: "#sobre", label: nav.about },
     { href: "#contato", label: nav.contact },

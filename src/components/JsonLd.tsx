@@ -53,10 +53,10 @@ export function JsonLd({ lang, t }: { lang: Locale; t: Dictionary }) {
         availableLanguage: ["Portuguese", "English"],
         hasOfferCatalog: {
           "@type": "OfferCatalog",
-          name: t.offer.title,
-          itemListElement: t.offer.formats.map((f) => ({
+          name: t.services.title,
+          itemListElement: t.services.items.map((s) => ({
             "@type": "Offer",
-            itemOffered: { "@type": "Service", name: f.name, description: f.text },
+            itemOffered: { "@type": "Service", name: s.name, description: s.description },
           })),
         },
       },
@@ -79,7 +79,7 @@ export function JsonLd({ lang, t }: { lang: Locale; t: Dictionary }) {
       },
       {
         "@type": "FAQPage",
-        mainEntity: t.offer.faq.map((f) => ({
+        mainEntity: t.faq.items.map((f) => ({
           "@type": "Question",
           name: f.q,
           acceptedAnswer: { "@type": "Answer", text: f.a },

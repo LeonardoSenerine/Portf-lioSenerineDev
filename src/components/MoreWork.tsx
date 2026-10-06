@@ -16,7 +16,7 @@ export type MoreItem = {
 
 // Índice dos outros trabalhos. No computador, a captura do projeto segue o
 // cursor sobre a linha; no celular, a miniatura fica dentro da própria linha.
-export function MoreWork({ items, title, cursor }: { items: MoreItem[]; title: string; cursor: string }) {
+export function MoreWork({ items, title, cursor, start }: { items: MoreItem[]; title: string; cursor: string; start: number }) {
   const [active, setActive] = useState<number | null>(null);
   const floatRef = useRef<HTMLDivElement>(null);
 
@@ -32,7 +32,7 @@ export function MoreWork({ items, title, cursor }: { items: MoreItem[]; title: s
         {items.map((it, i) => {
           const inner = (
             <>
-              <span className="more__num mono">{String(i + 5).padStart(2, "0")}</span>
+              <span className="more__num mono">{String(i + start).padStart(2, "0")}</span>
               <span className="more__thumb" aria-hidden="true">
                 <Image src={it.image} alt="" fill sizes="96px" />
               </span>
