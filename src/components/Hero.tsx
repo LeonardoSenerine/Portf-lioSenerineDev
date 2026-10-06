@@ -67,11 +67,21 @@ export function Hero({ t, whatsappHref, latest }: Props) {
             {t.titleBefore} {t.titleEm}
           </motion.span>
           <span className="sr-only">.</span>
-          <motion.span ref={dotRef} className="hero__dot" style={dotStyle} aria-hidden="true">
-            <motion.span className="hero__photo" style={reduce ? undefined : { opacity: photo }}>
-              <Image src="/leonardo-ponto.webp" alt="" fill priority sizes="(max-width: 700px) 30vw, 200px" />
+          {/* O ponto com a foto e o crédito pendurado nele, como legenda de foto:
+              rosto e nome juntos. O crédito é decorativo para leitores de tela
+              (o nome está no texto de apoio logo abaixo). */}
+          <span className="hero__mark" aria-hidden="true">
+            <motion.span ref={dotRef} className="hero__dot" style={dotStyle}>
+              <motion.span className="hero__photo" style={reduce ? undefined : { opacity: photo }}>
+                <Image src="/leonardo-ponto.webp" alt="" fill priority sizes="(max-width: 700px) 30vw, 200px" />
+              </motion.span>
             </motion.span>
-          </motion.span>
+            <motion.span className="hero__credit" style={fadeStyle}>
+              <span className="hero__credit-line" />
+              <span className="hero__credit-name">{t.credit.name}</span>
+              <span className="hero__credit-role mono">{t.credit.role}</span>
+            </motion.span>
+          </span>
         </h1>
 
         <motion.div className="container hero__foot" style={fadeStyle}>
