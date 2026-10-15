@@ -697,6 +697,19 @@ em { font-style: normal; color: var(--accent-text); }
   --inverse-ink: #0d0d0d;
   --frame: #1c1b19;
 }
+.case[data-room="cantina"] {
+  --room-bg: #23201d;
+  --ink: #fbf9f5;
+  --ink-soft: #fbf9f5;
+  --muted: #b9b0a4;
+  --line: rgba(251, 249, 245, 0.15);
+  --accent: #e3b26a;
+  --accent-text: #ecc489;
+  --accent-glow: rgba(227, 178, 106, 0.35);
+  --inverse-bg: #e3b26a;
+  --inverse-ink: #23201d;
+  --frame: #2f2b27;
+}
 .case[data-room="dconde"] {
   --room-bg: #19191a;
   --ink: #f2f2f2;

@@ -9,11 +9,12 @@ export const projects = [
   // própria marca) dentro da moldura do Senerine; ver .case[data-room] no CSS.
   // SURAMU em negociação: sem link até o fechamento.
   { id: "suramu", url: null, kind: "concept", featured: true, year: 2026, stack: ["HTML", "CSS", "JavaScript"] },
-  { id: "meraki", url: "https://meraki-studio-nu.vercel.app", kind: "concept", featured: true, year: 2026, stack: ["React", "TypeScript", "Vite", "Python"] },
+  { id: "cantina", url: "https://cantina-por-do-sol.vercel.app", kind: "real", featured: true, year: 2026, stack: ["React", "Vite", "Tailwind", "GSAP"] },
   { id: "dconde", url: "https://dcondebarbershop.vercel.app", kind: "real", featured: true, year: 2026, stack: ["React", "TypeScript", "Tailwind", "Supabase", "PostgreSQL"] },
   { id: "gordinho", url: "https://gordinho-lanches-site.vercel.app", kind: "real", featured: true, year: 2026, stack: ["Next.js", "TypeScript", "Tailwind"] },
   { id: "samoa", url: "https://samoa-gastro-bar.vercel.app", kind: "concept", featured: true, year: 2026, stack: ["React", "TypeScript", "Vite"] },
   // Mais trabalhos
+  { id: "meraki", url: "https://meraki-studio-nu.vercel.app", kind: "concept", featured: false, year: 2026, stack: ["React", "TypeScript", "Vite", "Python"] },
   { id: "pontoalto", url: "https://ponto-alto-site-omega.vercel.app", kind: "concept", featured: false, year: 2026, stack: ["React", "TypeScript", "Vite"] },
   // Convite de casamento: evento privado do casal, sem link público.
   { id: "convite", url: null, kind: "real", featured: false, year: 2026, stack: [] },
