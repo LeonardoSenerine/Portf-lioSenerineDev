@@ -99,6 +99,22 @@ const pt = {
     },
     moreTitle: "Mais trabalhos",
     items: {
+      docesabor: {
+        client: "Doce&Sabor",
+        segment: "Marmitas, personal chef e feijoada",
+        quote: "Três serviços que viviam espalhados agora cabem numa página só.",
+        concept:
+          "A cozinha da Chef Vanda Camargo virou marca: creme e café de base, uma cor para cada serviço e a assinatura que já era dela, feita com cuidado e servida com afeto.",
+        challenge:
+          "Marmitas congeladas, personal chef e buffet de feijoada para até 200 convidados: três serviços com públicos diferentes, cada um com o seu jeito de pedir, e tudo combinado na conversa.",
+        solution:
+          "Uma página com uma seção para cada serviço, logo redesenhada em vetor, um botão de WhatsApp por serviço com a mensagem já escrita e uma página que documenta a identidade da marca.",
+        decisions: [
+          { area: "Estratégia", text: "Sem carrinho: opções, valores e entrega são combinados direto com a Chef. Até o orçamento da feijoada vira uma mensagem pronta no WhatsApp." },
+          { area: "UX", text: "Cada serviço tem o seu botão, que já abre a conversa com a mensagem certa. A Chef sabe na hora do que a pessoa está falando." },
+          { area: "Movimento", text: "Títulos que entram letra por letra e seções que se empilham como pastas. Para quem prefere menos movimento, tudo fica parado." },
+        ],
+      },
       suramu: {
         client: "SURAMU",
         segment: "Real sushi · delivery de quebrada",
@@ -441,6 +457,22 @@ const en: Dictionary = {
     },
     moreTitle: "More work",
     items: {
+      docesabor: {
+        client: "Doce&Sabor",
+        segment: "Frozen meals, personal chef and feijoada",
+        quote: "Three services that used to be scattered now fit on a single page.",
+        concept:
+          "Chef Vanda Camargo's kitchen became a brand: cream and coffee as the base, one color per service and the signature that was already hers, made with care and served with affection.",
+        challenge:
+          "Frozen meals, a personal chef service and a feijoada buffet for up to 200 guests: three services with different audiences, each ordered its own way, all arranged in conversation.",
+        solution:
+          "One page with a section per service, a logo redrawn as vector, one WhatsApp button per service with the message already written, and a page that documents the brand identity.",
+        decisions: [
+          { area: "Strategy", text: "No cart: options, prices and delivery are arranged directly with the Chef. Even the feijoada quote turns into a ready-made WhatsApp message." },
+          { area: "UX", text: "Each service has its own button that opens the chat with the right message. The Chef knows right away what it is about." },
+          { area: "Motion", text: "Titles that come in letter by letter and sections that stack like folders. For anyone who prefers less motion, everything stays still." },
+        ],
+      },
       suramu: {
         client: "SURAMU",
         segment: "Real sushi · street delivery",

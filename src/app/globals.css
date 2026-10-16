@@ -549,6 +549,13 @@ em { font-style: normal; color: var(--accent-text); }
 .hero__credit-role { color: var(--muted); font-size: 11px; }
 .hero__credit-name,
 .hero__credit-role { padding-left: 2px; }
+/* no celular o ponto pode cair na borda direita (em inglês cai): o crédito pende para a esquerda */
+@media (max-width: 699px) {
+  .hero__credit { left: auto; right: calc(50% - 0.035em); justify-items: end; text-align: right; }
+  .hero__credit-line { left: auto; right: 0; }
+  .hero__credit-name,
+  .hero__credit-role { padding: 0 2px 0 0; }
+}
 /* o crédito se desenha logo depois que a página abre: o fio desce, o nome aparece */
 @media (prefers-reduced-motion: no-preference) {
   .hero__credit-line { animation: credit-line 0.7s var(--ease) 0.5s both; }
@@ -670,6 +677,19 @@ em { font-style: normal; color: var(--accent-text); }
   padding: clamp(88px, 11vw, 160px) 0;
   background: var(--room-bg);
   color: var(--ink);
+}
+.case[data-room="docesabor"] {
+  --room-bg: #3b1f0e;
+  --ink: #fcf1e1;
+  --ink-soft: #fcf1e1;
+  --muted: rgba(252, 241, 225, 0.78);
+  --line: rgba(252, 241, 225, 0.16);
+  --accent: #f2a922;
+  --accent-text: #f2a922;
+  --accent-glow: rgba(242, 169, 34, 0.4);
+  --inverse-bg: #f2a922;
+  --inverse-ink: #3b1f0e;
+  --frame: #2a1609;
 }
 .case[data-room="suramu"] {
   --room-bg: #b8141a;

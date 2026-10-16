@@ -65,7 +65,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       <CursorDot />
 
       <main id="topo">
-        <Hero t={t.hero} whatsappHref={wa} latest={{ name: t.work.items.suramu.client, href: "#case-suramu" }} />
+        <Hero t={t.hero} whatsappHref={wa} latest={{ name: t.work.items.docesabor.client, href: "#case-docesabor" }} />
 
         {/* Crenças: o ponto do hero vira este bloco azul */}
         <section className="beliefs flood" aria-label={t.beliefs.label}>
