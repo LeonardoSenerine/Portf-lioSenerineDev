@@ -11,7 +11,8 @@ export type MoreItem = {
   kind: string;
   url: string | null;
   image: string;
-  privateNote: string;
+  /** Aviso no lugar da ficha quando o motivo de não ter link precisa ser dito (o convite). */
+  privateNote?: string;
 };
 
 // Índice dos outros trabalhos. No computador, a captura do projeto segue o
@@ -38,7 +39,7 @@ export function MoreWork({ items, title, cursor, start }: { items: MoreItem[]; t
               </span>
               <span className="more__name">{it.client}</span>
               <span className="more__seg">{it.quote}</span>
-              <span className="more__meta mono">{it.url ? `${it.segment} · ${it.kind}` : it.privateNote}</span>
+              <span className="more__meta mono">{it.privateNote ?? `${it.segment} · ${it.kind}`}</span>
               <span className="more__arrow" aria-hidden="true">{it.url ? "↗" : "·"}</span>
             </>
           );

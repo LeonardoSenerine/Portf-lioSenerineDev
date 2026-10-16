@@ -11,7 +11,7 @@ Portfólio comercial do Leonardo Senerine: o objetivo é **vender** (gerar conta
 - Texto sem travessões. Não inventar números, depoimentos, prazos ou clientes; só usar fatos que já estão no site ou nos estudos de caso.
 - O **convite de casamento é confidencial**: sem link em lugar nenhum (`url: null` em `src/content/projects.ts`), imagens sempre desfocadas (`public/work/convite/*-privado.jpg`). Nunca colocar o link de volta.
 - Projetos reais: Doce&Sabor (último no ar), Gordinho Lanches, D'Conde Barbearia, convite. Propostas conceituais: SURAMU, Samoa, Ponto Alto, Meraki.
-- A SURAMU está em negociação: fica fora dos cases em destaque (só em "Mais trabalhos") até segunda ordem.
+- A SURAMU está em negociação: fica fora dos cases em destaque (só em "Mais trabalhos" e no exemplo do processo) e **sem link** (`url: null`) até segunda ordem.
 
 ## Regras de design
 

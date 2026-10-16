@@ -1,7 +1,7 @@
 // Dados fixos de cada projeto (links, tecnologias e imagens). Os textos ficam em dictionaries.ts.
 // Capturas geradas a partir dos sites no ar: desktop 1440×900 e celular 390×844 @2x.
 // Tecnologias tiradas do package.json de cada repositório (a SURAMU é HTML, CSS e JS puros).
-// A SURAMU saiu dos destaques enquanto está em negociação; a Doce&Sabor entrou no lugar.
+// A SURAMU saiu dos destaques e ficou sem link enquanto está em negociação; a Doce&Sabor entrou no lugar.
 
 export type ProjectKind = "real" | "concept";
 
@@ -14,7 +14,7 @@ export const projects = [
   { id: "gordinho", url: "https://gordinho-lanches-site.vercel.app", kind: "real", featured: true, year: 2026, stack: ["Next.js", "TypeScript", "Tailwind"] },
   { id: "samoa", url: "https://samoa-gastro-bar.vercel.app", kind: "concept", featured: true, year: 2026, stack: ["React", "TypeScript", "Vite"] },
   // Mais trabalhos
-  { id: "suramu", url: "https://suramusushi.vercel.app", kind: "concept", featured: false, year: 2026, stack: ["HTML", "CSS", "JavaScript"] },
+  { id: "suramu", url: null, kind: "concept", featured: false, year: 2026, stack: ["HTML", "CSS", "JavaScript"] },
   { id: "pontoalto", url: "https://ponto-alto-site-omega.vercel.app", kind: "concept", featured: false, year: 2026, stack: ["React", "TypeScript", "Vite"] },
   // Convite de casamento: evento privado do casal, sem link público.
   { id: "convite", url: null, kind: "real", featured: false, year: 2026, stack: [] },
