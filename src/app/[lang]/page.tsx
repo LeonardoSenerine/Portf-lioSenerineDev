@@ -32,13 +32,13 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   const t = getDictionary(lang);
   const wa = whatsappLink(t.whatsappMessage);
 
-  // Artefatos reais da SURAMU, um para cada etapa do processo.
+  // Artefatos reais da SURAMU, um para cada etapa do processo (desfocados enquanto ela está em negociação).
   const artifacts = [
     <figure key="poster" className="artifact artifact--poster">
-      <Image src="/work/suramu/poster.webp" alt={t.process.artifacts.poster} width={1280} height={1600} sizes="(max-width: 900px) 70vw, 340px" />
+      <Image src="/work/suramu/poster-privado.webp" alt={t.process.artifacts.poster} width={1280} height={1600} sizes="(max-width: 900px) 70vw, 340px" />
     </figure>,
     <figure key="manifesto" className="artifact artifact--screen">
-      <Image src="/work/suramu/detail-1.jpg" alt={t.process.artifacts.manifesto} width={1440} height={900} sizes="(max-width: 900px) 90vw, 520px" />
+      <Image src="/work/suramu/detail-1-privado.jpg" alt={t.process.artifacts.manifesto} width={1440} height={900} sizes="(max-width: 900px) 90vw, 520px" />
     </figure>,
     <figure key="code" className="artifact artifact--code">
       <figcaption className="mono">{t.process.artifacts.code}</figcaption>
@@ -47,10 +47,10 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       </pre>
     </figure>,
     <figure key="mobile" className="artifact artifact--phone">
-      <Image src="/work/suramu/mobile.jpg" alt={t.process.artifacts.mobile} width={780} height={1688} sizes="(max-width: 900px) 52vw, 240px" />
+      <Image src="/work/suramu/mobile-privado.jpg" alt={t.process.artifacts.mobile} width={780} height={1688} sizes="(max-width: 900px) 52vw, 240px" />
     </figure>,
     <figure key="og" className="artifact artifact--og">
-      <Image src="/work/suramu/og.jpg" alt={t.process.artifacts.og} width={1200} height={630} sizes="(max-width: 900px) 90vw, 520px" />
+      <Image src="/work/suramu/og-privado.jpg" alt={t.process.artifacts.og} width={1200} height={630} sizes="(max-width: 900px) 90vw, 520px" />
       <figcaption>
         <strong>SURAMU スラム</strong>
         <span>Real Sushi · Delivery de Quebrada</span>

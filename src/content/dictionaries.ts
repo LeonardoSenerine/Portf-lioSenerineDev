@@ -131,6 +131,22 @@ const pt = {
           { area: "Código", text: "HTML, CSS e JavaScript puros: um delivery não precisa carregar um framework para mostrar o peixe do dia." },
         ],
       },
+      cantina: {
+        client: "Cantina Pôr do Sol",
+        segment: "Café colonial e rodízio de pizzas",
+        quote: "A vista já vendia a casa. O site precisava levar até a mesa.",
+        concept:
+          "O nome da casa virou o sistema visual: o sol do logo nasce atrás do telhado no carregamento, e madeira, pedra e dourado levam o salão para a tela.",
+        challenge:
+          "Três experiências em dias diferentes, café colonial e almoço no domingo e rodízio de quinta a sábado, cada uma com horário e preço próprios, e toda reserva fechada pelo WhatsApp.",
+        solution:
+          "Uma seção para cada experiência, com o programa do domingo e o valor de cada dia, um painel de reserva que monta a mensagem pronta para o WhatsApp e a inauguração do novo espaço contada em vídeo.",
+        decisions: [
+          { area: "Marca", text: "O logo foi vetorizado em SVG a partir do arquivo do cliente, sem a marca d'água. O sol dele nasce no carregamento do site." },
+          { area: "UX", text: "A reserva conhece as regras da casa: o rodízio só aceita quinta a sábado e o valor muda conforme o dia escolhido." },
+          { area: "Performance", text: "O vídeo da inauguração caiu de 24 MB para 11 MB e só carrega quando a pessoa aperta o play." },
+        ],
+      },
       meraki: {
         client: "Meraki Galleria Shop",
         segment: "Tatuagem e barbearia",
@@ -486,6 +502,22 @@ const en: Dictionary = {
           { area: "Brand", text: "The manifesto comes before the menu. Visitors need to get the attitude before they see a price." },
           { area: "UX", text: "The fish-of-the-day board lives in a single file. The owner changes the fish without touching the site." },
           { area: "Code", text: "Plain HTML, CSS and JavaScript: a delivery doesn't need to ship a framework to show today's fish." },
+        ],
+      },
+      cantina: {
+        client: "Cantina Pôr do Sol",
+        segment: "Country breakfast and all-you-can-eat pizza",
+        quote: "The view already sold the place. The site had to bring people to the table.",
+        concept:
+          "The name became the visual system: the sun in the logo rises behind the roof as the site loads, and wood, stone and gold carry the dining room onto the screen.",
+        challenge:
+          "Three experiences on different days, country breakfast and lunch on Sundays and pizza night from Thursday to Saturday, each with its own hours and price, and every booking closed over WhatsApp.",
+        solution:
+          "One section per experience, with the Sunday schedule and each day's price, a booking panel that writes the WhatsApp message for you and the opening of the new space told in video.",
+        decisions: [
+          { area: "Brand", text: "The logo was redrawn in SVG from the client's file, without the watermark. Its sun rises as the site loads." },
+          { area: "UX", text: "Booking knows the house rules: pizza night only takes Thursday to Saturday, and the price follows the chosen day." },
+          { area: "Performance", text: "The opening video went from 24 MB to 11 MB and only loads when someone presses play." },
         ],
       },
       meraki: {
