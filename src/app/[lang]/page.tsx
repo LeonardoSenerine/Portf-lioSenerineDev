@@ -12,6 +12,7 @@ import { ProcessAxis } from "@/components/ProcessAxis";
 import { CursorDot } from "@/components/CursorDot";
 import { SectionHead } from "@/components/SectionHead";
 import { JsonLd } from "@/components/JsonLd";
+import { Faq } from "@/components/Faq";
 import { Reveal, SplitTitle } from "@/components/reveal";
 
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -190,6 +191,8 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         <section className="direct" aria-labelledby="direct-title">
           <div className="container">
             <SectionHead kicker={t.direct.kicker} title={t.direct.title} intro={t.direct.intro} folio={5} total={TOTAL} id="direct-title" />
+            {/* O recado (o ponto azul) viaja pela linha: na agência para em cada mão e
+                chega apagado; no Senerine.dev vai direto e chega aceso. */}
             <Reveal className="chain">
               <div className="chain__row chain__row--agency">
                 <p className="chain__label mono">{t.direct.agencyLabel}</p>
@@ -201,6 +204,9 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
                     </li>
                   ))}
                 </ol>
+                <span className="chain__track" aria-hidden="true">
+                  <span className="chain__msg" />
+                </span>
                 <p className="chain__note mono">{t.direct.agencyNote}</p>
               </div>
               <div className="chain__row chain__row--direct">
@@ -215,6 +221,9 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
                     <span className="chain__name">{t.direct.me}</span>
                   </li>
                 </ol>
+                <span className="chain__track" aria-hidden="true">
+                  <span className="chain__msg" />
+                </span>
                 <p className="chain__note mono">{t.direct.senerineNote}</p>
               </div>
             </Reveal>
@@ -302,17 +311,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         <section className="faq" id="duvidas" aria-labelledby="faq-title">
           <div className="container faq__grid">
             <SectionHead kicker={t.faq.kicker} title={t.faq.title} folio={9} total={TOTAL} id="faq-title" />
-            <div className="faq__list">
-              {t.faq.items.map((item) => (
-                <details key={item.q} className="faq__item">
-                  <summary>
-                    {item.q}
-                    <span className="faq__icon" aria-hidden="true" />
-                  </summary>
-                  <p>{item.a}</p>
-                </details>
-              ))}
-            </div>
+            <Faq items={t.faq.items} />
           </div>
         </section>
 

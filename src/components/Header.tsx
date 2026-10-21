@@ -94,7 +94,8 @@ export function Header({ lang, nav, whatsappHref }: Props) {
         </div>
       </div>
 
-      <nav id="menu-mobile" className="menu-mobile" aria-label="Menu" hidden={!open}>
+      {/* sempre no DOM para animar a saída; fechado, fica inert (sem foco nem leitor de tela) */}
+      <nav id="menu-mobile" className="menu-mobile" aria-label="Menu" inert={!open}>
         <ol>
           {links.map((l, i) => (
             <li key={l.href} style={{ "--i": i } as CSSProperties}>
