@@ -2,9 +2,11 @@
 export const site = {
   name: "Leonardo Senerine",
   brand: "senerine.dev",
+  // Nome da marca para o Google (nome do site nos resultados) e grafias que as pessoas digitam.
+  brandName: "Senerine.dev",
+  alternateNames: ["senerinedev", "Senerine Dev", "Senerine"],
   // Endereço público (capa do link, canonical, sitemap, dados para o Google).
-  // Na Vercel vem do domínio de produção do projeto: hoje senerinedev.vercel.app
-  // e, quando o domínio senerine.dev for ligado ao projeto, ele passa a valer sozinho.
+  // Na Vercel vem do domínio de produção do projeto (hoje www.senerinedev.com.br).
   url: process.env.NEXT_PUBLIC_SITE_URL ??
     (process.env.VERCEL_PROJECT_PRODUCTION_URL
       ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`

@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
     metadataBase: new URL(site.url),
     title: dict.meta.title,
     description: dict.meta.description,
-    applicationName: site.brand,
+    applicationName: site.brandName,
     keywords: dict.meta.keywords,
     authors: [{ name: site.name, url: site.url }],
     creator: site.name,
@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
     openGraph: {
       type: "website",
       url: `/${lang}`,
-      siteName: site.brand,
+      siteName: site.brandName,
       title: dict.meta.title,
       description: dict.meta.description,
       locale: lang === "pt" ? "pt_BR" : "en_US",

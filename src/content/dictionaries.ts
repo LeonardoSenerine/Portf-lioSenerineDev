@@ -25,7 +25,7 @@ type Service = { name: string; description: string; features: string[]; recommen
 const pt = {
   htmlLang: "pt-BR",
   meta: {
-    title: "Senerine.dev · Estúdio digital de Leonardo Senerine",
+    title: "Senerine.dev · Sites e aplicações de Leonardo Senerine",
     description:
       "Estúdio digital autoral: sites e aplicações para marcas e negócios que não querem passar batido. Design, código e publicação na mesma mão.",
     keywords: ["estúdio digital", "criação de sites", "site profissional", "desenvolvimento web", "aplicações web", "design de interface", "Next.js", "React", "site para marcas"],
@@ -399,7 +399,7 @@ export type Dictionary = typeof pt;
 const en: Dictionary = {
   htmlLang: "en",
   meta: {
-    title: "Senerine.dev · Leonardo Senerine's digital studio",
+    title: "Senerine.dev · Websites and apps by Leonardo Senerine",
     description:
       "An independent digital studio: websites and apps for brands and businesses that refuse to be scrolled past. Design, code and launch in one pair of hands.",
     keywords: ["digital studio", "website design", "custom website", "web development", "web apps", "interface design", "Next.js", "React", "brand website"],
