@@ -99,6 +99,22 @@ const pt = {
     },
     moreTitle: "Mais trabalhos",
     items: {
+      flanar: {
+        client: "Flanar Café",
+        segment: "Café especial e cozinha artesanal",
+        quote: "Uma identidade forte que, fora do Instagram, era só um link na bio.",
+        concept:
+          "O grão do logo virou o sistema do site: abre a página, marca o fundo e gira no selo. O verde do salão e o laranja do grão vestem cada seção.",
+        challenge:
+          "A marca só existia no Instagram, o logo era uma imagem de 150 px e o cardápio existia só nas nove páginas do impresso.",
+        solution:
+          "Logo redesenhado em vetor, cardápio completo em sete seções com foto e preço, as etapas do preparo em vídeo e uma página que se conta no ritmo da rolagem, do salão até como chegar.",
+        decisions: [
+          { area: "Marca", text: "O grão foi redesenhado em código: duas elipses inclinadas a 37°, com a de dentro deslocada para o traço engrossar como uma pincelada." },
+          { area: "Cor", text: "O laranja da marca não tem contraste para texto pequeno, então ganhou tons vizinhos, cada um com a sua função e o seu contraste mínimo." },
+          { area: "Movimento", text: "A abertura entra pelo grão do logo e cada seção anima no ritmo da rolagem. Para quem prefere menos movimento, tudo já aparece pronto." },
+        ],
+      },
       docesabor: {
         client: "Doce&Sabor",
         segment: "Marmitas, personal chef e feijoada",
@@ -473,6 +489,22 @@ const en: Dictionary = {
     },
     moreTitle: "More work",
     items: {
+      flanar: {
+        client: "Flanar Café",
+        segment: "Specialty coffee and artisan kitchen",
+        quote: "A strong identity that, outside Instagram, was just a link in bio.",
+        concept:
+          "The coffee bean from the logo became the site's system: it opens the page, marks the background and spins on the seal. The green of the room and the orange of the bean dress every section.",
+        challenge:
+          "The brand only lived on Instagram, the logo was a 150 px image and the menu existed only as the nine pages of the printed version.",
+        solution:
+          "Logo redrawn as vector, the full menu in seven sections with photo and price, the preparation steps on video and a page that tells its story at the pace of the scroll, from the room to how to get there.",
+        decisions: [
+          { area: "Brand", text: "The bean was redrawn in code: two ellipses tilted at 37°, the inner one offset so the stroke thickens like a brushstroke." },
+          { area: "Color", text: "The brand's orange lacks contrast for small text, so it gained neighboring shades, each with its own role and minimum contrast." },
+          { area: "Motion", text: "The opening flies in through the logo's bean and each section animates with the scroll. For people who prefer less motion, everything is already in place." },
+        ],
+      },
       docesabor: {
         client: "Doce&Sabor",
         segment: "Frozen meals, personal chef and feijoada",

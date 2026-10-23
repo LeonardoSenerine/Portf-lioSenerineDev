@@ -702,6 +702,21 @@ em { font-style: normal; color: var(--accent-text); }
   background: var(--room-bg);
   color: var(--ink);
 }
+/* Flanar: o verde do salão, o leite do cardápio e o laranja do grão. Texto pequeno
+   em laranja usa o tom claro do próprio site, que passa de 5:1 sobre o verde. */
+.case[data-room="flanar"] {
+  --room-bg: #3a4c26;
+  --ink: #f7f2ea;
+  --ink-soft: #f7f2ea;
+  --muted: #d8c7b1;
+  --line: rgba(247, 242, 234, 0.16);
+  --accent: #e3723f;
+  --accent-text: #f2b08f;
+  --accent-glow: rgba(227, 114, 63, 0.38);
+  --inverse-bg: #e3723f;
+  --inverse-ink: #1f2a14;
+  --frame: #2c3a1c;
+}
 .case[data-room="docesabor"] {
   --room-bg: #fcf1e1;
   --ink: #3b1f0e;

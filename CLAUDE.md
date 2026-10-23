@@ -10,7 +10,7 @@ Portfólio comercial do Leonardo Senerine: o objetivo é **vender** (gerar conta
 - Nunca citar Itatiba nem outra cidade dele: ele atende qualquer lugar. Também não listar nichos no hero.
 - Texto sem travessões. Não inventar números, depoimentos, prazos ou clientes; só usar fatos que já estão no site ou nos estudos de caso.
 - O **convite de casamento é confidencial**: sem link em lugar nenhum (`url: null` em `src/content/projects.ts`), imagens sempre desfocadas (`public/work/convite/*-privado.jpg`). Nunca colocar o link de volta.
-- Projetos reais: Doce&Sabor (último no ar), Cantina Pôr do Sol, Gordinho Lanches, D'Conde Barbearia, convite. Propostas conceituais: SURAMU, Samoa, Ponto Alto, Meraki.
+- Projetos reais: Doce&Sabor, Cantina Pôr do Sol, Gordinho Lanches, D'Conde Barbearia, convite. Propostas conceituais: Flanar Café (último no ar, abre os destaques), SURAMU, Samoa, Ponto Alto, Meraki.
 - A **SURAMU está em negociação**: fora dos cases em destaque (só em "Mais trabalhos" e no exemplo do processo), `url: null` e imagens desfocadas (`public/work/suramu/*-privado.*`). Não colocar o link nem as capturas originais de volta sem o Leonardo pedir.
 
 ## Regras de design
