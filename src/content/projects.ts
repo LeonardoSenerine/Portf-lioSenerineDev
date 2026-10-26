@@ -2,20 +2,22 @@
 // Capturas geradas a partir dos sites no ar: desktop 1440×900 e celular 390×844 @2x.
 // Tecnologias tiradas do package.json de cada repositório (a SURAMU é HTML, CSS e JS puros).
 // A SURAMU saiu dos destaques e ficou sem link enquanto está em negociação; a Doce&Sabor entrou no lugar.
-// A Flanar Café é a proposta mais recente: abre os destaques e é o "Último no ar" do hero.
+// A Vincenzo Saggio é a proposta mais recente: abre os destaques e é o "Último no ar" do hero.
+// A Samoa saiu dos destaques para manter seis cases e ficou em Mais trabalhos.
 
 export type ProjectKind = "real" | "concept";
 
 export const projects = [
   // Cases em destaque, na ordem em que aparecem. Cada um tem a sua "sala" (cores da
   // própria marca) dentro da moldura do Senerine; ver .case[data-room] no CSS.
+  { id: "vincenzo", url: "https://vicenzosaggio.vercel.app", kind: "concept", featured: true, year: 2026, stack: ["HTML", "CSS", "JavaScript", "Shopify"] },
   { id: "flanar", url: "https://flanarcafe.vercel.app", kind: "concept", featured: true, year: 2026, stack: ["Next.js", "TypeScript", "Tailwind", "GSAP", "Lenis"] },
   { id: "docesabor", url: "https://doce-sabor-rust.vercel.app", kind: "real", featured: true, year: 2026, stack: ["Next.js", "TypeScript", "Tailwind", "GSAP"] },
   { id: "cantina", url: "https://cantina-por-do-sol.vercel.app", kind: "real", featured: true, year: 2026, stack: ["React", "Vite", "Tailwind", "GSAP"] },
   { id: "dconde", url: "https://dcondebarbershop.vercel.app", kind: "real", featured: true, year: 2026, stack: ["React", "TypeScript", "Tailwind", "Supabase", "PostgreSQL"] },
   { id: "gordinho", url: "https://gordinho-lanches-site.vercel.app", kind: "real", featured: true, year: 2026, stack: ["Next.js", "TypeScript", "Tailwind"] },
-  { id: "samoa", url: "https://samoa-gastro-bar.vercel.app", kind: "concept", featured: true, year: 2026, stack: ["React", "TypeScript", "Vite"] },
   // Mais trabalhos
+  { id: "samoa", url: "https://samoa-gastro-bar.vercel.app", kind: "concept", featured: false, year: 2026, stack: ["React", "TypeScript", "Vite"] },
   { id: "suramu", url: null, kind: "concept", featured: false, year: 2026, stack: ["HTML", "CSS", "JavaScript"] },
   { id: "meraki", url: "https://meraki-studio-nu.vercel.app", kind: "concept", featured: false, year: 2026, stack: ["React", "TypeScript", "Vite", "Python"] },
   { id: "pontoalto", url: "https://ponto-alto-site-omega.vercel.app", kind: "concept", featured: false, year: 2026, stack: ["React", "TypeScript", "Vite"] },
