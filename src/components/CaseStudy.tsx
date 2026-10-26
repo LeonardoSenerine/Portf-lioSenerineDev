@@ -17,6 +17,9 @@ type Props = {
 // moldura é sempre do Senerine (régua, ponto, ficha técnica e notas de decisão).
 export function CaseStudy({ project: p, index, total, t }: Props) {
   const c = t.items[p.id];
+  const words = c.client.split(" ");
+  const last = words.pop();
+  const head = words.length ? `${words.join(" ")} ` : "";
   const L = t.labels;
   const [d1, d2] = details(p.id);
   const flip = index % 2 === 1;
@@ -47,8 +50,12 @@ export function CaseStudy({ project: p, index, total, t }: Props) {
         </Reveal>
         <header className="case__head">
           <h3 className="case__name" id={`case-${p.id}-name`}>
-            {c.client}
-            <span className="dot" aria-hidden="true" />
+            {head}
+            {/* o ponto fica preso à última palavra: em nomes longos, ele não cai sozinho para a linha de baixo */}
+            <span className="case__last">
+              {last}
+              <span className="dot" aria-hidden="true" />
+            </span>
           </h3>
           <p className="case__segment">{c.segment}</p>
         </header>

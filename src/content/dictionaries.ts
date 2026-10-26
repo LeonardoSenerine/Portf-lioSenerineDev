@@ -99,6 +99,22 @@ const pt = {
     },
     moreTitle: "Mais trabalhos",
     items: {
+      vincenzo: {
+        client: "Vincenzo Saggio",
+        segment: "Moda masculina · coleção Acervo",
+        quote: "O clássico sem ser rígido, numa loja com a cara da marca.",
+        concept:
+          "A loja veste a linguagem da alfaiataria: Bodoni nos títulos, marfim e carvão de base, o couro como acento e botões com o pesponto de uma etiqueta costurada.",
+        challenge:
+          "Vender camisas e calças pela internet sem perder o que faz a marca: o caimento, as combinações e a história da coleção Acervo, com fotos fortes que pedem espaço.",
+        solution:
+          "Uma loja editorial com a coleção, a seção do Acervo com o vídeo do Vincenzo, o Monte o seu look, a ficha de medidas em cada peça e a compra finalizada na loja Shopify da marca.",
+        decisions: [
+          { area: "Compra", text: "O Monte o seu look junta camisa e calça, com cada foto posicionada pela cintura medida para as peças se encontrarem no cós, e mostra o total na hora." },
+          { area: "Medidas", text: "A ficha de medidas indica o tamanho pela medida de uma peça que a pessoa já tem, marca o tamanho certo e já escolhe ele na compra." },
+          { area: "Detalhe", text: "Os botões levam o pesponto da alfaiataria: uma costura tracejada, como numa etiqueta, que corre quando o mouse passa." },
+        ],
+      },
       flanar: {
         client: "Flanar Café",
         segment: "Café especial e cozinha artesanal",
@@ -489,6 +505,22 @@ const en: Dictionary = {
     },
     moreTitle: "More work",
     items: {
+      vincenzo: {
+        client: "Vincenzo Saggio",
+        segment: "Menswear · Acervo collection",
+        quote: "Classic without being rigid, in a store that looks like the brand.",
+        concept:
+          "The store wears the language of tailoring: Bodoni for the headings, ivory and charcoal as the base, leather as the accent and buttons with the topstitching of a sewn-on label.",
+        challenge:
+          "Selling shirts and trousers online without losing what makes the brand: the fit, the combinations and the story of the Acervo collection, with strong photos that need room.",
+        solution:
+          "An editorial store with the collection, the Acervo section with Vincenzo's video, Build your look, a size guide on every piece and checkout completed in the brand's Shopify store.",
+        decisions: [
+          { area: "Shopping", text: "Build your look pairs a shirt and trousers, each photo placed by the measured waist so the pieces meet at the waistband, and shows the total right away." },
+          { area: "Sizing", text: "The size guide suggests a size from the measurements of a piece the customer already owns, marks the right size and selects it at checkout." },
+          { area: "Detail", text: "Buttons carry the topstitching of tailoring: a dashed seam, like on a label, that runs when the mouse passes over." },
+        ],
+      },
       flanar: {
         client: "Flanar Café",
         segment: "Specialty coffee and artisan kitchen",
