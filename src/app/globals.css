@@ -702,6 +702,21 @@ em { font-style: normal; color: var(--accent-text); }
   background: var(--room-bg);
   color: var(--ink);
 }
+/* Scarpetta Cucina: o verde garrafa do salão, o creme da assinatura e o tomate do logo.
+   Texto pequeno de acento usa o manjericão do site, que tem contraste sobre o verde. */
+.case[data-room="scarpetta"] {
+  --room-bg: #0f3d2c;
+  --ink: #efe5c8;
+  --ink-soft: #efe5c8;
+  --muted: #c9c3a8;
+  --line: rgba(239, 229, 200, 0.16);
+  --accent: #c4362b;
+  --accent-text: #a9c99a;
+  --accent-glow: rgba(196, 54, 43, 0.38);
+  --inverse-bg: #efe5c8;
+  --inverse-ink: #0a2b1f;
+  --frame: #0a2b1f;
+}
 /* Vincenzo Saggio: o marfim e o carvão da alfaiataria, com o couro de acento. */
 .case[data-room="vincenzo"] {
   --room-bg: #f4f0e8;
