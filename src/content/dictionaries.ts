@@ -99,6 +99,22 @@ const pt = {
     },
     moreTitle: "Mais trabalhos",
     items: {
+      scarpetta: {
+        client: "Scarpetta Cucina",
+        segment: "Cozinha italiana afetiva",
+        quote: "O link da bio era um Linktree. Virou a casa.",
+        concept:
+          "O nome da casa é um gesto: passar o pão no molho até não sobrar nada. O site veste o verde garrafa, o creme, o tomate do logo e a assinatura manuscrita.",
+        challenge:
+          "Um Linktree com sete botões cinza fazia o papel de site: nenhum prato, nenhuma foto do salão, e cada toque levava o cliente para outro lugar.",
+        solution:
+          "Um site com o cardápio completo com foto e preço, o menu executivo da semana, a reserva, o salão em vídeo, os eventos e os canais de delivery num endereço só.",
+        decisions: [
+          { area: "Reserva", text: "A reserva só oferece os dias e horários em que a casa abre e monta a mensagem completa para o WhatsApp da equipe." },
+          { area: "UX", text: "O aviso de aberto ou fechado acompanha cada turno, do almoço ao jantar, e diz quando a casa abre de novo." },
+          { area: "Manutenção", text: "O menu executivo muda toda semana e mora num arquivo só: trocar a semana não mexe no resto do site." },
+        ],
+      },
       vincenzo: {
         client: "Vincenzo Saggio",
         segment: "Moda masculina · coleção Acervo",
@@ -505,6 +521,22 @@ const en: Dictionary = {
     },
     moreTitle: "More work",
     items: {
+      scarpetta: {
+        client: "Scarpetta Cucina",
+        segment: "Heartfelt Italian cooking",
+        quote: "The bio link was a Linktree. Now it's the house.",
+        concept:
+          "The name is a gesture: wiping the plate with bread until there's no sauce left. The site wears the bottle green, the cream, the tomato from the logo and the handwritten signature.",
+        challenge:
+          "A Linktree with seven grey buttons stood in for a website: no dishes, no photo of the dining room, and every tap sent the customer somewhere else.",
+        solution:
+          "A website with the full menu with photos and prices, the weekly set menu, booking, the dining room on video, events and the delivery channels at a single address.",
+        decisions: [
+          { area: "Booking", text: "Booking only offers the days and times the restaurant is open and builds the complete message for the team's WhatsApp." },
+          { area: "UX", text: "The open or closed notice follows each service, lunch and dinner, and says when the restaurant opens again." },
+          { area: "Maintenance", text: "The set menu changes every week and lives in a single file: updating the week doesn't touch the rest of the site." },
+        ],
+      },
       vincenzo: {
         client: "Vincenzo Saggio",
         segment: "Menswear · Acervo collection",
