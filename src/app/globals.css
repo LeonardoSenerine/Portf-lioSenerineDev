@@ -702,6 +702,20 @@ em { font-style: normal; color: var(--accent-text); }
   background: var(--room-bg);
   color: var(--ink);
 }
+/* Multsystems: o navy do topo e do rodapé, o branco das vitrines e o azul claro dos destaques. */
+.case[data-room="multsystems"] {
+  --room-bg: #1c2f5c;
+  --ink: #ffffff;
+  --ink-soft: #ffffff;
+  --muted: #c3cde3;
+  --line: rgba(255, 255, 255, 0.16);
+  --accent: #9fb4ea;
+  --accent-text: #9fb4ea;
+  --accent-glow: rgba(159, 180, 234, 0.38);
+  --inverse-bg: #ffffff;
+  --inverse-ink: #1c2f5c;
+  --frame: #16264b;
+}
 /* Scarpetta Cucina: o verde garrafa do salão, o creme da assinatura e o tomate do logo.
    Texto pequeno de acento usa o manjericão do site, que tem contraste sobre o verde. */
 .case[data-room="scarpetta"] {

@@ -99,6 +99,22 @@ const pt = {
     },
     moreTitle: "Mais trabalhos",
     items: {
+      multsystems: {
+        client: "Multsystems",
+        segment: "Loja de informática desde 1995",
+        quote: "31 anos de loja, e o site ainda não mostrava a loja.",
+        concept:
+          "Uma loja que atende empresa e casa: o site separa os dois caminhos logo na entrada, com o azul do logo e a elipse em pincelada da marca se desenhando atrás do topo.",
+        challenge:
+          "O site antigo tinha muito texto e quase nenhuma imagem. Quem mais fatura são as empresas, que pedem orçamento; quem mais acessa é quem compra para casa, pelo celular, vendo o preço e chamando no WhatsApp.",
+        solution:
+          "O catálogo inteiro da loja com foto, preço e filtros, compra pelo WhatsApp, orçamento para empresa, a assistência técnica parceira e uma saída para quando a busca não acha o produto.",
+        decisions: [
+          { area: "Catálogo", text: "As 64 categorias do sistema da loja viraram 11 departamentos, e a marca é reconhecida no nome do produto, que chega em maiúsculas e é reescrito para leitura." },
+          { area: "Busca", text: "Quando a busca não acha nada, a página oferece um atendente no WhatsApp e o pedido por encomenda, em vez de uma lista vazia." },
+          { area: "Fotos", text: "A cada publicação, um script confere quais fotos do catálogo não existem, e o site mostra \"Foto em breve\" no lugar de uma imagem quebrada." },
+        ],
+      },
       scarpetta: {
         client: "Scarpetta Cucina",
         segment: "Cozinha italiana afetiva",
@@ -521,6 +537,22 @@ const en: Dictionary = {
     },
     moreTitle: "More work",
     items: {
+      multsystems: {
+        client: "Multsystems",
+        segment: "Computer store since 1995",
+        quote: "31 years in business, and the website still didn't show the store.",
+        concept:
+          "A store that serves both businesses and homes: the site splits the two paths right at the entrance, with the blue of the logo and the brand's brushstroke ellipse drawing itself behind the hero.",
+        challenge:
+          "The old site had a lot of text and almost no images. Businesses, who ask for quotes, bring in the most revenue; home buyers visit the most, on their phones, checking the price and messaging on WhatsApp.",
+        solution:
+          "The store's entire catalog with photos, prices and filters, buying through WhatsApp, quotes for businesses, the partner repair service and a way out when the search finds nothing.",
+        decisions: [
+          { area: "Catalog", text: "The 64 categories in the store's system became 11 departments, and the brand is recognised in the product name, which arrives in capitals and is rewritten to read well." },
+          { area: "Search", text: "When the search finds nothing, the page offers a sales rep on WhatsApp and a special order instead of an empty list." },
+          { area: "Photos", text: "On every deploy, a script checks which catalog photos don't exist, and the site shows \"Photo coming soon\" instead of a broken image." },
+        ],
+      },
       scarpetta: {
         client: "Scarpetta Cucina",
         segment: "Heartfelt Italian cooking",
