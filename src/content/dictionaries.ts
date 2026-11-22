@@ -115,6 +115,22 @@ const pt = {
           { area: "Fotos", text: "A cada publicação, um script confere quais fotos do catálogo não existem, e o site mostra \"Foto em breve\" no lugar de uma imagem quebrada." },
         ],
       },
+      idear: {
+        client: "Idear Empreendimentos",
+        segment: "Incorporadora de casas de alto padrão",
+        quote: "A casa era de alto padrão. O site era um modelo pronto.",
+        concept:
+          "A Idear constrói uma casa por vez, e o site faz o mesmo: a casa à venda é a protagonista, com o azul-marinho e o bronze da marca, a Cormorant Garamond nos títulos e renders grandes, que pedem espaço.",
+        challenge:
+          "O site antigo era um modelo de design de interiores, com texto de exemplo em várias páginas e nenhuma informação da casa à venda: sem metragem, sem planta, sem dizer quem constrói nem como falar com a equipe.",
+        solution:
+          "A home da Idear e uma página só para a casa à venda, com galeria, ficha técnica, planta, acabamentos, localização e o pedido de visita a um toque, junto com o guia da marca e a coleção de lançamento para o Instagram.",
+        decisions: [
+          { area: "Vídeo", text: "A abertura é um vídeo feito do render da fachada, com profundidade em 2.5D, e tem uma versão própria para o celular, quadrada e mais leve." },
+          { area: "Manutenção", text: "É uma casa à venda por vez: quando ela é vendida, passa para as casas entregues e a próxima entra no lugar, mexendo num arquivo só." },
+          { area: "Link", text: "Cada página tem a sua capa quando o link é enviado no WhatsApp ou nas redes, com a casa e o nome da Idear, em vez de um link sem imagem." },
+        ],
+      },
       scarpetta: {
         client: "Scarpetta Cucina",
         segment: "Cozinha italiana afetiva",
@@ -551,6 +567,22 @@ const en: Dictionary = {
           { area: "Catalog", text: "The 64 categories in the store's system became 11 departments, and the brand is recognised in the product name, which arrives in capitals and is rewritten to read well." },
           { area: "Search", text: "When the search finds nothing, the page offers a sales rep on WhatsApp and a special order instead of an empty list." },
           { area: "Photos", text: "On every deploy, a script checks which catalog photos don't exist, and the site shows \"Photo coming soon\" instead of a broken image." },
+        ],
+      },
+      idear: {
+        client: "Idear Empreendimentos",
+        segment: "Developer of high-end homes",
+        quote: "The house was high-end. The website was a ready-made template.",
+        concept:
+          "Idear builds one house at a time, and so does the site: the house for sale is the lead, with the brand's navy and bronze, Cormorant Garamond for the headings and large renders that need room.",
+        challenge:
+          "The old site was an interior design template, with placeholder text on several pages and no information about the house for sale: no floor area, no floor plan, nothing about who builds it or how to reach the team.",
+        solution:
+          "Idear's home page and a page just for the house for sale, with gallery, spec sheet, floor plan, finishes, location and a one-tap visit request, along with the brand guide and the launch collection for Instagram.",
+        decisions: [
+          { area: "Video", text: "The opening is a video made from the facade render, with 2.5D depth, and has its own lighter, square version for phones." },
+          { area: "Maintenance", text: "There is one house for sale at a time: when it sells, it moves to the delivered homes and the next one takes its place, by editing a single file." },
+          { area: "Link", text: "Every page has its own cover when the link is shared on WhatsApp or social media, with the house and Idear's name, instead of a link with no image." },
         ],
       },
       scarpetta: {
