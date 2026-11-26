@@ -702,6 +702,21 @@ em { font-style: normal; color: var(--accent-text); }
   background: var(--room-bg);
   color: var(--ink);
 }
+/* Idear Empreendimentos: a areia e o marfim do site, o azul-marinho dos títulos e o bronze dos detalhes.
+   Texto pequeno de acento usa o bronze escuro, que tem contraste sobre a areia. */
+.case[data-room="idear"] {
+  --room-bg: #f1ede5;
+  --ink: #07324f;
+  --ink-soft: #07324f;
+  --muted: #5b6570;
+  --line: rgba(7, 50, 79, 0.15);
+  --accent: #756b48;
+  --accent-text: #635a3a;
+  --accent-glow: rgba(117, 107, 72, 0.35);
+  --inverse-bg: #07324f;
+  --inverse-ink: #faf8f4;
+  --frame: #e6e0d4;
+}
 /* Scarpetta Cucina: o verde garrafa do salão, o creme da assinatura e o tomate do logo.
    Texto pequeno de acento usa o manjericão do site, que tem contraste sobre o verde. */
 .case[data-room="scarpetta"] {
@@ -858,6 +873,8 @@ em { font-style: normal; color: var(--accent-text); }
   overflow-wrap: anywhere;
 }
 .case__last { white-space: nowrap; }
+/* "Empreendimentos" é uma palavra só e longa: o título desce um pouco para caber inteiro, do celular ao desktop. */
+.case[data-room="idear"] .case__name { font-size: clamp(38px, 10.4vw, 168px); }
 .case__segment { margin-top: clamp(16px, 2.4vw, 36px); font-size: 16px; color: var(--muted); }
 .case__quote {
   margin-top: clamp(28px, 4vw, 52px);
