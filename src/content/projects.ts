@@ -4,7 +4,6 @@
 // A SURAMU saiu dos destaques e ficou sem link enquanto está em negociação; a Doce&Sabor entrou no lugar.
 // A Multsystems é o projeto mais recente (cliente real): abre os destaques e é o "Último no ar" do hero.
 // Depois vêm a Idear Empreendimentos, a Scarpetta Cucina (o site que substituiu o Linktree) e a Flanar Café.
-// A Idear fica sem link até o site ir ao ar com os dados reais (o endereço da Vercel ainda mostra a prévia).
 // A Samoa saiu dos destaques para manter seis cases e ficou em Mais trabalhos.
 
 export type ProjectKind = "real" | "concept";
@@ -13,7 +12,7 @@ export const projects = [
   // Cases em destaque, na ordem em que aparecem. Cada um tem a sua "sala" (cores da
   // própria marca) dentro da moldura do Senerine; ver .case[data-room] no CSS.
   { id: "multsystems", url: "https://multsystems.com.br", kind: "real", featured: true, year: 2026, stack: ["Next.js", "TypeScript", "Tailwind", "Zod"] },
-  { id: "idear", url: null, kind: "real", featured: true, year: 2026, stack: ["Next.js", "TypeScript", "Tailwind", "GSAP", "Lenis"] },
+  { id: "idear", url: "https://www.idearempreendimentos.com.br", kind: "real", featured: true, year: 2026, stack: ["Next.js", "TypeScript", "Tailwind", "GSAP", "Lenis"] },
   { id: "scarpetta", url: "https://scarpetta-ten.vercel.app", kind: "real", featured: true, year: 2026, stack: ["React", "TypeScript", "Vite", "Motion", "Lenis"] },
   { id: "flanar", url: "https://flanarcafe.vercel.app", kind: "concept", featured: true, year: 2026, stack: ["Next.js", "TypeScript", "Tailwind", "GSAP", "Lenis"] },
   { id: "vincenzo", url: "https://vicenzosaggio.vercel.app", kind: "concept", featured: true, year: 2026, stack: ["HTML", "CSS", "JavaScript", "Shopify"] },
